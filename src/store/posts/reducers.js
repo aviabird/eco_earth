@@ -9,6 +9,8 @@ export default function (state = INITIAL_STATE, action) { //action coming from a
   switch (action.type) {
     case 'FETCH_POSTS': 
       return {...state, posts: action.payload}
+    case 'FETCH_POSTS_BY_CATEGORY':
+      return {...state, posts: action.payload}
     default:
       {
         return state;

@@ -1,7 +1,7 @@
-import {connect} from 'react-redux';
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {fetchPosts} from '../../../store/posts/actions';
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { fetchPosts } from '../../../store/posts/actions';
 import PostsListItem from '../component/post_list_item';
 //import { Link } from 'react-router';
 
@@ -10,9 +10,7 @@ class PostsList extends Component {
   constructor(props) {
     super(props);
 
-    this
-      .props
-      .fetchPosts();
+    this.props.fetchPosts();
   }
 
   renderPosts(postData) {

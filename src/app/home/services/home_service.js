@@ -24,6 +24,33 @@ var posts = [
   }
 ];
 
+var categories = [
+  {
+    id:1,
+    category:'energy conservation'
+  }, {
+    id:2,
+    category:'eco-friendly habits'
+  },{
+    id:3,
+    category:'Pollution'
+  },{
+    id:4,
+    category:'eco-friendly habits'
+  }
+];
+
 export function getPosts() {
   return posts;
+}
+
+export function getCategories() {
+  return categories;
+}
+
+export function getCategorylist(category){
+  var categories_list=posts.filter(function (post) {
+    return post.category == category
+  });
+  return categories_list;
 }
