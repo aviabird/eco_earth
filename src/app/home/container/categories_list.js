@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { fetchCategories } from '../../../store/categories/actions';
-import { activeCategory } from '';
 import { fetchpostsbyCategory } from '../../../store/posts/actions';
 import CategoriesListItem from '../component/categories_list_item';
 //import { Link } from 'react-router';
@@ -24,21 +23,21 @@ class CategoriesList extends Component {
       .bind(this);
   }
 
-  onClicked(category) {
+  onClicked(category_id) {
     this
       .props
-      .selectedCategory(category);
+      .selectedCategory(category_id);
   }
 
   renderCategories(data) {
+    const category_id = data.id;
     const category = data.category;
-
     return (
       <li
-        key={data.id}
-        onClick={() => this.onClicked(category)}
-        className="categories-list list-group-item">
-        <CategoriesListItem category={category}/>
+        key = { data.id }
+        onClick = { () => this.onClicked(category_id) }
+        className = "categories-list list-group-item">
+        <CategoriesListItem category = { category }/>
       </li>
     );
   }
@@ -47,10 +46,10 @@ class CategoriesList extends Component {
     return (
       <ul>
         Categories:
-        {this
+        { this
           .props
           .categories
-          .map(this.renderCategories)}
+          .map(this.renderCategories) }
       </ul>
     )
   }
@@ -59,7 +58,7 @@ class CategoriesList extends Component {
 
 //function mapStateToProps(state) {
 function mapStateToProps(state) {
-  return {categories: state.categories.categories}; //{weather}==={weather:weather}
+  return { categories: state.categories.categories }; //{weather}==={weather:weather}
 }
 
 function mapDispatchToProps(dispatch) {

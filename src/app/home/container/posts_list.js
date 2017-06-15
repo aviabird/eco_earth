@@ -15,14 +15,20 @@ class PostsList extends Component {
 
   renderPosts(postData) {
     const title = postData.title;
-    const category = postData.category;
     const content = postData.content;
 
     return (
-      <PostsListItem key={postData.id} title={title} category={category} content={content}/>
+      <PostsListItem key = {postData.id} title = {title} content = {content}/>
     );
   }
   render() {
+    if(!this.props.posts){
+      return (
+      <ul>
+        NO POSTS TO SHOW IN THIS CATEGORY
+      </ul>
+    ) 
+    }
     return (
       <ul>
         {this
