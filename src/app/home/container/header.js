@@ -9,8 +9,8 @@ class Header extends Component {
 	render(){
 	  return (
 	   <div className = "header">
-	     TAKE YOUR PLEDGE FOR A BETTER FUTURE
-			 <Searchbar onSearched = {(keyword) => this.onSearched(keyword)}/>
+	     TAKE A PLEDGE FOR YOUR BETTER FUTURE
+			 <Searchbar onSearched = { (keyword) => this.onSearched(keyword) }/>
      </div>
 	  )
 	}

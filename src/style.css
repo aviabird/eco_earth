@@ -26,3 +26,8 @@
     height:30vh;
     box-shadow: 0 1px 2px #c9cccd;
 }
+.post_detail{
+   box-shadow: 0 1px 2px #c9cccd;
+   width:70%;
+   height:300px;
+}

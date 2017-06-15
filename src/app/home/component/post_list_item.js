@@ -1,12 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const PostsListItem = (props) => {
   return (
     <li className = "posts-list list-group-item">
       <div className = "row">
-       <div className = "col-md-8">{props.title} </div>
+        <Link to = { "posts/" + props.data.id }>
+          <div className = "col-md-8">{ props.data.title }
+          </div>
+        </Link>
       </div>
-      {props.content}
+      { props.data.content }
     </li>
   );
 };

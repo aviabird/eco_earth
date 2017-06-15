@@ -43,6 +43,10 @@ export function getPosts() {
 
 }
 
+export function getPostById(id) {
+  return posts[id-1];
+}
+
 export function getCategories() {
   return categories;
 }

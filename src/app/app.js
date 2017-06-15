@@ -10,7 +10,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className = "home_page">
+      <div className = "main">
         <Header className = "header"/>
         <div className = "lists">
           { this.props.children }

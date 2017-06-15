@@ -1,7 +1,7 @@
 //reducers are always functions
 const INITIAL_STATE = {
   posts: [],
-  selected_post: null
+  selected_post: {}
 };
 
 export default function (state = INITIAL_STATE, action) { //action coming from actioncontainers
@@ -16,6 +16,11 @@ export default function (state = INITIAL_STATE, action) { //action coming from a
       return {
         ...state,
         posts: action.payload
+      }
+    case 'FETCH_SELECTED_POST':
+		  return {
+        posts: [],
+        selected_post: action.payload
       }
     default:
       {

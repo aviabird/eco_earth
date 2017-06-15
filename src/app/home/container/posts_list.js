@@ -7,28 +7,17 @@ import PostsListItem from '../component/post_list_item';
 
 class PostsList extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.props.fetchPosts();
+  componentWillMount() {
+    var id = this.props.params.id;
+    this
+      .props
+      .fetchPosts();
   }
 
   renderPosts(postData) {
-    const title = postData.title;
-    const content = postData.content;
-
-    return (
-      <PostsListItem key = {postData.id} title = {title} content = {content}/>
-    );
+    return (<PostsListItem data = { postData } key = { postData.id }/>);
   }
   render() {
-    if(!this.props.posts){
-      return (
-      <ul>
-        NO POSTS TO SHOW IN THIS CATEGORY
-      </ul>
-    ) 
-    }
     return (
       <ul>
         {this
