@@ -1,13 +1,11 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 
 
 const CategoriesListItem = (props) => {
   return (
-    <span>
-      <Link to="/">
+    <span className="category-list-item">
         { props.category }
-      </Link>
     </span>
   );
 };

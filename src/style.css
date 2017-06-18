@@ -31,3 +31,10 @@
    width:70%;
    height:300px;
 }
+.category-list-item{
+	cursor:pointer;
+}
+
+.category-list-item:hover{
+	background-color: #eee;
+}

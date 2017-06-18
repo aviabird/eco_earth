@@ -14,7 +14,7 @@ export default class App extends Component {
         <Header className = "header"/>
         <div className = "lists">
           { this.props.children }
-          <CategoriesList/>
+          <CategoriesList className = "categories-list" />
         </div>
       </div>
     );
