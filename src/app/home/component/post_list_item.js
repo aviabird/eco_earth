@@ -5,12 +5,12 @@ const PostsListItem = (props) => {
   return (
     <li className = "posts-list list-group-item">
       <div className = "row">
-        <Link to = { "posts/" + props.data.id }>
-          <div className = "col-md-8">{ props.data.title }
+        <Link to = {"posts/" + props.data.id}>
+          <div className = "col-md-8">{props.data.title}
           </div>
         </Link>
       </div>
-      { props.data.content }
+      {props.data.content}
     </li>
   );
 };

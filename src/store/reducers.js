@@ -5,7 +5,7 @@ import categoriesReducer from './categories/reducers';
 
 const rootReducer = combineReducers({
   post_state: postsReducer,
-  categories: categoriesReducer,
+  categories: categoriesReducer
   //form: formReducer
 });
 

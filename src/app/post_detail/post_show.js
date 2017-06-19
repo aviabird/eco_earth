@@ -28,7 +28,7 @@ class PostShow extends Component {
 }
 
 function mapStateToProps(state) {
-  return { post: state.post_state.selected_post };
+  return {post: state.post_state.selected_post};
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({

@@ -18,8 +18,8 @@ export default function (state = INITIAL_STATE, action) { //action coming from a
         posts: action.payload
       }
     case 'FETCH_SELECTED_POST':
-		  return {
-        posts: [],
+      return {
+        posts: [], 
         selected_post: action.payload
       }
     default:
