@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
+import CategoriesList from './home/container/categories_list';
+import Header from './home/container/header';
 
 export default class App extends Component {
+
+  /*onSearched(keyword) {
+    console.log(keyword);
+  }*/
+
   render() {
     return (
-      <div>
-        {this.props.children}
+      <div className = "main">
+        <Header className = "header"/>
+        <div className = "lists">
+          { this.props.children }
+          <CategoriesList className = "categories-list"/>
+        </div>
       </div>
     );
   }
