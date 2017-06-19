@@ -24,19 +24,14 @@ class CategoriesList extends Component {
   }
 
   onClicked(category_id) {
-    this
-      .props
-      .selectedCategory(category_id);
+    this.props.selectedCategory(category_id);
   }
 
   renderCategories(data) {
     const category_id = data.id;
     const category = data.category;
     return (
-      <li
-        key = { data.id }
-        onClick = { () => this.onClicked(category_id) }
-        className = "categories-list list-group-item">
+      <li key = { data.id } onClick = { () => this.onClicked(category_id) } className = "categories-list list-group-item">
         <CategoriesListItem category = { category }/>
       </li>
     );
@@ -46,10 +41,7 @@ class CategoriesList extends Component {
     return (
       <ul>
         Categories:
-        { this
-          .props
-          .categories
-          .map(this.renderCategories) }
+        { this.props.categories.map(this.renderCategories) }
       </ul>
     )
   }

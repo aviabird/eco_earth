@@ -4,9 +4,9 @@ import Header from './home/container/header';
 
 export default class App extends Component {
 
-  onSearched(keyword) {
+  /*onSearched(keyword) {
     console.log(keyword);
-  }
+  }*/
 
   render() {
     return (

@@ -4,8 +4,9 @@ const Searchbar = (props) => {
 		return (
 				<div>
 						<input
-								onKeyPress = { (event) => props.onSearched(event.target.value) }
-								className = "search-bar"/>
+								onKeyPress=
+								{ (event) => props.onSearched(event.target.value) }
+								className="search-bar"/>
 				</div>
 		);
 }
