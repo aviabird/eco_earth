@@ -11,16 +11,21 @@ class CategoryList extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {};
     this.onClicked = this.onClicked.bind(this);
     this.renderCategories = this.renderCategories.bind(this);
   }
 
   componentDidMount() {
     this.props.effects.fetchCategories()
-      .then(() => console.log('Loaded Categories'))
+      .then(() => this.setState({ loadingCategories: false }))
       .catch(error => {
         console.log(error);
       });
+  }
+
+  initialState() {
+    this.setState({ loadingCategories: true });
   }
 
   onClicked(category_id) {
@@ -47,6 +52,12 @@ class CategoryList extends Component {
   }
 
   render() {
+    if (this.state.loadingCategories) {
+      return (
+        <h5>Loading Categories</h5>
+      )
+    }
+
     return (
       <ul>
         Categories: {this

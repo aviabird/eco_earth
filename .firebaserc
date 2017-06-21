@@ -1,1 +1,5 @@
-{}
+{
+  "projects": {
+    "default": "ecoearth-1f818"
+  }
+}

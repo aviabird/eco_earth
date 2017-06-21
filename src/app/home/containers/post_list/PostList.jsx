@@ -7,18 +7,33 @@ import PropTypes from 'prop-types';
 
 class PostList extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
   componentDidMount() {
     this.props.effects.fetchPosts()
-      .then(() => console.log('Loaded Posts'))
+      .then(() => this.setState({ loadingPosts: false }))
       .catch(error => {
         alert(error);
       });
+  }
+
+  initialState() {
+    this.setState({ loadingPosts: true });
   }
 
   renderPosts(postData) {
     return (<PostListItem data={postData} key={postData.id} />);
   }
   render() {
+    if(this.state.loadingPosts) {
+      return (
+        <h5>Loading Latest Posts</h5>
+      )
+    }
     return (
       <ul>
         {this
