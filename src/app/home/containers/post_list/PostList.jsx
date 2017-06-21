@@ -17,7 +17,7 @@ class PostList extends Component {
     this.props.effects.fetchPosts()
       .then(() => this.setState({ loadingPosts: false }))
       .catch(error => {
-        alert(error);
+        console.log(error);
       });
   }
 
