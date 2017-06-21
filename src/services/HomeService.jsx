@@ -53,7 +53,7 @@ export function getCategories() {
 
 export function getCategorylist(category_id){
   var categories_list = posts.filter(function (post) {
-    return post.category_id == category_id
+    return post.category_id === category_id
   });
   return categories_list;
 }
