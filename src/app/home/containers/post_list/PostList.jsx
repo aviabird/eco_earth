@@ -11,6 +11,7 @@ class PostList extends Component {
     super(props);
 
     this.state = {};
+    initialState();
   }
 
   componentWillMount() {

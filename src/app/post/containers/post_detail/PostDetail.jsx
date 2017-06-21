@@ -13,6 +13,7 @@ class PostDetail extends Component {
     super(props);
 
     this.state = {};
+    initialState();
   }
 
   componentWillMount() {
