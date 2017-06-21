@@ -12,7 +12,7 @@ class CategoryList extends Component {
     super(props);
 
     this.state = {};
-    initialState();
+    this.initialState();
     this.onClicked = this.onClicked.bind(this);
     this.renderCategories = this.renderCategories.bind(this);
   }
