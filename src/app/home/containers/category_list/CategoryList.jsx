@@ -16,7 +16,7 @@ class CategoryList extends Component {
     this.renderCategories = this.renderCategories.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.effects.fetchCategories()
       .then(() => this.setState({ loadingCategories: false }))
       .catch(error => {

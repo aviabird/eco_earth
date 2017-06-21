@@ -13,7 +13,7 @@ class PostList extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.effects.fetchPosts()
       .then(() => this.setState({ loadingPosts: false }))
       .catch(error => {

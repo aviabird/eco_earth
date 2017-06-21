@@ -14,7 +14,7 @@ export default class HomeService {
   }
 
   static getPostById(id) {
-    return axios.get(`${API_URL}/post/${id}`)
+    return axios.get(`${API_URL}/posts/${id}`)
       .then(resp => resp.data.data)
       .catch(err => {
         throw err;
