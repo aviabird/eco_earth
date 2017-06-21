@@ -4,7 +4,7 @@ import Header from './containers/header/Header';
 import CategoryList from './containers/category_list/CategoryList.jsx';
 import PostList from './containers/post_list/PostList';
 import PostDetail from './../post/containers/post_detail/PostDetail';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 class Home extends Component {
   render() {

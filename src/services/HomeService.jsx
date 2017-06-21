@@ -1,59 +1,43 @@
-var posts = [
-  {
-    id: 1,
-    title: 'Save energy',
-    category_id: 1,
-    content: 'Turn off lights when I leave a room and use natural lighting as much as possible'
-  }, {
-    id: 2,
-    title: 'Say no to plastics',
-    category_id: 2,
-    content: 'Use less and compost and recycle as much as possible'
-  }, {
-    id: 3,
-    title: 'Use Automobiles smartly',
-    category_id: 3,
-    content: 'Walk and ride my bike less to and from school and get a ride with friends instead'
-  }, {
-    id: 4,
-    title: 'Go green',
-    category_id: 4,
-    content: 'Work with my People.Power.Planet Champions to find ways that we can help our school save energy and the environment'
+import axios from 'axios';
+import ENV from '../AppConstants';
+
+const API_URL = ENV.API_URL;
+
+export default class HomeService {
+
+  static getPosts() {
+    return axios.get(`${API_URL}/posts`)
+      .then(resp => resp.data.data)
+      .catch(err => {
+        throw err;
+      });
   }
-];
 
-var categories = [
-  {
-    id:1,
-    category:'energy conservation'
-  }, {
-    id:2,
-    category:'no plastics'
-  }, {
-    id:3,
-    category:'Pollution'
-  }, {
-    id:4,
-    category:'eco-friendly habits'
+  static getPostById(id) {
+    return axios.get(`${API_URL}/post/${id}`)
+      .then(resp => resp.data.data)
+      .catch(err => {
+        throw err;
+      });
   }
-];
 
-export function getPosts() {
-  return posts;
+  static getCategories() {
+    return axios.get(`${API_URL}/categories`)
+      .then(resp => resp.data.data)
+      .catch(err => {
+        throw err;
+      });
+  }
 
-}
-
-export function getPostById(id) {
-  return posts[id-1];
-}
-
-export function getCategories() {
-  return categories;
-}
-
-export function getCategorylist(category_id){
-  var categories_list = posts.filter(function (post) {
-    return post.category_id == category_id
-  });
-  return categories_list;
+  static getPostlistFor(category_id) {
+    return axios.get(`${API_URL}/posts`)
+      .then(resp => {
+        return resp.data.data.filter(function (post) {
+          return post.category_id === category_id
+        });
+      })
+      .catch(err => {
+        throw err;
+      });
+  }
 }
