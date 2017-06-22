@@ -11,19 +11,15 @@ class PostList extends Component {
     super(props);
 
     this.state = {};
-    this.initialState();
   }
 
   componentWillMount() {
+    this.setState({ loadingPosts: true });
     this.props.effects.fetchPosts()
       .then(() => this.setState({ loadingPosts: false }))
       .catch(error => {
         console.log(error);
       });
-  }
-
-  initialState() {
-    this.setState({ loadingPosts: true });
   }
 
   renderPosts(postData) {

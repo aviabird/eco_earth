@@ -12,21 +12,17 @@ class CategoryList extends Component {
     super(props);
 
     this.state = {};
-    this.initialState();
     this.onClicked = this.onClicked.bind(this);
     this.renderCategories = this.renderCategories.bind(this);
   }
 
   componentWillMount() {
+    this.setState({ loadingCategories: true });
     this.props.effects.fetchCategories()
       .then(() => this.setState({ loadingCategories: false }))
       .catch(error => {
         console.log(error);
       });
-  }
-
-  initialState() {
-    this.setState({ loadingCategories: true });
   }
 
   onClicked(category_id) {
