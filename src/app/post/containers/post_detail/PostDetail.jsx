@@ -12,18 +12,15 @@ class PostDetail extends Component {
     super(props);
 
     this.state = {};
-    this.initialState();
+    
   }
 
   componentWillMount() {
+    this.setState({ isLoading: true });
     var postId = this.props.match.params.postId;
     this.props.effects.getSelectedPost(postId)
       .then(() => this.setState({ isLoading: true }))
       .catch((error) => console.log(error));
-  }
-
-  initialState() {
-    this.setState({ isLoading: true });
   }
 
   render() {

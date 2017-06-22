@@ -24,7 +24,7 @@ class CategoryList extends Component {
   }
 
   onClicked(category_id) {
-    this.props.effects.getPostListFor(category_id)
+    this.props.effects.fetchpostsbyCategory(category_id)
       .then(() => console.log('Loading Category Posts'))
       .catch(error => {
         console.log(error);
