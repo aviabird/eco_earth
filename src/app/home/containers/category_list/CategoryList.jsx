@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
+import './CategoryList.css';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import CategoryListItem from '../../components/category_list_item/CategoryListItem';
 import PropTypes from 'prop-types';
+
 
 class CategoryList extends Component {
 
@@ -54,7 +56,7 @@ class CategoryList extends Component {
     }
 
     return (
-      <ul>
+      <ul className="category_list">
         Categories: {this
           .props
           .categories

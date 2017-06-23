@@ -17,9 +17,11 @@
     "rxjs": "^5.4.1"
   },
   "devDependencies": {
+    "enzyme": "^2.9.0",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.0.2",
-    "react-scripts": "1.0.7"
+    "react-scripts": "1.0.7",
+    "react-test-renderer": "^15.6.1"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",

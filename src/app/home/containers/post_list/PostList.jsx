@@ -2,7 +2,11 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PostListItem from '../../components/post_list_item/PostListItem';
 import PropTypes from 'prop-types';
+<<<<<<< 9cf2e2587b856ea8dbd52c36134ad6937c764c52
 import { fetchPosts } from '../../../../store/modules/posts/actions'
+=======
+import './PostList.css';
+>>>>>>> test case for post_list added
 
 class PostList extends Component {
 

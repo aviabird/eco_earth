@@ -21,7 +21,6 @@ export default function (state = INITIAL_STATE, action) { //action coming from a
       }
     case 'FETCH_SELECTED_POST':
       return {
-        posts: [], 
         selected_post: action.payload
       }
     default:
