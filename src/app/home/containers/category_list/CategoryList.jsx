@@ -2,8 +2,6 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import CategoryListItem from '../../components/category_list_item/CategoryListItem';
-import * as categoryEffects from '../../../../store/categories/effects';
-import * as postsEffects from '../../../../store/posts/effects';
 import PropTypes from 'prop-types';
 
 class CategoryList extends Component {
@@ -80,7 +78,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     effects: bindActionCreators(
-      { ...categoryEffects, ...postsEffects },
+      {  },
       dispatch)
   };
 }

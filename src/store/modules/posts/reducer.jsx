@@ -1,3 +1,5 @@
+import * as actionTypes from './actionTypes';
+
 //reducers are always functions
 const INITIAL_STATE = {
   posts: [],
@@ -7,7 +9,7 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) { //action coming from actioncontainers
 
   switch (action.type) {
-    case 'FETCH_POSTS':
+    case actionTypes.FETCH_POSTS_SUCCESS:
       return {
         ...state,
         posts: action.payload

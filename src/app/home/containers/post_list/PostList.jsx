@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import PostListItem from '../../components/post_list_item/PostListItem';
-import * as postEffects from '../../../../store/posts/effects';
 import PropTypes from 'prop-types';
+import { fetchPosts } from '../../../../store/modules/posts/actions'
 
 class PostList extends Component {
 
@@ -13,48 +12,47 @@ class PostList extends Component {
     this.state = {};
   }
 
-  componentWillMount() {
-    this.setState({ loadingPosts: true });
-    this.props.effects.fetchPosts()
-      .then(() => this.setState({ loadingPosts: false }))
-      .catch(error => {
-        console.log(error);
-      });
+  componentDidMount() {
+    this.props.fetchPosts();
   }
 
   renderPosts(postData) {
     return (<PostListItem data={postData} key={postData.id} />);
   }
+
   render() {
-    if(this.state.loadingPosts) {
+    const { posts } = this.props;
+
+    // console.log(this.props);
+
+    if (!posts) {
+      return (
+        <h5>Loading Latest Posts</h5>
+      )
+    } else if (!posts.length) {
       return (
         <h5>Loading Latest Posts</h5>
       )
     }
+
     return (
       <ul>
-        {this
-          .props
-          .posts
-          .map(this.renderPosts)}
+        {posts.map(this.renderPosts)}
       </ul>
     )
   }
 }
 
 PostList.propTypes = {
-  posts: PropTypes.array.isRequired,
-  effects: PropTypes.object.isRequired
+  posts: PropTypes.array
 };
 
-function mapStateToProps(state, ownProps) {
-  return { posts: state.post_state.posts };
+function mapStateToProps({postsState}, ownProps) {
+  const { posts } = postsState;
+  return { posts };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    effects: bindActionCreators(postEffects, dispatch)
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostList);
+export default connect(
+  mapStateToProps,
+  { fetchPosts }
+)(PostList);

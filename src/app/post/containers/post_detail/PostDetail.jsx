@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import * as postEffects from '../../../../store/posts/effects';
 import PropTypes from 'prop-types';
 
 import './PostDetail.css';
@@ -57,7 +56,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     effects: bindActionCreators(
-      { ...postEffects },
+      {  },
       dispatch
     )
   }
