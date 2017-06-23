@@ -20,11 +20,11 @@ export const  getPostlistFor = (action$) => {
 }
 
 
-// export const getSelectedPost = (action$) => {
-//   return action$.ofType(actionTypes.FETCH_SELECTED_POST)
-//     .map( action => action.payload)
-//     .switchMap((category_id) =>
-//       HomeService.getCategorylist(category_id)
-//       .map(postsActions.selectedPostSuccess)
-//     )
-// }
+export const getSelectedPost = (action$) => {
+  return action$.ofType(actionTypes.FETCH_SELECTED_POST)
+    .map( action => action.payload)
+    .switchMap((post_id) =>
+      HomeService.getPostById(post_id)
+      .map(postsActions.fetchSelectedPostSuccess)
+    )
+}

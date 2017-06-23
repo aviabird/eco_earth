@@ -8,6 +8,7 @@ import * as categoryEpics from './categories/epics';
 export const rootEpic = combineEpics(
   postEpics.fetchPosts,
   postEpics.getPostlistFor,
+  postEpics.getSelectedPost,
   categoryEpics.fetchCategories
 );
 

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-
+import { selectedPost } from './../../../../store/modules/posts/actions';
 import './PostDetail.css';
 
 class PostDetail extends Component {
@@ -18,9 +17,8 @@ class PostDetail extends Component {
   componentWillMount() {
     this.setState({ isLoading: true });
     var postId = this.props.match.params.postId;
-    this.props.effects.getSelectedPost(postId)
-      .then(() => this.setState({ isLoading: true }))
-      .catch((error) => console.log(error));
+    this.props.selectedPost(postId);
+
   }
 
   render() {
@@ -43,20 +41,11 @@ class PostDetail extends Component {
 }
 
 PostDetail.propTypes = {
-  post: PropTypes.object.isRequired,
-  effects: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
-  return { post: state.post_state.selected_post };
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    effects: bindActionCreators(
-      {  },
-      dispatch
-    )
-  }
+function mapStateToProps({postsState}) {
+  return { post: postsState.selected_post };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
+export default connect(mapStateToProps,{selectedPost})(PostDetail);

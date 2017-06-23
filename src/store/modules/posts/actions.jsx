@@ -34,7 +34,7 @@ export function selectedPost(post_id) {
   };
 }
 
-export function selectedPostSuccess(post) {
+export function fetchSelectedPostSuccess(post) {
   return {
     type: actionTypes.FETCH_SELECTED_POST_SUCCESS,
     payload: post
