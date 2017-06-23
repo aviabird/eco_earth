@@ -24,8 +24,6 @@ class PostList extends Component {
   render() {
     const { posts } = this.props;
 
-    // console.log(this.props);
-
     if (!posts) {
       return (
         <h5>Loading Latest Posts</h5>
@@ -37,7 +35,7 @@ class PostList extends Component {
     }
 
     return (
-      <ul>
+      <ul className="post_list">
         {posts.map(this.renderPosts)}
       </ul>
     )

@@ -1,13 +1,12 @@
-import HomeService from '../../services/HomeService';
-import { loadedCategories } from './actions';
+import HomeService from '../../../services/HomeService';
+import * as actionTypes from './actionTypes';
+import * as categoryActions from './actions';
 
-export function fetchCategories() {
-  return dispatch => {
-    return HomeService.getCategories()
-      .then(categories => {
-        dispatch(loadedCategories(categories))
-      }).catch(error => {
-        throw error;
-      });
-  }
+
+export const fetchCategories = (action$) => {
+  return action$.ofType(actionTypes.FETCH_CATEGORIES)
+    .switchMap(() =>
+      HomeService.getCategories()
+        .map(categoryActions.fetchCategoriesSuccess)
+    )
 }
