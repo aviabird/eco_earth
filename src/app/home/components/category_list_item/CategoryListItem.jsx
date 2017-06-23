@@ -1,4 +1,5 @@
 import React from 'react';
+import './CategoryListItem.css';
 
 const CategoryListItem = (props) => {
   return (

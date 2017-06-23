@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PostListItem from '../../components/post_list_item/PostListItem';
 import PropTypes from 'prop-types';
 import { fetchPosts } from '../../../../store/modules/posts/actions'
+import './PostList.css';
 
 class PostList extends Component {
 
