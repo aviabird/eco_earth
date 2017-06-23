@@ -10,35 +10,21 @@ export const fetchPosts = (action$) => {
     )
 }
 
-// export function fetchpostsbyCategory(category_id) {
-//   return dispatch => {
-//     return HomeService.getCategorylist(category_id)
-//       .then(posts => {
-//         dispatch(loadedPostsByCategory(posts))
-//       }).catch(error => {
-//         throw error;
-//       });
-//   }
-// }
+export const  getPostlistFor = (action$) => {
+  return action$.ofType(actionTypes.FETCH_POSTS_BY_CATEGORY)
+    .map(action => action.payload)
+    .switchMap((category_id) =>
+      HomeService.getPostlistFor(category_id)
+      .map(postsActions.fetchPostsByCategorySuccess)
+    )
+}
 
-// export function getSelectedPost(id) {
-//   return dispatch => {
-//     return HomeService.getPostById(id)
-//       .then(post => {
-//         dispatch(selectedPost(post))
-//       }).catch(error => {
-//         throw error;
-//       });
-//   }
-// }
 
-// export function getPostListFor(category_id) {
-//   return dispatch => {
-//     return HomeService.getPostlistFor(category_id)
-//       .then(posts => {
-//         dispatch(loadedPosts(posts))
-//       }).catch(error => {
-//         throw error;
-//       });
-//   }
+// export const getSelectedPost = (action$) => {
+//   return action$.ofType(actionTypes.FETCH_SELECTED_POST)
+//     .map( action => action.payload)
+//     .switchMap((category_id) =>
+//       HomeService.getCategorylist(category_id)
+//       .map(postsActions.selectedPostSuccess)
+//     )
 // }

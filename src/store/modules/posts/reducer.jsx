@@ -14,12 +14,12 @@ export default function (state = INITIAL_STATE, action) { //action coming from a
         ...state,
         posts: action.payload
       }
-    case 'FETCH_POSTS_BY_CATEGORY':
+    case actionTypes.FETCH_POSTS_BY_CATEGORY_SUCCESS:
       return {
         ...state,
         posts: action.payload
       }
-    case 'FETCH_SELECTED_POST':
+    case actionTypes.FETCH_SELECTED_POST_SUCCESS:
       return {
         selected_post: action.payload
       }

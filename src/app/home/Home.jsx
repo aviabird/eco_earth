@@ -13,8 +13,8 @@ class Home extends Component {
         <Header className="header" />
         <div className="lists">
           <Route exact path="/" component={PostList} className="post_list"/>
-          {/*<Route path="/posts/:postId" component={PostDetail} className="post_detail"/>
-          <CategoryList className="categories-list" />*/}
+          {/*<Route path="/posts/:postId" component={PostDetail} className="post_detail"/>*/}
+          <CategoryList className="categories-list" />
         </div>
       </div>
     );

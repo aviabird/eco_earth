@@ -1,5 +1,9 @@
-import { FETCH_CATEGORIES } from './actionTypes';
+import * as actionTypes from './actionTypes';
 
-export function loadedCategories(categories) {
-  return {type: FETCH_CATEGORIES, payload: categories};
+export function fetchCategories() {
+  return {type: actionTypes.FETCH_CATEGORIES};
+}
+
+export function fetchCategoriesSuccess(categories) {
+  return {type: actionTypes.FETCH_CATEGORIES_SUCCESS, payload: categories};
 }
