@@ -4,7 +4,7 @@ import './App.css';
 import Home from './home/Home';
 
 const App = () => (
-  <div className="main__body">
+  <div className="container-fluid">
     <Home />
   </div>
 )
