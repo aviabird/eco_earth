@@ -42,13 +42,12 @@ class CategoryList extends Component {
   }
 
   render() {
-    if(this.props.isFetchingCategories) { return <Loader /> }
-
     return (
       <Panel className="cat-list">
         <h5>Categories: </h5>
         <hr/>
         <ul>
+          {this.props.isFetchingCategories ? <Loader /> : null }
           {this.props.categories.map(this.renderCategories)}
         </ul>
       </Panel>
