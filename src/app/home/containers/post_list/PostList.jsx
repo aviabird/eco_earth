@@ -24,20 +24,13 @@ class PostList extends Component {
   }
 
   render() {
-    const { posts } = this.props;
-
-    if (!posts) {
-      return (
-        <Loader />
-      )
-    } else if (!posts.length) {
-      return (
-        <h5>No Posts Found</h5>
-      )
-    }
+    const { posts, isFetchingPosts } = this.props;
+    if (isFetchingPosts) { return <Loader />; }
+    if (!posts) { return <h4> No Posts Available </h4>; }
 
     return (
       <div className="post-list" >
+        {!posts.length ? <h4> No Posts Available </h4> : null}
         {posts.map(this.renderPosts)}
       </div>
     )
@@ -48,9 +41,9 @@ PostList.propTypes = {
   posts: PropTypes.array
 };
 
-function mapStateToProps({postsState}, ownProps) {
-  const { posts } = postsState;
-  return { posts };
+function mapStateToProps({ postsState }, ownProps) {
+  const { posts, isFetchingPosts } = postsState;
+  return { posts, isFetchingPosts };
 }
 
 export default connect(

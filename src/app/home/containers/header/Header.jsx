@@ -25,18 +25,7 @@ class Header extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <div className="navbar-right">
-            <Navbar.Form pullLeft>
-              <FormGroup>
-                <FormControl type="text" placeholder="Search Topics" className="search-input" />
-              </FormGroup>
-              <Button className="search-btn" type="submit">
-                <FontAwesome
-                  className='super-crazy-colors'
-                  name='search'
-                  style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-                />
-              </Button>
-            </Navbar.Form>
+            <Searchbar onSearched={this.onSearched} />
             <Nav pullRight>
               <NavItem eventKey={1}>
                 <Button className="start-new-topic" type="submit">

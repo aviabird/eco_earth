@@ -42,12 +42,13 @@ class CategoryList extends Component {
   }
 
   render() {
+    if(this.props.isFetchingCategories) { return <Loader /> }
+
     return (
       <Panel className="cat-list">
         <h5>Categories: </h5>
         <hr/>
         <ul>
-          {!this.props.categories ? <Loader /> : null}
           {this.props.categories.map(this.renderCategories)}
         </ul>
       </Panel>
@@ -61,7 +62,10 @@ CategoryList.propTypes = {
 
 //function mapStateToProps(state) {
 function mapStateToProps({categoriesState}) {
-  return { categories: categoriesState.categories }; //{weather}==={weather:weather}
+  return {
+    categories: categoriesState.categories,
+    isFetchingCategories: categoriesState.isFetchingCategories
+  }; //{weather}==={weather:weather}
 }
 
 export default connect(

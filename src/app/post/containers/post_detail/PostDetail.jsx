@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { selectedPost } from './../../../../store/modules/posts/actions';
 import './PostDetail.css';
 import { Panel } from 'react-bootstrap';
+import Loader from '../../../../shared/components/loader/Loader';
 
 class PostDetail extends Component {
 
@@ -12,20 +13,17 @@ class PostDetail extends Component {
     super(props);
 
     this.state = {};
-
   }
 
   componentWillMount() {
-    this.setState({ isLoading: true });
     var postId = this.props.match.params.postId;
     this.props.selectedPost(postId);
-
   }
 
   render() {
-    if (this.isLoading) {
+    if (this.props.isFetchingSinglePost) {
       return (
-        <h5>Loading Post</h5>
+        <Loader />
       )
     }
     return (
@@ -42,7 +40,7 @@ PostDetail.propTypes = {
 };
 
 function mapStateToProps({ postsState }) {
-  return { post: postsState.selected_post };
+  return { post: postsState.selected_post, isFetchingSinglePost: postsState.isFetchingSinglePost };
 }
 
 export default connect(mapStateToProps, { selectedPost })(PostDetail);
