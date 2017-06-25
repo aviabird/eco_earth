@@ -4,6 +4,7 @@ import PostListItem from '../../components/post_list_item/PostListItem';
 import PropTypes from 'prop-types';
 import { fetchPosts } from '../../../../store/modules/posts/actions'
 import './PostList.css';
+import { Col } from 'react-bootstrap';
 
 class PostList extends Component {
 
@@ -35,9 +36,9 @@ class PostList extends Component {
     }
 
     return (
-      <ul className="post_list">
+      <div className="post-list" >
         {posts.map(this.renderPosts)}
-      </ul>
+      </div>
     )
   }
 }

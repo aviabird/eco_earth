@@ -5,8 +5,7 @@ import CategoryListItem from "../../components/category_list_item/CategoryListIt
 import PropTypes from "prop-types";
 import { fetchCategories } from "../../../../store/modules/categories/actions";
 import { fetchPostsByCategory } from "../../../../store/modules/posts/actions";
-
-
+import { Panel } from 'react-bootstrap';
 
 class CategoryList extends Component {
   constructor(props) {
@@ -34,7 +33,7 @@ class CategoryList extends Component {
       <li
         key={data.id}
         onClick={() => this.onClicked(category_id)}
-        className="categories-list list-group-item"
+        className="list-group-item"
       >
         <CategoryListItem title={title} desc={desc} />
       </li>
@@ -47,9 +46,13 @@ class CategoryList extends Component {
     }
 
     return (
-      <ul className="category_list">
-        Categories: {this.props.categories.map(this.renderCategories)}
-      </ul>
+      <Panel className="cat-list">
+        <h5>Categories: </h5>
+        <hr/>
+        <ul class="list-group">
+          {this.props.categories.map(this.renderCategories)}
+        </ul>
+      </Panel>
     );
   }
 }

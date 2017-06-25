@@ -15,7 +15,7 @@
   box-shadow: none;
   background-color: #ECF0F1;
   margin-right: -5px;
-  width: 30vw !important;
+  width: 18vw !important;
   height: 3.9rem;
   &:focus {
     border: none;
@@ -33,10 +33,24 @@
   font-size: 18px;
   background-image: none;
   transition: transform 0.3s;
-
   &:hover {
     background-color: #697683;
     transform: scale(1.05);
     color: #ffffff;
   }
+}
+
+.start-new-topic {
+  margin: -7px 8px;
+  background-image: none;
+  height: 38px;
+  border: none;
+  box-shadow: none;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'Open Sans Bold', sans-serif;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: #1abc9c;
+  text-shadow: none;
 }

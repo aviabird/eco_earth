@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { selectedPost } from './../../../../store/modules/posts/actions';
 import './PostDetail.css';
+import { Panel } from 'react-bootstrap';
 
 class PostDetail extends Component {
 
@@ -11,7 +12,7 @@ class PostDetail extends Component {
     super(props);
 
     this.state = {};
-    
+
   }
 
   componentWillMount() {
@@ -22,20 +23,16 @@ class PostDetail extends Component {
   }
 
   render() {
-    if(this.isLoading) {
+    if (this.isLoading) {
       return (
         <h5>Loading Post</h5>
       )
     }
     return (
-      <div className="post_detail">
-        <h3>Details for:</h3><br />
-        <div>Title: {this.props.post.title}</div>
-        <div>Pages: {this.props.post.content}</div>
-        <Link to="/">
-          Back to home page
-        </Link>
-      </div>
+      <Panel className="post_detail">
+        <h4>{this.props.post.title}</h4>
+        <p>{this.props.post.content}</p>
+      </Panel>  
     );
   }
 }
@@ -44,8 +41,8 @@ PostDetail.propTypes = {
   post: PropTypes.object.isRequired
 };
 
-function mapStateToProps({postsState}) {
+function mapStateToProps({ postsState }) {
   return { post: postsState.selected_post };
 }
 
-export default connect(mapStateToProps,{selectedPost})(PostDetail);
+export default connect(mapStateToProps, { selectedPost })(PostDetail);
