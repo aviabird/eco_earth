@@ -1,0 +1,86 @@
+/*Time line*/
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0
+  }
+  100% {
+    background-position: 468px 0
+  }
+}
+
+.animated-background {
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 65px;
+  position: relative;
+}
+
+.background-masker {
+  background: #fff;
+  position: absolute;
+}
+
+
+/* Every thing below this is just positioning */
+
+.background-masker.image {
+  top: -10px;
+  left: -12px;
+  right: 0;
+  height: 113%;
+  background: none;
+  border: 23px solid white;
+  width: 10%;
+  margin-left: 1%;
+  border-left: 0px;
+  border-top: 0px;
+}
+
+.background-masker.header-right {
+  top: 0px;
+  right: 0px;
+  height: 21px;
+  width: 16%;
+}
+
+.background-masker.header-bottom {
+  top: 21px;
+  left: 8%;
+  right: 0;
+  height: 10px;
+}
+
+.background-masker.paragraph1-bottom {
+  top: 31px;
+  right: 0;
+  height: 9px;
+  width: 27%;
+}
+
+.background-masker.paragraph2-bottom {
+  top: 40px;
+  right: 0;
+  height: 10px;
+  width: 100%;
+}
+
+.background-masker.paragraph3-bottom {
+  top: 50px;
+  right: 0;
+  height: 9px;
+  width: 40%;
+}
+
+.background-masker.paragraph4-bottom {
+  top: 59px;
+  left: 0;
+  right: 0;
+  height: 6px;
+}

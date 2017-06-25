@@ -11,8 +11,8 @@ $border-color: #f1f1f1;
   .badge {
     height: 15px;
     width: 15px;
-    top: 10px;
-    left: 35px;
+    top: 8px;
+    left: 64%;
     border-radius: 10px;
     padding: 0;
     position: relative;
@@ -28,7 +28,7 @@ $border-color: #f1f1f1;
     }
   }
   .post-text {
-    padding: 20px 15px 30px;
+    padding: 20px 15px 15px;
     color: #989c9e;
     font-size: 14px;
     font-family: 'Open Sans Light', sans-serif;

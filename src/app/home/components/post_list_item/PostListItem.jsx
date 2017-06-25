@@ -8,12 +8,12 @@ import { Panel, Col, Image, Badge } from 'react-bootstrap';
 const PostListItem = (props) => {
   return (
     <Panel className="post">
-      <Col xs={3} sm={2} md={1} className="user-info text-center">
+      <Col xs={2} sm={1} md={1} className="user-info text-center">
         <Badge className="active"></Badge>
         <Image src={Avatar} alt="Avatar" rounded />
         <hr />
       </Col>
-      <Col xs={6} sm={8} md={9} className="post-text">
+      <Col xs={8} sm={8} md={9} className="post-text">
         <Link to={"posts/" + props.data.id}>
           <h2>
             {props.data.title}
@@ -21,7 +21,7 @@ const PostListItem = (props) => {
         </Link>
         <p>{props.data.content}</p>
       </Col>
-      <Col xs={3} sm={2} md={2} className="post-info text-center">
+      <Col xs={2} sm={2} md={2} className="post-info text-center">
         <div className="comments">
           <div className="commentbg">
             560

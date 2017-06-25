@@ -6,6 +6,7 @@ import { fetchPosts } from '../../../../store/modules/posts/actions'
 import './PostList.css';
 import { Col } from 'react-bootstrap';
 import Loader from '../../../../shared/components/loader/Loader';
+import { Panel } from 'react-bootstrap';
 
 class PostList extends Component {
 
@@ -23,9 +24,33 @@ class PostList extends Component {
     return (<PostListItem data={postData} key={postData.id} />);
   }
 
+  loadingPosts() {
+    return (
+      <Panel className="timeline-wrapper">
+        <div className="timeline-item">
+          <div className="animated-background">
+              <div className="background-masker image"></div>
+              <div className="background-masker header-right"></div>
+              <div className="background-masker header-bottom"></div>
+              <div className="background-masker paragraph1-bottom"></div>
+              <div className="background-masker paragraph2-bottom"></div>
+              <div className="background-masker paragraph3-bottom"></div>
+              <div className="background-masker paragraph4-bottom"></div>
+          </div>
+        </div>
+      </Panel>
+    );
+  }
+
   render() {
     const { posts, isFetchingPosts } = this.props;
-    if (isFetchingPosts) { return <Loader />; }
+    if (isFetchingPosts) {
+      return (
+        <div>
+          {[...Array(5)].map(() => this.loadingPosts())}
+        </div>
+      )
+    }
     if (!posts) { return <h4> No Posts Available </h4>; }
 
     return (
