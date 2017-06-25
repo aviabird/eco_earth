@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { fetchPosts } from '../../../../store/modules/posts/actions'
 import './PostList.css';
 import { Col } from 'react-bootstrap';
+import Loader from '../../../../shared/components/loader/Loader';
 
 class PostList extends Component {
 
@@ -27,11 +28,11 @@ class PostList extends Component {
 
     if (!posts) {
       return (
-        <h5>Loading Latest Posts</h5>
+        <Loader />
       )
     } else if (!posts.length) {
       return (
-        <h5>Loading Latest Posts</h5>
+        <h5>No Posts Found</h5>
       )
     }
 

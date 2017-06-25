@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { fetchCategories } from "../../../../store/modules/categories/actions";
 import { fetchPostsByCategory } from "../../../../store/modules/posts/actions";
 import { Panel } from 'react-bootstrap';
+import Loader from '../../../../shared/components/loader/Loader';
 
 class CategoryList extends Component {
   constructor(props) {
@@ -41,15 +42,12 @@ class CategoryList extends Component {
   }
 
   render() {
-    if (!this.props.categories) {
-      return <h5>Loading Categories</h5>;
-    }
-
     return (
       <Panel className="cat-list">
         <h5>Categories: </h5>
         <hr/>
-        <ul class="list-group">
+        <ul>
+          {!this.props.categories ? <Loader /> : null}
           {this.props.categories.map(this.renderCategories)}
         </ul>
       </Panel>
