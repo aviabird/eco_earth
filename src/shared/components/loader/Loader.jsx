@@ -5,7 +5,7 @@ import './Loader.css';
 const Loader = () => {
   return (
     <div className="text-center">
-      <img className="loader" src={LoaderImage} />
+      <img className="loader" alt="Loading Data" src={LoaderImage} />
     </div>
   );
 };

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Searchbar from '../../components/search_bar/SearchBar';
 import './Header.css';
-import { Navbar, FormGroup, FormControl, Button, NavDropdown, Nav, NavItem, MenuItem } from 'react-bootstrap';
+import { Navbar, Button, NavDropdown, Nav, NavItem, MenuItem } from 'react-bootstrap';
 import Logo from './../../../../assets/images/logo.png';
-import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
 
 class Header extends Component {

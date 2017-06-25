@@ -4,9 +4,8 @@ import PostListItem from '../../components/post_list_item/PostListItem';
 import PropTypes from 'prop-types';
 import { fetchPosts } from '../../../../store/modules/posts/actions'
 import './PostList.css';
-import { Col } from 'react-bootstrap';
-import Loader from '../../../../shared/components/loader/Loader';
 import { Panel } from 'react-bootstrap';
+import {Motion, spring} from 'react-motion';
 
 class PostList extends Component {
 
@@ -20,13 +19,28 @@ class PostList extends Component {
     this.props.fetchPosts();
   }
 
-  renderPosts(postData) {
-    return (<PostListItem data={postData} key={postData.id} />);
+  renderPost(postData) {
+    return (
+      <Motion
+        key={postData.id}
+        defaultStyle={{y: 50, o: 0}}
+        style={{
+          y: spring(0, {precision: 0.001}),
+          o: spring(1, {precision: 0.001})
+        }}
+      >
+        {value =>
+          <div style={{transform: `translateY(${value.y}px)`, opacity: value.o}}>
+            <PostListItem data={postData} />
+          </div>
+        }
+      </Motion>
+      );
   }
 
-  loadingPosts() {
+  loadingPosts(index) {
     return (
-      <Panel className="timeline-wrapper">
+      <Panel className="timeline-wrapper" key={index}>
         <div className="timeline-item">
           <div className="animated-background">
               <div className="background-masker image"></div>
@@ -47,7 +61,7 @@ class PostList extends Component {
     if (isFetchingPosts) {
       return (
         <div>
-          {[...Array(5)].map(() => this.loadingPosts())}
+          {[...Array(5)].map((val, i) => this.loadingPosts(i))}
         </div>
       )
     }
@@ -56,7 +70,7 @@ class PostList extends Component {
     return (
       <div className="post-list" >
         {!posts.length ? <h4> No Posts Available </h4> : null}
-        {posts.map(this.renderPosts)}
+        {posts.map(this.renderPost)}
       </div>
     )
   }
