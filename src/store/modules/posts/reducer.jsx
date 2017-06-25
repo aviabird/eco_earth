@@ -19,6 +19,8 @@ export default function (state = INITIAL_STATE, action) { //action coming from a
         posts: action.payload,
         isFetchingPosts: false
       }
+    case actionTypes.FETCH_POSTS_BY_CATEGORY:
+      return { ...state, isFetchingPosts: true }
     case actionTypes.FETCH_POSTS_BY_CATEGORY_SUCCESS:
       return {
         ...state,
