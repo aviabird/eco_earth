@@ -25,7 +25,7 @@ class PostList extends Component {
         key={postData.id}
         defaultStyle={{y: 50, o: 0}}
         style={{
-          y: spring(0, {precision: 0.001}),
+          y: spring(0, {stiffness: 160, damping: 10}),
           o: spring(1, {precision: 0.001})
         }}
       >
@@ -42,9 +42,9 @@ class PostList extends Component {
     return (
       <Motion
         key={index}
-        defaultStyle={{y: 50, o: 0}}
+        defaultStyle={{y: 200, o: 0}}
         style={{
-          y: spring(0, {precision: 0.001}),
+          y: spring(0, {stiffness: 160, damping: 15}),
           o: spring(1, {precision: 0.001})
         }}
       >

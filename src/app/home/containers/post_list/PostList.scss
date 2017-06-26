@@ -38,6 +38,7 @@
   background: none;
   border: 23px solid white;
   width: 10%;
+  min-width: 70px;
   margin-left: 1%;
   border-left: 0px;
   border-top: 0px;
@@ -52,9 +53,18 @@
 
 .background-masker.header-bottom {
   top: 16px;
-  left: 8%;
+  left: 9%;
   right: 0;
   height: 15px;
+  position: relative;
+  width: 91%;
+}
+
+@media (max-width: 500px) {
+  .background-masker.header-bottom {
+    left: 14.6%;
+    width: 86%;
+  }
 }
 
 .background-masker.paragraph1-bottom {

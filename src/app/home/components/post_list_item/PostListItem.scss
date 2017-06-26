@@ -43,9 +43,6 @@ $border-color: #f1f1f1;
         color: #989c9e;
       }
     }
-    p {
-      margin: 0 0 10px;
-    }
   }
   .post-info {
     padding: 0;
@@ -100,5 +97,8 @@ $border-color: #f1f1f1;
     font-size: 12px !important;
     padding: 7px !important;
     min-width: 35px;
+    .mark {
+      left: 33% !important;
+    }
   }
 }
