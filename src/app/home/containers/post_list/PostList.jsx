@@ -40,19 +40,30 @@ class PostList extends Component {
 
   loadingPosts(index) {
     return (
-      <Panel className="timeline-wrapper" key={index}>
-        <div className="timeline-item">
-          <div className="animated-background">
-              <div className="background-masker image"></div>
-              <div className="background-masker header-right"></div>
-              <div className="background-masker header-bottom"></div>
-              <div className="background-masker paragraph1-bottom"></div>
-              <div className="background-masker paragraph2-bottom"></div>
-              <div className="background-masker paragraph3-bottom"></div>
-              <div className="background-masker paragraph4-bottom"></div>
-          </div>
-        </div>
-      </Panel>
+      <Motion
+        key={index}
+        defaultStyle={{y: 50, o: 0}}
+        style={{
+          y: spring(0, {precision: 0.001}),
+          o: spring(1, {precision: 0.001})
+        }}
+      >
+        {value =>
+          <Panel style={{transform: `translateY(${value.y}px)`, opacity: value.o}} className="timeline-wrapper" key={index}>
+            <div className="timeline-item">
+              <div className="animated-background">
+                  <div className="background-masker image"></div>
+                  <div className="background-masker header-right"></div>
+                  <div className="background-masker header-bottom"></div>
+                  <div className="background-masker paragraph1-bottom"></div>
+                  <div className="background-masker paragraph2-bottom"></div>
+                  <div className="background-masker paragraph3-bottom"></div>
+                  <div className="background-masker paragraph4-bottom"></div>
+              </div>
+            </div>
+          </Panel>
+        }
+      </Motion>
     );
   }
 
