@@ -13,13 +13,13 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/observable/of';
 
-
 export const rootEpic = (...args) => combineEpics(
   postEpics.fetchPosts,
   postEpics.getPostlistFor,
   postEpics.getSelectedPost,
   categoryEpics.FetchCategories
 )(...args);
+
 
 const epicMiddleware = createEpicMiddleware(rootEpic, {
   dependencies: { getJSON: ajax.getJSON }

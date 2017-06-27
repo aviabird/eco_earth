@@ -5,6 +5,7 @@ import {
   FETCH_POSTS_BY_CATEGORY_SUCCESS
 } from "./actionTypes";
 
+
 describe("fetchposts reducer", () => {
   const INITIAL_STATE = {
     posts: [],
