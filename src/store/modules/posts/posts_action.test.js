@@ -1,5 +1,5 @@
-import {loadedPosts, loadedPostsByCategory, selectedPost} from './actions.jsx';
-import {FETCH_POSTS, FETCH_SELECTED_POST, FETCH_POSTS_BY_CATEGORY} from './actionTypes.jsx';
+import {fetchPostsSuccess,fetchPostsByCategorySuccess,fetchSelectedPostSuccess} from './actions.jsx';
+import {FETCH_POSTS_SUCCESS, FETCH_SELECTED_POST_SUCCESS, FETCH_POSTS_BY_CATEGORY_SUCCESS} from './actionTypes.jsx';
 
 describe('fetchposts action', () => {
   it('loads posts', () => {
@@ -12,11 +12,11 @@ describe('fetchposts action', () => {
       }
 
     ];
-    expect(loadedPosts(posts)).toEqual({type: FETCH_POSTS, payload: posts});
+    expect(fetchPostsSuccess(posts)).toEqual({type: FETCH_POSTS_SUCCESS, payload: posts});
   });
   it('has the correct type', () => {
-    const action = loadedPosts();
-    expect(action.type).toEqual("FETCH_POSTS");
+    const action = fetchPostsSuccess();
+    expect(action.type).toEqual("FETCH_POSTS_SUCCESS");
   });
 });
 
@@ -30,11 +30,11 @@ describe('select posts by category', () => {
         content: 'Turn off lights when I leave a room and use natural lighting as much as possible'
       }
     ]
-    expect(loadedPostsByCategory(posts)).toEqual({type: FETCH_POSTS_BY_CATEGORY, payload: posts});
+    expect(fetchPostsByCategorySuccess(posts)).toEqual({type: FETCH_POSTS_BY_CATEGORY_SUCCESS, payload: posts});
   });
   it('has the correct type', () => {
-    const action = loadedPostsByCategory();
-    expect(action.type).toEqual("FETCH_POSTS_BY_CATEGORY");
+    const action = fetchPostsByCategorySuccess();
+    expect(action.type).toEqual("FETCH_POSTS_BY_CATEGORY_SUCCESS");
   });
 });
 
@@ -48,10 +48,10 @@ describe('selected post', () => {
         content: 'Turn off lights when I leave a room and use natural lighting as much as possible'
       }
     ]
-    expect(selectedPost(post)).toEqual({type: FETCH_SELECTED_POST, payload: post});
+    expect(fetchSelectedPostSuccess(post)).toEqual({type: FETCH_SELECTED_POST_SUCCESS, payload: post});
   });
   it('has the correct type', () => {
-    const action = selectedPost();
-    expect(action.type).toEqual("FETCH_SELECTED_POST");
+    const action = fetchSelectedPostSuccess();
+    expect(action.type).toEqual("FETCH_SELECTED_POST_SUCCESS");
   });
 });
