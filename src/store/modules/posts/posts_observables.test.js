@@ -1,5 +1,5 @@
 import { ActionsObservable } from "redux-observable";
-import { fetchPosts,getPostlistFor } from "./epics";
+import { fetchPosts, getPostlistFor } from "./epics";
 import * as actionTypes from "./actionTypes.jsx";
 import { ajax } from "rxjs/observable/dom/ajax";
 import { Observable } from "rxjs/Observable";
@@ -7,6 +7,7 @@ import "rxjs/add/operator/switchMap";
 import "rxjs/add/observable/of";
 import "rxjs/add/operator/toArray";
 import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
 
 describe("fetchPosts", () => {
   it("should emit a FETCH_POSTS_SUCCESS action with action type and data as payload", () => {
@@ -57,7 +58,7 @@ describe("fetchPosts", () => {
         assertDeepEqual(actions, [
           {
             type: actionTypes.FETCH_POSTS_BY_CATEGORY_SUCCESS,
-            payload:data
+            payload: data
           }
         ]);
       });

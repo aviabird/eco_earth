@@ -12,7 +12,7 @@ describe('fetchcategories reducer', () => {
       type: FETCH_CATEGORIES_SUCCESS,
       payload: {}
     };
-    expect(category_reducer(state, action)).toEqual({categories: action.payload, selected_category: null})
+    expect(category_reducer(state, action)).toEqual({categories: action.payload,isFetchingCategories: false, selected_category: null})
   });
   it('updates categories state on non-empty payload', () => {
     var action = {
@@ -27,6 +27,6 @@ describe('fetchcategories reducer', () => {
         }
       ]
     };
-    expect(category_reducer(state, action)).toEqual({categories: action.payload, selected_category: null})
+    expect(category_reducer(state, action)).toEqual({categories: action.payload,isFetchingCategories: false, selected_category: null})
   });
 });
