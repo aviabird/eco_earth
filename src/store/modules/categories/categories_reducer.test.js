@@ -1,5 +1,5 @@
 import category_reducer from './reducer.jsx';
-import {FETCH_CATEGORIES} from './actionTypes';
+import {FETCH_CATEGORIES_SUCCESS} from './actionTypes';
 
 describe('fetchcategories reducer', () => {
   const INITIAL_STATE = {
@@ -9,14 +9,14 @@ describe('fetchcategories reducer', () => {
   var state = INITIAL_STATE;
   it('updates categories state on empty payload', () => {
     var action = {
-      type: FETCH_CATEGORIES,
+      type: FETCH_CATEGORIES_SUCCESS,
       payload: {}
     };
     expect(category_reducer(state, action)).toEqual({categories: action.payload, selected_category: null})
   });
   it('updates categories state on non-empty payload', () => {
     var action = {
-      type: FETCH_CATEGORIES,
+      type: FETCH_CATEGORIES_SUCCESS,
       payload: [
         {
           id: 1,

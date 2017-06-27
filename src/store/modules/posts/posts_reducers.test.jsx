@@ -1,5 +1,5 @@
 import posts_reducer from './reducer.jsx';
-import {FETCH_POSTS, FETCH_SELECTED_POST, FETCH_POSTS_BY_CATEGORY} from './actionTypes';
+import {FETCH_POSTS_SUCCESS, FETCH_SELECTED_POST_SUCCESS, FETCH_POSTS_BY_CATEGORY_SUCCESS} from './actionTypes';
 
 describe('fetchposts reducer', () => {
   const INITIAL_STATE = {
@@ -9,7 +9,7 @@ describe('fetchposts reducer', () => {
   var state = INITIAL_STATE;
   it('updates posts state on passing payload', () => {
     var action = {
-      type: FETCH_POSTS,
+      type: FETCH_POSTS_SUCCESS,
       payload: [
         {
           id: 1,
@@ -28,7 +28,7 @@ describe('fetchposts reducer', () => {
   });
   it('updates post reducer on selecting a category', () => {
     var action = {
-      type:FETCH_POSTS_BY_CATEGORY,
+      type:FETCH_POSTS_BY_CATEGORY_SUCCESS,
       payload: [
         {
           id: 1,
@@ -42,7 +42,7 @@ describe('fetchposts reducer', () => {
   });
   it('updates post reducer on selecting a post', () => {
     var action = {
-      type: FETCH_SELECTED_POST,
+      type: FETCH_SELECTED_POST_SUCCESS,
       payload: [
         {
           id: 1,
