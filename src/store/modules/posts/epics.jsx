@@ -2,7 +2,7 @@ import * as postsActions from './actions';
 import HomeService from '../../../services/HomeService';
 import * as actionTypes from './actionTypes';
 
-export const fetchPosts = (action$) => {
+export const fetchPosts = (action$,{ getJSON }) => {
   return action$.ofType(actionTypes.FETCH_POSTS)
     .switchMap(() =>
       HomeService.getPosts()
@@ -10,7 +10,7 @@ export const fetchPosts = (action$) => {
     )
 }
 
-export const  getPostlistFor = (action$) => {
+export const  getPostlistFor = (action$,{ getJSON }) => {
   return action$.ofType(actionTypes.FETCH_POSTS_BY_CATEGORY)
     .map(action => action.payload)
     .switchMap((category_id) =>
@@ -20,7 +20,7 @@ export const  getPostlistFor = (action$) => {
 }
 
 
-export const getSelectedPost = (action$) => {
+export const getSelectedPost = (action$,{ getJSON }) => {
   return action$.ofType(actionTypes.FETCH_SELECTED_POST)
     .map( action => action.payload)
     .switchMap((post_id) =>
