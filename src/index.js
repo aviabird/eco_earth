@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker';
 import createBrowserHistory from 'history/createBrowserHistory';
-import configureStore from './store/cofigureStore';
+import configureStore from './store/configureStore';
 import App from './app/App';
 
 // adding rx operators

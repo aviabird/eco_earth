@@ -20,7 +20,7 @@ export const  getPostlistFor = (action$,{ getJSON }) => {
 }
 
 
-export const getSelectedPost = (action$,{ getJSON }) => {
+export const getSelectedPost = (action$,{ getJSON } ) => {
   return action$.ofType(actionTypes.FETCH_SELECTED_POST)
     .map( action => action.payload)
     .switchMap((post_id) =>

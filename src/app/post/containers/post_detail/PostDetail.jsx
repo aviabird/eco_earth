@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { selectedPost } from './../../../../store/modules/posts/actions';
 import './PostDetail.css';
-import { Panel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Panel ,Button } from 'react-bootstrap';
 import Loader from '../../../../shared/components/loader/Loader';
 
 class PostDetail extends Component {
@@ -17,6 +18,7 @@ class PostDetail extends Component {
   componentWillMount() {
     var postId = this.props.match.params.postId;
     this.props.selectedPost(postId);
+    this.setState({postId});
   }
 
   render() {
@@ -29,6 +31,9 @@ class PostDetail extends Component {
       <Panel className="post_detail">
         <h4>{this.props.post.title}</h4>
         <p>{this.props.post.content}</p>
+        <Link to ={"/post/edit/"+ this.state.postId}>
+          <Button className="btn-primary pull-right edit_post">EDIT POST </Button>
+        </Link>
       </Panel>  
     );
   }

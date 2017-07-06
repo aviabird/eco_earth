@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PostListItem from '../../components/post_list_item/PostListItem';
 import PropTypes from 'prop-types';
-import { fetchPosts } from '../../../../store/modules/posts/actions'
+import { fetchPosts }  from '../../../../store/modules/posts/actions'
 import './PostList.css';
 import { Panel } from 'react-bootstrap';
 import {Motion, spring} from 'react-motion';
