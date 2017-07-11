@@ -19,7 +19,6 @@ export const  getPostlistFor = (action$,{ getJSON }) => {
     )
 }
 
-
 export const getSelectedPost = (action$,{ getJSON } ) => {
   return action$.ofType(actionTypes.FETCH_SELECTED_POST)
     .map( action => action.payload)
@@ -28,3 +27,11 @@ export const getSelectedPost = (action$,{ getJSON } ) => {
       .map(postsActions.fetchSelectedPostSuccess)
     )
 }
+
+export const newpostCreate = (action$,{ getJSON } ) => {
+  return action$.ofType(actionTypes.CREATE_POST)
+    .map( action => action.payload)
+    .switchMap((post) => HomeService.postSubmit(post))
+    .map(post => postsActions.newpostCreateSuccess(post))
+}
+

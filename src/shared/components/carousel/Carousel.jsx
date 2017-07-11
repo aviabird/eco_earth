@@ -6,7 +6,7 @@ const CarouselSlide = () => {
   return (
     <Carousel>
     <Carousel.Item>
-      <img width={1300} height={500} alt="900x500" src="http://forum.azyrusthemes.com/images/slide.jpg"/>
+      <img width={1300} height={500} className="image" alt="900x500" src="http://forum.azyrusthemes.com/images/slide.jpg"/>
       <Carousel.Caption>
         <h3>First slide label</h3>
         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
