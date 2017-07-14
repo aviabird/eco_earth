@@ -25,6 +25,8 @@ var config = {
   messagingSenderId: "571704518364"
 };
 firebase.initializeApp(config);
+const database = firebase.database();
+export default database;
 
 ReactDOM.render(
   <Provider store={store}>

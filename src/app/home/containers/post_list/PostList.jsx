@@ -22,7 +22,7 @@ class PostList extends Component {
   renderPost(postData) {
     return (
       <Motion
-        key={postData.id}
+        key={postData.key}
         defaultStyle={{y: 50, o: 0}}
         style={{
           y: spring(0, {stiffness: 160, damping: 10}),
