@@ -20,6 +20,7 @@ export const rootEpic = (...args) => combineEpics(
   postEpics.getPostlistFor,
   postEpics.getSelectedPost,
   postEpics.newpostCreate,
+  postEpics.postUpdation,
   categoryEpics.FetchCategories
 )(...args);
 

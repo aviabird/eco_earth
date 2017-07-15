@@ -31,6 +31,13 @@ export default class HomeService {
     //this.getFirebasePosts();
   }
 
+static postUpdate(post) {
+    var firebaseRef = database.ref(`/posts/${post.id}`);
+    firebaseRef.update(post);
+    return Observable.of(post);
+    //this.getFirebasePosts();
+  }
+
   static getCategories() {
     return ajax.getJSON(`${API_URL}/categories`).map(resp => resp.data);
   }

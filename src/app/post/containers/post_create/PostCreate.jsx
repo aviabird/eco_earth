@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import _ from 'lodash';
+import _ from "lodash";
 import {
   selectedPost,
-  newpostCreate
+  newpostCreate,
+  postUpdate
 } from "./../../../../store/modules/posts/actions";
 import { Link } from "react-router-dom";
 import "./PostCreate.css";
@@ -36,7 +37,7 @@ class PostCreate extends Component {
     var category = this.category.value.trim();
     var content = this.content.value.trim();
     this.props.newpostCreate({
-      id:id,
+      id: id,
       title: title,
       category: category,
       content: content
@@ -45,9 +46,21 @@ class PostCreate extends Component {
     this.category.value = "";
     this.content.value = "";
   }
-   if(formloaded){
-      alert("form uploaded successfully");
-    }
+
+  handleUpdate(event) {
+    event.preventDefault();
+    var title = this.title.value.trim();
+    var category = this.category.value.trim();
+    var content = this.content.value.trim();
+    this.props.postUpdate({
+      title: title,
+      category: category,
+      content: content
+    }, this.props.match.params.postId);
+    this.title.value = "";
+    this.category.value = "";
+    this.content.value = "";
+  }
 
   renderCategories(data) {
     return <option value={data.title} key={data.id}>{data.title}</option>;
@@ -59,7 +72,11 @@ class PostCreate extends Component {
     //var loaded = this.props.formloaded;
     return (
       <Panel>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form
+          onSubmit={
+            postId ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)
+          }
+        >
           <h3>{postId ? "Edit post" : "Create a New Post"}</h3>
           <FormGroup controlId="formControlsText">
             <ControlLabel>Title</ControlLabel>
@@ -113,6 +130,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { selectedPost, newpostCreate })(
-  PostCreate
-);
+export default connect(mapStateToProps, {
+  selectedPost,
+  newpostCreate,
+  postUpdate
+})(PostCreate);

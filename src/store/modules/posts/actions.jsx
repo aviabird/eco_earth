@@ -49,9 +49,22 @@ export function newpostCreate(props) {
     payload: props
   };
 }
+
 export function newpostCreateSuccess(props) {
   return {
     type: actionTypes.CREATE_POST_SUCCESS,
+    payload: props
+  };
+}
+export function postUpdate(props,id) {
+  return {
+    type: actionTypes.POST_UPDATE,
+    payload: Object.assign({},props,{id:id})
+  };
+}
+export function postUpdateSuccess(props) {
+  return {
+    type: actionTypes.POST_UPDATE_SUCCESS,
     payload: props
   };
 }

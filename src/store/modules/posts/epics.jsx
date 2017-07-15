@@ -40,3 +40,11 @@ export const newpostCreate = (action$, { getJSON }) => {
     .switchMap(post => HomeService.postSubmit(post))
     .map(post => postsActions.newpostCreateSuccess(post));
 };
+
+export const postUpdation = (action$, { getJSON }) => {
+  return action$
+    .ofType(actionTypes.POST_UPDATE)
+    .map(action => action.payload)
+    .switchMap(post => HomeService.postUpdate(post))
+    .map(post => postsActions.postUpdateSuccess(post));
+};
