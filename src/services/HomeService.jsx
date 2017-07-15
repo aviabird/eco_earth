@@ -7,7 +7,12 @@ export const API_URL = ENV.API_URL;
 export default class HomeService {
  
   static getPostById(id) {
-    return ajax.getJSON(`${API_URL}/posts/${id}`).map(resp => resp.data);
+    var ref=database.ref(`/posts/${id}`);
+    return Observable.create(observer => {
+      ref.once("value", function(snapshot) {
+        return observer.next(snapshot.val());
+      });
+    }); 
   }
 
   static getFirebasePosts() {
@@ -17,20 +22,13 @@ export default class HomeService {
         return observer.next(snapshot.val());
       });
     });
-    // test.then(a => console.log('value', a));
-
-    // return Observable.of('a'); // fromPromise(test);
-    // .then(res => {
-    //   console.log('res from promise', res)
-    //   return res
-    // })
-    // );
   }
 
   static postSubmit(post) {
     var firebaseRef = database.ref("posts");
     firebaseRef.push(post);
-    this.getFirebasePosts();
+    return Observable.of(post);
+    //this.getFirebasePosts();
   }
 
   static getCategories() {

@@ -2,7 +2,8 @@ import * as actionTypes from "./actionTypes";
 
 //reducers are always functions
 const INITIAL_STATE = {
-  posts: [],
+  postids:[],
+  posts: {},
   selected_post: {},
   isFetchingPosts: false,
   isFetchingSinglePost: false,
@@ -18,7 +19,9 @@ export default function(state = INITIAL_STATE, action) {
     case actionTypes.FETCH_POSTS_SUCCESS:
       return {
         ...state,
+        postids:Object.keys(action.payload),
         posts: action.payload,
+       // postentities:posts.reduce()
         isFetchingPosts: false
       };
     case actionTypes.FETCH_POSTS_BY_CATEGORY:
@@ -33,13 +36,14 @@ export default function(state = INITIAL_STATE, action) {
       return { ...state, isFetchingSinglePost: true };
     case actionTypes.FETCH_SELECTED_POST_SUCCESS:
       return {
+        ...state,
         selected_post: action.payload,
         isFetchingSinglePost: false
       };
     case actionTypes.CREATE_POST:
       return { ...state };
     case actionTypes.CREATE_POST_SUCCESS:
-      return { ...state, posts: action.payload, formloaded: true };
+      return { ...state, formloaded: true };
     case actionTypes.DELETE_SELECTED_POST:
       return { ...state, posts: action.payload };
     default: {

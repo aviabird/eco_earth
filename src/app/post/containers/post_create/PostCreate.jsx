@@ -45,6 +45,9 @@ class PostCreate extends Component {
     this.category.value = "";
     this.content.value = "";
   }
+   if(formloaded){
+      alert("form uploaded successfully");
+    }
 
   renderCategories(data) {
     return <option value={data.title} key={data.id}>{data.title}</option>;

@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
-import {API_URL} from './../../../services/HomeService';
-import axios from 'axios'; 
+
+import database from "../../../index.js";
 
 export function fetchPosts() {
   return {
@@ -57,7 +57,7 @@ export function newpostCreateSuccess(props) {
 }
 
 export function deletePost(post_id) {
-  const request = axios.delete(`${API_URL}/posts/${post_id}`);
+  const request = database.ref(`/posts/${post_id}`).remove();
   return {
     type: actionTypes.DELETE_SELECTED_POST,
     payload: request
