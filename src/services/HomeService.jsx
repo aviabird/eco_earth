@@ -1,5 +1,4 @@
 import ENV from "../AppConstants";
-import { ajax } from "rxjs/observable/dom/ajax";
 import { Observable } from "rxjs/Observable";
 import database from "../index";
 export const API_URL = ENV.API_URL;
@@ -53,12 +52,12 @@ static postUpdate(post) {
 
 
   static getPostlistFor(category_id) {
-    var categories = database.ref(`categories/${category_id}`);
-    return ajax.getJSON(`${API_URL}/posts`).map(resp => {
-      return resp.data.filter(post => {
-        return post.category_id === category_id;
-      });
-    });
+    var postRef = database.ref(`posts`);
+    return Observable.create(observer => {
+      postRef.orderByChild("category_id").equalTo(category_id).once("value", function(snapshot) {
+        return  observer.next(snapshot.val());
+      })
+    })
   }
 
   static handleError(resp) {

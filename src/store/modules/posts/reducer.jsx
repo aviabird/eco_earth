@@ -29,6 +29,7 @@ export default function(state = INITIAL_STATE, action) {
     case actionTypes.FETCH_POSTS_BY_CATEGORY_SUCCESS:
       return {
         ...state,
+        postids:Object.keys(action.payload),
         posts: action.payload,
         isFetchingPosts: false
       };

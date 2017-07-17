@@ -34,12 +34,12 @@ class PostCreate extends Component {
     event.preventDefault();
     var id = _.uniqueId();
     var title = this.title.value.trim();
-    var category = this.category.value.trim();
+    var category_id = this.category.value.trim();
     var content = this.content.value.trim();
     this.props.newpostCreate({
       id: id,
       title: title,
-      category: category,
+      category_id: category_id,
       content: content
     });
     this.title.value = "";
@@ -50,11 +50,11 @@ class PostCreate extends Component {
   handleUpdate(event) {
     event.preventDefault();
     var title = this.title.value.trim();
-    var category = this.category.value.trim();
+    var category_id = this.category.value.trim();
     var content = this.content.value.trim();
     this.props.postUpdate({
       title: title,
-      category: category,
+      category_id: category_id,
       content: content
     }, this.props.match.params.postId);
     this.title.value = "";
@@ -63,7 +63,7 @@ class PostCreate extends Component {
   }
 
   renderCategories(data) {
-    return <option value={data.title} key={data.id}>{data.title}</option>;
+    return <option value={data.id} key={data.id}>{data.title}</option>;
   }
   render() {
     const { categoryids, categories } = this.props;

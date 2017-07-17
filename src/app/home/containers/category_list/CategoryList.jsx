@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import "./CategoryList.css";
 import React, { Component } from "react";
 import CategoryListItem from "../../components/category_list_item/CategoryListItem";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import { fetchCategories } from "../../../../store/modules/categories/actions";
 import { fetchPostsByCategory } from "../../../../store/modules/posts/actions";
 import { Panel } from 'react-bootstrap';
@@ -57,12 +57,12 @@ class CategoryList extends Component {
   }
 }
 
-CategoryList.propTypes = {
-  categories: PropTypes.array
-};
+// CategoryList.propTypes = {
+//   categories: PropTypes.object
+// };
 
 //function mapStateToProps(state) {
-function mapStateToProps({categoriesState}) {
+function mapStateToProps({categoriesState},ownProps) {
   return {
     categoryids:categoriesState.categoryids,
     categories: categoriesState.categories,

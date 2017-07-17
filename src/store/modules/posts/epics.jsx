@@ -16,8 +16,10 @@ export const getPostlistFor = (action$, { getJSON }) => {
     .ofType(actionTypes.FETCH_POSTS_BY_CATEGORY)
     .map(action => action.payload)
     .switchMap(category_id =>
-      HomeService.getPostlistFor(category_id).map(
-        postsActions.fetchPostsByCategorySuccess
+      HomeService.getPostlistFor(category_id).map(data =>
+        {
+         return postsActions.fetchPostsByCategorySuccess(data);
+        }
       )
     );
 };
