@@ -16,9 +16,9 @@ class PostDetail extends Component {
 
     this.state = {};
   }
-  static contextTypes = {
-    router: PropTypes.object
-  };
+  // static contextTypes = {
+  //   router: PropTypes.object
+  // };
 
   componentWillMount() {
     var postId = this.props.match.params.postId;
@@ -38,9 +38,13 @@ class PostDetail extends Component {
     }
     return (
       <Panel className="post_detail">
-        <h4>{this.props.post.title}</h4>
-        <p>{this.props.post.content}</p>
-          <Link to="/">
+        <h4>
+          {this.props.post.title}
+        </h4>
+        <p>
+          {this.props.post.content}
+        </p>
+        <Link to="/">
           <Button
             onClick={this.onDeleteClick.bind(this)}
             className="btn-danger pull-right"
@@ -51,7 +55,6 @@ class PostDetail extends Component {
         <Link to={"/post/edit/" + this.state.postId}>
           <Button className="btn-primary  edit_post">Edit Post</Button>
         </Link>
-
       </Panel>
     );
   }

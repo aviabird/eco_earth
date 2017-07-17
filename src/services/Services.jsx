@@ -1,12 +1,12 @@
 import ENV from "../AppConstants";
 
 // Firebase Services
-import { HomeService as FBHomeService } from "./HomeService";
+import FBHomeService from "./Firebase/FBHomeService";
 
 // API Services
-import { ApiHomeService } from "./Api/ApiHomeService";
+import ApiHomeService from "./Api/ApiHomeService";
 
-const SERVICES = {
+export const SERVICES = {
   FB: {
     HOME: FBHomeService
   },
