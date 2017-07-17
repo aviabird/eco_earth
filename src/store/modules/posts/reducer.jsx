@@ -47,7 +47,7 @@ export default function(state = INITIAL_STATE, action) {
     case actionTypes.POST_UPDATE:
       return { ...state };
     case actionTypes.POST_UPDATE_SUCCESS:
-      return { ...state,posts: action.payload  };
+      return { ...state,posts: action.payload,formloaded: true  };
     case actionTypes.DELETE_SELECTED_POST:
       return { ...state, posts: action.payload };
     default: {

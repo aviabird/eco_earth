@@ -28,7 +28,7 @@ class CategoryList extends Component {
   renderCategories(data) {
     const category_id = data.id;
     const title = data.title;
-    const desc = data.desc;
+    const description = data.description;
 
     return (
       <li
@@ -36,19 +36,21 @@ class CategoryList extends Component {
         onClick={() => this.onClicked(category_id)}
         className="list-group-item"
       >
-        <CategoryListItem title={title} desc={desc} />
+        <CategoryListItem title={title} description={description} />
       </li>
     );
   }
 
   render() {
+    const { categoryids, categories } = this.props;
+    var categoriesArr = categoryids.map(id => Object.assign({}, categories[id], { id: id }));
     return (
       <Panel className="cat-list">
         <h5>Categories: </h5>
         <hr/>
         <ul>
           {this.props.isFetchingCategories ? <Loader /> : null }
-          {this.props.categories.map(this.renderCategories)}
+          {categoriesArr.map(this.renderCategories)}
         </ul>
       </Panel>
     );
@@ -62,6 +64,7 @@ CategoryList.propTypes = {
 //function mapStateToProps(state) {
 function mapStateToProps({categoriesState}) {
   return {
+    categoryids:categoriesState.categoryids,
     categories: categoriesState.categories,
     isFetchingCategories: categoriesState.isFetchingCategories
   }; //{weather}==={weather:weather}

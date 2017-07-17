@@ -66,6 +66,8 @@ class PostCreate extends Component {
     return <option value={data.title} key={data.id}>{data.title}</option>;
   }
   render() {
+    const { categoryids, categories } = this.props;
+    var categoriesArr = categoryids.map(id => Object.assign({}, categories[id], { id: id }));
     var postId = this.state.postId;
     var title = this.props.post.title;
     var content = this.props.post.content;
@@ -98,19 +100,20 @@ class PostCreate extends Component {
                 this.category = ref;
               }}
             >
-              {this.props.categories.map(this.renderCategories)}
+              {categoriesArr.map(this.renderCategories)}
             </FormControl>
           </FormGroup>
           <FormGroup controlId="formControlsTextarea">
             <ControlLabel>Content</ControlLabel>
             <FormControl
-              type="textarea"
+               componentClass="textarea"
               defaultValue={content}
               inputRef={ref => {
                 this.content = ref;
               }}
             />
           </FormGroup>
+
           <Button className="btn-primary" type="submit">
             {postId ? "Update" : "Submit"}
           </Button>
@@ -124,6 +127,7 @@ class PostCreate extends Component {
 
 function mapStateToProps(state) {
   return {
+    categoryids: state.categoriesState.categoryids,
     categories: state.categoriesState.categories,
     post: state.postsState.selected_post,
     formloaded: state.postsState.formloaded

@@ -7,7 +7,7 @@ const CategoryListItem = (props) => {
       <span className="badge pull-right">20</span>
       {props.title}
       <br/>
-      <small>{props.desc}</small>
+      <small>{props.description}</small>
     </span>
   );
 };

@@ -1,7 +1,8 @@
 import * as actionTypes from './actionTypes';
 
 const INITIAL_STATE = {
-  categories: [],
+  categoryids:[],
+  categories: {},
   selected_category: null,
   isFetchingCategories: false
 };
@@ -14,6 +15,7 @@ export default function (state = INITIAL_STATE, action) { //action coming from a
     case actionTypes.FETCH_CATEGORIES_SUCCESS:
       return {
         ...state,
+        categoryids:Object.keys(action.payload),
         categories: action.payload,
         isFetchingCategories: false
       }

@@ -38,11 +38,22 @@ static postUpdate(post) {
     //this.getFirebasePosts();
   }
 
-  static getCategories() {
-    return ajax.getJSON(`${API_URL}/categories`).map(resp => resp.data);
+  // static getCategories() {
+  //   return ajax.getJSON(`${API_URL}/categories`).map(resp => resp.data);
+  // }
+
+  static getFirebaseCategories() {
+    var categoriesRef = database.ref("categories");
+    return Observable.create(observer => {
+      categoriesRef.once("value", function(snapshot) {
+        return observer.next(snapshot.val());
+      });
+    });
   }
 
+
   static getPostlistFor(category_id) {
+    var categories = database.ref(`categories/${category_id}`);
     return ajax.getJSON(`${API_URL}/posts`).map(resp => {
       return resp.data.filter(post => {
         return post.category_id === category_id;
