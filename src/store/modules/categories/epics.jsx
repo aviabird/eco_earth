@@ -13,7 +13,7 @@ import * as categoryActions from "./actions";
 export const FetchCategories = (action$, { getJSON }) => {
   return action$
     .ofType(actionTypes.FETCH_CATEGORIES)
-    .switchMap(() => appServices().HOME.getFirebaseCategories())
+    .switchMap(() => appServices().HOME.getCategories())
     .map(data => {
       return categoryActions.fetchCategoriesSuccess(data);
     });

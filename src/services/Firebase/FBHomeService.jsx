@@ -13,7 +13,7 @@ export default class FBHomeService {
     });
   }
 
-  static getFirebasePosts() {
+  static getPosts() {
     var postsRef = database.ref("posts");
     return Observable.create(observer => {
       postsRef.once("value", function(snapshot) {
@@ -40,7 +40,7 @@ export default class FBHomeService {
   //   return ajax.getJSON(`${API_URL}/categories`).map(resp => resp.data);
   // }
 
-  static getFirebaseCategories() {
+  static getCategories() {
     var categoriesRef = database.ref("categories");
     return Observable.create(observer => {
       categoriesRef.once("value", function(snapshot) {

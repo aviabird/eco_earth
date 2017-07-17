@@ -5,7 +5,7 @@ import * as actionTypes from "./actionTypes";
 export const fetchPosts = (action$, { getJSON }) => {
   return action$
     .ofType(actionTypes.FETCH_POSTS)
-    .switchMap(() => appServices().HOME.getFirebasePosts())
+    .switchMap(() => appServices().HOME.getPosts())
     .map(data => {
       return postsActions.fetchPostsSuccess(data);
     });
