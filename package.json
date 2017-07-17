@@ -39,6 +39,7 @@
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
+    "start:api": "REACT_APP_API_MODE=API npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
     "test-js": "react-scripts test --env=jsdom ",
     "test": "npm run build-css && npm run test-js",
