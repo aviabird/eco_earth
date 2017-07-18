@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import "./CategoryList.css";
+import { Link } from 'react-router-dom';
 import React, { Component } from "react";
 import CategoryListItem from "../../components/category_list_item/CategoryListItem";
 //import PropTypes from "prop-types";
@@ -22,7 +23,7 @@ class CategoryList extends Component {
   }
 
   onClicked(category_id) {
-    this.props.fetchPostsByCategory(category_id)
+    this.props.fetchPostsByCategory(category_id);
   }
 
   renderCategories(data) {
@@ -31,19 +32,24 @@ class CategoryList extends Component {
     const description = data.description;
 
     return (
-      <li
-        key={data.id}
-        onClick={() => this.onClicked(category_id)}
-        className="list-group-item"
-      >
-        <CategoryListItem title={title} description={description} />
-      </li>
+      <Link to={"/categories/"+category_id}>
+        <li
+          key={data.id}
+          onClick={() => this.onClicked(category_id)}
+          className="list-group-item"
+        >
+          <CategoryListItem title={title} description={description} />
+        </li>
+      </Link>
     );
   }
 
   render() {
     const { categoryids, categories } = this.props;
     var categoriesArr = categoryids.map(id => Object.assign({}, categories[id], { id: id }));
+    if(!categoriesArr){
+      return <h1>No posts with this category</h1>
+    }
     return (
       <Panel className="cat-list">
         <h5>Categories: </h5>

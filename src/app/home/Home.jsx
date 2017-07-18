@@ -23,6 +23,7 @@ class Home extends Component {
                 <Route path="/post/edit/:postId" component={PostCreate} />
                 <Route path="/posts/:postId" component={PostDetail} className="post_detail"/>
                 <Route path="/create_new" component={PostCreate} />
+                <Route path="/categories/:category" component={PostList}/>
               </Col>
               <Col lg={4} md={4}>
                 <CategoryList className="categories-list" />

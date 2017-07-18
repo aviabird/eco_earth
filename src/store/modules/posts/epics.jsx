@@ -15,13 +15,10 @@ export const getPostlistFor = (action$, { getJSON }) => {
   return action$
     .ofType(actionTypes.FETCH_POSTS_BY_CATEGORY)
     .map(action => action.payload)
-    .switchMap(category_id =>
-       appServices().HOME.getPostlistFor(category_id).map(data =>
-        {
-         return postsActions.fetchPostsByCategorySuccess(data);
-        }
-      )
-    );
+    .switchMap(category_id => appServices().HOME.getPostlistFor(category_id))
+    .map(data => {
+      return postsActions.fetchPostsByCategorySuccess(data || {});
+    });
 };
 
 export const getSelectedPost = (action$, { getJSON }) => {
