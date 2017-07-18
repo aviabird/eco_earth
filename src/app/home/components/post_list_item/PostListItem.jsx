@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Avatar from '../../../../assets/images/avatar.jpg';
 import './PostListItem.css';
 import FontAwesome from 'react-fontawesome';
-import { Panel, Col, Image, Badge } from 'react-bootstrap';
+import { Panel, Col, Image, Badge} from 'react-bootstrap';
 
 const PostListItem = (props) => {
   return (

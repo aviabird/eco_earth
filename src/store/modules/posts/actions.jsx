@@ -1,4 +1,6 @@
 import * as actionTypes from './actionTypes';
+import {API_URL} from './../../../services/HomeService';
+import axios from 'axios'; 
 
 export function fetchPosts() {
   return {
@@ -40,3 +42,25 @@ export function fetchSelectedPostSuccess(post) {
     payload: post
   };
 }
+
+export function newpostCreate(props) {
+  return {
+    type: actionTypes.CREATE_POST,
+    payload: props
+  };
+}
+export function newpostCreateSuccess(props) {
+  return {
+    type: actionTypes.CREATE_POST_SUCCESS,
+    payload: props
+  };
+}
+
+export function deletePost(post_id) {
+  const request = axios.delete(`${API_URL}/posts/${post_id}`);
+  return {
+    type: actionTypes.DELETE_SELECTED_POST,
+    payload: request
+  };
+}
+

@@ -1,42 +1,49 @@
-import * as actionTypes from './actionTypes';
+import * as actionTypes from "./actionTypes";
 
 //reducers are always functions
 const INITIAL_STATE = {
   posts: [],
   selected_post: {},
   isFetchingPosts: false,
-  isFetchingSinglePost: false
+  isFetchingSinglePost: false,
+  formloaded: false
 };
 
-export default function (state = INITIAL_STATE, action) { //action coming from actioncontainers
+export default function(state = INITIAL_STATE, action) {
+  //action coming from actioncontainers
 
   switch (action.type) {
     case actionTypes.FETCH_POSTS:
-      return { ...state, isFetchingPosts: true }
+      return { ...state, isFetchingPosts: true };
     case actionTypes.FETCH_POSTS_SUCCESS:
       return {
         ...state,
         posts: action.payload,
         isFetchingPosts: false
-      }
+      };
     case actionTypes.FETCH_POSTS_BY_CATEGORY:
-      return { ...state, isFetchingPosts: true }
+      return { ...state, isFetchingPosts: true };
     case actionTypes.FETCH_POSTS_BY_CATEGORY_SUCCESS:
       return {
         ...state,
         posts: action.payload,
         isFetchingPosts: false
-      }
+      };
     case actionTypes.FETCH_SELECTED_POST:
-      return { ...state, isFetchingSinglePost: true }
+      return { ...state, isFetchingSinglePost: true };
     case actionTypes.FETCH_SELECTED_POST_SUCCESS:
       return {
         selected_post: action.payload,
         isFetchingSinglePost: false
-      }
-    default:
-      {
-        return state;
-      }
+      };
+    case actionTypes.CREATE_POST:
+      return { ...state };
+    case actionTypes.CREATE_POST_SUCCESS:
+      return { ...state, posts: action.payload, formloaded: true };
+    case actionTypes.DELETE_SELECTED_POST:
+      return { ...state, posts: action.payload };
+    default: {
+      return state;
+    }
   }
 }

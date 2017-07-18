@@ -1,11 +1,11 @@
 import ENV from '../AppConstants';
 import { ajax } from 'rxjs/observable/dom/ajax';
 import { Observable } from 'rxjs/Observable';
-
-const API_URL = ENV.API_URL;
+import firebase from 'firebase';
+export const API_URL = ENV.API_URL;
 
 export default class HomeService {
-
+  
   static getPosts() {
     return ajax.getJSON(`${API_URL}/posts`)
       .map(resp => resp.data)
@@ -15,6 +15,12 @@ export default class HomeService {
   static getPostById(id) {
     return ajax.getJSON(`${API_URL}/posts/${id}`)
       .map(resp => resp.data);
+  }
+  
+  static postSubmit(post){
+   var firebaseRef = firebase.database().ref('posts');
+   firebaseRef.push(post);
+   return Observable.of(post);
   }
 
   static getCategories() {
