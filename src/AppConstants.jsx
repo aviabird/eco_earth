@@ -1,6 +1,14 @@
 const ENV = {
   API_URL: process.env.REACT_APP_API_URL,
-  API_MODE: process.env.API_MODE
+  API_MODE: process.env.REACT_APP_API_MODE,
+  FIREBASE: {
+    APP_KEY: process.env.REACT_APP_FIREBASE_KEY,
+    AUTH_DOMAIN: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    DATABASE_URL: process.env.REACT_APP_DATABASE_URL,
+    PROJECT_ID: process.env.REACT_APP_PROJECT_ID,
+    STORAGE_BUCKET: process.env.REACT_APP_STORAGE_BUCKET,
+    MESSAGING_SENDERID: process.env.REACT_APP_MESSAGING_SENDERID
+  }
 };
 
 export default ENV;

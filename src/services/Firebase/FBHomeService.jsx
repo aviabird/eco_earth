@@ -1,20 +1,19 @@
-import ENV from "../AppConstants";
+import ENV from "../../AppConstants";
 import { Observable } from "rxjs/Observable";
-import database from "../index";
+import database from "../../index.js";
 export const API_URL = ENV.API_URL;
 
-export default class HomeService {
- 
+export default class FBHomeService {
   static getPostById(id) {
-    var ref=database.ref(`/posts/${id}`);
+    var ref = database.ref(`/posts/${id}`);
     return Observable.create(observer => {
       ref.once("value", function(snapshot) {
         return observer.next(snapshot.val());
       });
-    }); 
+    });
   }
 
-  static getFirebasePosts() {
+  static getPosts() {
     var postsRef = database.ref("posts");
     return Observable.create(observer => {
       postsRef.once("value", function(snapshot) {
@@ -30,7 +29,7 @@ export default class HomeService {
     //this.getFirebasePosts();
   }
 
-static postUpdate(post) {
+  static postUpdate(post) {
     var firebaseRef = database.ref(`/posts/${post.id}`);
     firebaseRef.update(post);
     return Observable.of(post);
@@ -41,7 +40,7 @@ static postUpdate(post) {
   //   return ajax.getJSON(`${API_URL}/categories`).map(resp => resp.data);
   // }
 
-  static getFirebaseCategories() {
+  static getCategories() {
     var categoriesRef = database.ref("categories");
     return Observable.create(observer => {
       categoriesRef.once("value", function(snapshot) {

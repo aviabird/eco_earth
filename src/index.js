@@ -9,6 +9,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import createBrowserHistory from "history/createBrowserHistory";
 import configureStore from "./store/configureStore";
 import App from "./app/App";
+import ENV from "./AppConstants.jsx";
 import * as firebase from 'firebase';
 
 // adding rx operators
@@ -17,12 +18,12 @@ const store = configureStore();
 
 const history = createBrowserHistory();
 var config = {
-  apiKey: "AIzaSyBoRtTjxHckAej9ROeGbTzRxN_reDsAufY",
-  authDomain: "ecoearth-afcd3.firebaseapp.com",
-  databaseURL: "https://ecoearth-afcd3.firebaseio.com",
-  projectId: "ecoearth-afcd3",
-  storageBucket: "ecoearth-afcd3.appspot.com",
-  messagingSenderId: "571704518364"
+  apiKey: ENV.FIREBASE.APP_KEY,
+  authDomain: ENV.FIREBASE.AUTH_DOMAIN,
+  databaseURL: ENV.FIREBASE.DATABASE_URL,
+  projectId: ENV.FIREBASE.PROJECT_ID,
+  storageBucket: ENV.FIREBASE.STORAGE_BUCKET,
+  messagingSenderId: ENV.FIREBASE.MESSAGING_SENDERID
 };
 firebase.initializeApp(config);
 const database = firebase.database();
