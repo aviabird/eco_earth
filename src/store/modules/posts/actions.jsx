@@ -1,5 +1,7 @@
 import * as actionTypes from './actionTypes';
 
+import database from "../../../index.js";
+
 export function fetchPosts() {
   return {
     type: actionTypes.FETCH_POSTS
@@ -40,3 +42,38 @@ export function fetchSelectedPostSuccess(post) {
     payload: post
   };
 }
+
+export function newpostCreate(props) {
+  return {
+    type: actionTypes.CREATE_POST,
+    payload: props
+  };
+}
+
+export function newpostCreateSuccess(props) {
+  return {
+    type: actionTypes.CREATE_POST_SUCCESS,
+    payload: props
+  };
+}
+export function postUpdate(props,id) {
+  return {
+    type: actionTypes.POST_UPDATE,
+    payload: Object.assign({},props,{id:id})
+  };
+}
+export function postUpdateSuccess(props) {
+  return {
+    type: actionTypes.POST_UPDATE_SUCCESS,
+    payload: props
+  };
+}
+
+export function deletePost(post_id) {
+  const request = database.ref(`/posts/${post_id}`).remove();
+  return {
+    type: actionTypes.DELETE_SELECTED_POST,
+    payload: request
+  };
+}
+
