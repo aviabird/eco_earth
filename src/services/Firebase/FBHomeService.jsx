@@ -1,7 +1,5 @@
-import ENV from "../../AppConstants";
 import { Observable } from "rxjs/Observable";
 import database from "../../index.js";
-export const API_URL = ENV.API_URL;
 
 export default class FBHomeService {
   static getPostById(id) {

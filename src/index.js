@@ -10,7 +10,7 @@ import createBrowserHistory from "history/createBrowserHistory";
 import configureStore from "./store/configureStore";
 import App from "./app/App";
 import ENV from "./AppConstants.jsx";
-import * as firebase from 'firebase';
+import * as firebase from "firebase";
 
 // adding rx operators
 
@@ -27,6 +27,7 @@ var config = {
 };
 firebase.initializeApp(config);
 const database = firebase.database();
+//const firebaseAuth = firebase.auth();
 export default database;
 
 ReactDOM.render(

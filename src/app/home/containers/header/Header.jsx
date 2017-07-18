@@ -9,6 +9,7 @@ import {
   NavItem,
   MenuItem
 } from "react-bootstrap";
+import Login from "../../../Login/login";
 import Logo from "./../../../../assets/images/logo.png";
 import { Link } from "react-router-dom";
 
@@ -38,7 +39,9 @@ class Header extends Component {
                   Start New Topic
                 </Button>
               </NavItem>
-              <NavItem eventKey={1} href="#">Login</NavItem>
+              <NavItem eventKey={1} href="#">
+                <Login />
+              </NavItem>
               <NavDropdown eventKey={3} title="Profile" id="basic-nav-dropdown">
                 <MenuItem eventKey={3.1}>My Profile</MenuItem>
                 <MenuItem eventKey={3.2}>Setting</MenuItem>

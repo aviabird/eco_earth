@@ -32,15 +32,15 @@ class CategoryList extends Component {
     const description = data.description;
 
     return (
-      <Link to={"/categories/"+category_id}>
+      <Link key={category_id} to={"/categories/"+category_id}>
         <li
-          key={data.id}
+          
           onClick={() => this.onClicked(category_id)}
           className="list-group-item"
         >
           <CategoryListItem title={title} description={description} />
         </li>
-      </Link>
+     </Link>
     );
   }
 
