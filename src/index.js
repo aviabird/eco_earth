@@ -10,6 +10,8 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import configureStore from './store/cofigureStore';
 import App from './app/App';
 
+import * as firebase from 'firebase';
+
 // adding rx operators
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
@@ -18,6 +20,18 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/observable/of';
+
+var config = {
+    apiKey: "AIzaSyCeSSfTO7a3moD2_qfStsiYZk36TQBe1zw",
+    authDomain: "eco-earth-b0911.firebaseapp.com",
+    databaseURL: "https://eco-earth-b0911.firebaseio.com",
+    projectId: "eco-earth-b0911",
+    storageBucket: "eco-earth-b0911.appspot.com",
+    messagingSenderId: "1043499852389"
+  };
+
+firebase.initializeApp(config);
+export const database = firebase.database; 
 
 const store = configureStore();
 
@@ -33,3 +47,5 @@ ReactDOM.render(
 );
 
 registerServiceWorker();
+
+
