@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Searchbar from "../../components/search_bar/SearchBar";
+import firebase from "firebase";
 import "./Header.css";
 import {
   Navbar,
@@ -16,6 +17,16 @@ import { Link } from "react-router-dom";
 class Header extends Component {
   onSearched(keyword) {
     console.log(keyword);
+  }
+  googleSignout() {
+    firebase.auth().signOut().then(
+      function() {
+        console.log("Signout Succesfull");
+      },
+      function(error) {
+        console.log("Signout Failed");
+      }
+    );
   }
 
   render() {
@@ -46,7 +57,12 @@ class Header extends Component {
                 <MenuItem eventKey={3.1}>My Profile</MenuItem>
                 <MenuItem eventKey={3.2}>Setting</MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey={3.3}>Logout</MenuItem>
+                <MenuItem
+                  eventKey={3.3}
+                  onClick={this.googleSignout.bind(this)}
+                >
+                  Logout
+                </MenuItem>
               </NavDropdown>
             </Nav>
           </div>

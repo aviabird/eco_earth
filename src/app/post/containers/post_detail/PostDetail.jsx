@@ -29,7 +29,6 @@ class PostDetail extends Component {
   onDeleteClick() {
     this.props.deletePost(this.props.match.params.postId);
 
-    //this.context.router.push('/')
   }
 
   render() {

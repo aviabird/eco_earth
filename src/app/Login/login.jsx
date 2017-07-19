@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import Avatar from "react-avatar";
 import firebase from "firebase";
+import database from "../../index.js";
+import { connect } from "react-redux";
+import { authentication } from "../../store/modules/login/actions";
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -13,6 +16,16 @@ export default class Login extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ user });
+        this.props.authentication(user);
+        database.ref("users").push({
+          displayName: user.displayName,
+          email: user.email,
+          emailVerified: user.emailVerified,
+          photoURL: user.photoURL,
+          isAnonymous: user.isAnonymous,
+          uid: user.uid,
+          providerData: user.providerData
+        });
       }
     });
   }
@@ -37,3 +50,11 @@ export default class Login extends Component {
     );
   }
 }
+
+function mapStateToProps({ auth }) {
+  return {
+    isAuthenticated: auth.isAuthenticated
+  };
+}
+
+export default connect(mapStateToProps, { authentication })(Login);
