@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Searchbar from "../../components/search_bar/SearchBar";
 import firebase from "firebase";
 import { connect } from "react-redux";
+import { logout } from "../../../../store/modules/auth/actions";
 import "./Header.css";
 import {
   Navbar,
@@ -16,20 +17,17 @@ import Logo from "./../../../../assets/images/logo.png";
 import { Link } from "react-router-dom";
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   onSearched(keyword) {
     console.log(keyword);
   }
   googleSignout() {
     firebase.auth().signOut().then(
-      function() {
+      () => {
         console.log("Signout Succesfull");
+        this.props.logout();
       },
-      function(error) {
-        console.log("Signout Failed");
+      err => {
+        console.log("Signout Failed", err);
       }
     );
   }
@@ -90,4 +88,4 @@ function mapStateToProps({ auth }) {
   };
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { logout })(Header);
