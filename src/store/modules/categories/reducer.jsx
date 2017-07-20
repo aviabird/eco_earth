@@ -14,6 +14,7 @@ export default function (state = INITIAL_STATE, action) { //action coming from a
   switch (action.type) {
     case actionTypes.FETCH_CATEGORIES:
       return { ...state, isFetchingCategories: true }
+    
     case actionTypes.FETCH_CATEGORIES_SUCCESS:
       return {
         ...state,
@@ -39,10 +40,11 @@ export default function (state = INITIAL_STATE, action) { //action coming from a
       };
 
     case actionTypes.FETCH_SELECTED_CATEGORY_SUCCESS:
+    console.log('from reducer', action.payload);
       return {
         ...state,
         selected_category: action.payload,
-        isFetchingSingleCategories: false
+        //isFetchingSingleCategories: false
       };    
 
     case actionTypes.UPDATE_CATEGORY:
@@ -51,6 +53,7 @@ export default function (state = INITIAL_STATE, action) { //action coming from a
       };
 
     case actionTypes.UPDATE_CATEGORY_SUCCESS:
+      
       return {
         ...state,
         categories: action.payload,

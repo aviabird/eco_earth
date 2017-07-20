@@ -18,7 +18,7 @@ export const FetchCategories = (action$, { getJSON }) => {
     .ofType(actionTypes.FETCH_CATEGORIES)
     .switchMap(() => AdminService.getCategories())
     .map(data => {
-      return categoryActions.fetchCategoriesSuccess(Object.values(data));
+      return categoryActions.fetchCategoriesSuccess(data);
     });
 };
 

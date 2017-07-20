@@ -4,8 +4,6 @@ import postsReducer from './posts/reducer';
 import categoriesReducer from './categories/reducer';
 import * as postEpics from './posts/epics';
 import * as categoryEpics from './categories/epics';
-import { ajax } from 'rxjs/observable/dom/ajax';
-import { reducer as formReducer } from 'redux-form';
 
 export const rootEpic = (...args) => combineEpics(
   postEpics.fetchPosts,
@@ -27,8 +25,7 @@ const epicMiddleware = createEpicMiddleware(rootEpic, {
 
 export const rootReducer = combineReducers({
   postsState: postsReducer,
-  categoriesState: categoriesReducer,
-  form: formReducer
+  categoriesState: categoriesReducer
 });
 
 

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { newCategoryCreate, selectedCategory, categoryUpdate } from '../../../../store/modules/categories/actions';
+import { 
+  newCategoryCreate, 
+  selectedCategory, 
+  categoryUpdate 
+  } from '../../../../store/modules/categories/actions';
 import { Link } from 'react-router-dom';	
 import _ from 'lodash';
 
@@ -9,8 +13,7 @@ import {
   FormGroup,
   ControlLabel,
   Button,
-  Panel,
-  Glyphicon
+  Panel
 } from "react-bootstrap";
 
 
@@ -23,10 +26,12 @@ class CategoriesNew extends Component {
 
   componentWillMount() {
     var category_id = this.props.match.params.category_id;
-   
+    
     if (category_id) {
+      console.log('category id:', category_id);
       this.props.selectedCategory(category_id);
       this.setState({ category_id });
+      this.setState({category:this.props.category})
     }
   }
 
@@ -68,12 +73,14 @@ class CategoriesNew extends Component {
     const { categoriesId, categories } = this.props;
     var categoriesArr = categoriesId.map(id => (Object.assign({}, categories[id], {category_id: id})))
     
-    var category_id = this.state.category_id;
-    var title = this.props.categories.title;
-    var desc = this.props.categories.desc;
+    var category_id = this.props.category.category_id;
+    console.log('Category id for click:', category_id);
+    var title = this.props.category.title;
+    console.log('titlt', title);
+    var desc = this.props.category.desc;
 
 		return (
-      <Panel>
+      <Panel key={category_id}>
         <form onSubmit={ category_id ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)}>
           <h3>{category_id ? "Edit category" : "Create a New Category"}</h3>
           <FormGroup controlId="formControlsText">
@@ -110,9 +117,11 @@ class CategoriesNew extends Component {
 }
 
 function mapStateToProps(state) {
+      console.log('selected cat:', state.categoriesState.selected_category);
   return {
     categoriesId: state.categoriesState.ids,
     categories: state.categoriesState.categories,
+    category: state.categoriesState.selected_category,
     formloaded: state.postsState.formloaded
   };
 }  
