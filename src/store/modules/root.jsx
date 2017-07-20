@@ -3,7 +3,7 @@ import { combineReducers } from "redux";
 //import firebase from "firebase";
 import postsReducer from "./posts/reducer";
 import categoriesReducer from "./categories/reducer";
-import authReducer from "./login/reducer";
+import authReducer from "./auth/reducer";
 import * as postEpics from "./posts/epics";
 import * as categoryEpics from "./categories/epics";
 //import { ajax } from 'rxjs/observable/dom/ajax';

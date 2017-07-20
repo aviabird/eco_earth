@@ -56,7 +56,7 @@ class Login extends Component {
             src="https://developers.google.com/identity/sign-in/g-normal.png"
             size={30}
           />
-          Signin With Google
+          Sign-in With Google
         </button>
       </div>
     );
