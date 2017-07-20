@@ -21,15 +21,17 @@ class PostCreate extends Component {
     super(props);
 
     this.state = {};
+    window.count = 0;
   }
+
   componentWillMount() {
     var postId = this.props.match.params.postId;
 
     if (postId) {
       this.props.selectedPost(postId);
     }
-    this.setState({ postId });
   }
+
   // componentWillReceiveProps(nextprops) {
   //   console.log("new props", nextprops.post.title);
   //   this.setState({ title: nextprops.post.title });
@@ -68,9 +70,6 @@ class PostCreate extends Component {
     this.category.value = "";
     this.content.value = "";
   }
-  onClick(evt) {
-    this.setState({ title: evt.target.value });
-  }
 
   renderCategories(data) {
     return (
@@ -84,22 +83,19 @@ class PostCreate extends Component {
     var categoriesArr = categoryids.map(id =>
       Object.assign({}, categories[id], { id: id })
     );
-    var postId = this.state.postId;
-    var title = this.props.post.title;
-    var content = this.props.post.content;
+    var { title, content, id } = this.props.post;
     //var loaded = this.props.formloaded;
-    console.log(title, content);
     return (
-      <Panel>
+      <Panel key={id}>
         <form
           onSubmit={
-            postId ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)
+            id ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)
           }
         >
           <h3>
-            {postId ? "Edit post" : "Create a New Post"}
+            {id ? "Edit post" : "Create a New Post"}
           </h3>
-          <FormGroup key={title} controlId="formControlsText">
+          <FormGroup controlId="formControlsText">
             <ControlLabel>Title</ControlLabel>
             <FormControl
               type="text"
@@ -112,7 +108,7 @@ class PostCreate extends Component {
               //onChange={this.onClick.bind(this)}
             />
           </FormGroup>
-          <FormGroup  controlId="formControlsSelect">
+          <FormGroup controlId="formControlsSelect">
             <ControlLabel>Category</ControlLabel>
             <FormControl
               componentClass="select"
@@ -124,7 +120,7 @@ class PostCreate extends Component {
               {categoriesArr.map(this.renderCategories)}
             </FormControl>
           </FormGroup>
-          <FormGroup key={content} controlId="formControlsTextarea">
+          <FormGroup controlId="formControlsTextarea">
             <ControlLabel>Content</ControlLabel>
             <FormControl
               componentClass="textarea"
@@ -136,7 +132,7 @@ class PostCreate extends Component {
           </FormGroup>
 
           <Button className="btn-primary" type="submit">
-            {postId ? "Update" : "Submit"}
+            {id ? "Update" : "Submit"}
           </Button>
           <span> </span>
           <Link to="/" className="btn btn-danger">

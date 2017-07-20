@@ -3,7 +3,7 @@ import * as actionTypes from "./actionTypes";
 
 const INITIAL_STATE = {
   isAuthenticated: false,
-  user: null
+  currentUser: null
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -11,7 +11,7 @@ export default function(state = INITIAL_STATE, action) {
 
   switch (action.type) {
     case actionTypes.AUTHENTICATION:
-      return { ...state, isAuthenticated: true, user: action.payload };
+      return { ...state, isAuthenticated: true, currentUser: action.payload };
 
     default: {
       return state;
