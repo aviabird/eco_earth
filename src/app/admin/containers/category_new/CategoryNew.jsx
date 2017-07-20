@@ -28,7 +28,16 @@ class CategoriesNew extends Component {
     var category_id = this.props.match.params.category_id;
     
     if (category_id) {
-      console.log('category id:', category_id);
+      this.props.selectedCategory(category_id);
+      this.setState({ category_id });
+      this.setState({category:this.props.category})
+    }
+  }
+
+  componentWillReceiveProps() {
+    var category_id =this.props.match.params.category_id;
+    
+     if (category_id) {
       this.props.selectedCategory(category_id);
       this.setState({ category_id });
       this.setState({category:this.props.category})
@@ -74,9 +83,7 @@ class CategoriesNew extends Component {
     var categoriesArr = categoriesId.map(id => (Object.assign({}, categories[id], {category_id: id})))
     
     var category_id = this.props.category.category_id;
-    console.log('Category id for click:', category_id);
     var title = this.props.category.title;
-    console.log('titlt', title);
     var desc = this.props.category.desc;
 
 		return (
@@ -117,7 +124,6 @@ class CategoriesNew extends Component {
 }
 
 function mapStateToProps(state) {
-      console.log('selected cat:', state.categoriesState.selected_category);
   return {
     categoriesId: state.categoriesState.ids,
     categories: state.categoriesState.categories,

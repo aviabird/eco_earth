@@ -40,7 +40,6 @@ export default function (state = INITIAL_STATE, action) { //action coming from a
       };
 
     case actionTypes.FETCH_SELECTED_CATEGORY_SUCCESS:
-    console.log('from reducer', action.payload);
       return {
         ...state,
         selected_category: action.payload,

@@ -24,8 +24,7 @@ class CategoryList extends Component {
 
   componentDidMount() {
     this.props.fetchCategories();
-  }
-  
+  } 
 
 
   renderCategories(data) {
@@ -35,8 +34,7 @@ class CategoryList extends Component {
 
     return (
       <li
-        key={data.category_id}
-        
+        key={data.category_id}        
         className="list-group-item"
       > 
         
