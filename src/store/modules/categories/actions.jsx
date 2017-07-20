@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-
+import * as firebase from 'firebase';
 
 export function fetchCategories() {
   return {type: actionTypes.FETCH_CATEGORIES};
@@ -15,6 +15,7 @@ export function newCategoryCreate(props) {
     payload: props
   };
 }
+
 export function newCategoryCreateSuccess(props) {
   return {
     type: actionTypes.CREATE_CATEGORY_SUCCESS,
@@ -23,7 +24,6 @@ export function newCategoryCreateSuccess(props) {
 }
 
 export function selectedCategory(category_id) {
-  console.log('Selected category_id from action:', category_id);
   return {
     type: actionTypes.FETCH_SELECTED_CATEGORY,
     payload: category_id
@@ -51,12 +51,11 @@ export function categoryUpdateSuccess(props) {
   };
 }
 
-// export function deleteCategory(category_id) {
-//   console.log('category_id', category_id);
-//   const request = firebase.database().ref(`/categories/${category_id}`).remove();
-//   return {
-//     type: actionTypes.DELETE_SELECTED_CATEGORY,
-//     payload: request
-//   };
-// }
+export function deleteCategory(category_id) {
+  const request = firebase.database().ref(`/categories/${category_id}`).remove();
+  return {
+    type: actionTypes.DELETE_SELECTED_CATEGORY,
+    payload: request
+  };
+}
 

@@ -39,8 +39,8 @@ class CategoriesNew extends Component {
     
      if (category_id) {
       this.props.selectedCategory(category_id);
-      this.setState({ category_id });
-      this.setState({category:this.props.category})
+      // this.setState({ category_id });
+      // this.setState({category:this.props.category})
     }
   }
 
@@ -77,7 +77,6 @@ class CategoriesNew extends Component {
   }
 
 
-
 	render() {
     const { categoriesId, categories } = this.props;
     var categoriesArr = categoriesId.map(id => (Object.assign({}, categories[id], {category_id: id})))
@@ -88,8 +87,11 @@ class CategoriesNew extends Component {
 
 		return (
       <Panel key={category_id}>
-        <form onSubmit={ category_id ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)}>
-          <h3>{category_id ? "Edit category" : "Create a New Category"}</h3>
+        <form 
+          onSubmit={ category_id ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)}>
+          <h3>
+            {category_id ? "Edit category" : "Create a New Category"}
+          </h3>
           <FormGroup controlId="formControlsText">
             <ControlLabel>Title</ControlLabel>
             <FormControl

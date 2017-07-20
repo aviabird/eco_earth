@@ -59,6 +59,9 @@ export default function (state = INITIAL_STATE, action) { //action coming from a
         formloaded: true
       };
 
+    case actionTypes.DELETE_SELECTED_CATEGORY:
+      return { ...state, categories: action.payload };
+        
     default:
       {
         return state;
