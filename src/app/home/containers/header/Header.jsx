@@ -1,9 +1,16 @@
-import React, { Component } from 'react';
-import Searchbar from '../../components/search_bar/SearchBar';
-import './Header.css';
-import { Navbar, Button, NavDropdown, Nav, NavItem, MenuItem } from 'react-bootstrap';
-import Logo from './../../../../assets/images/logo.png';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import Searchbar from "../../components/search_bar/SearchBar";
+import "./Header.css";
+import {
+  Navbar,
+  Button,
+  NavDropdown,
+  Nav,
+  NavItem,
+  MenuItem
+} from "react-bootstrap";
+import Logo from "./../../../../assets/images/logo.png";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   onSearched(keyword) {
@@ -26,7 +33,7 @@ class Header extends Component {
           <div className="navbar-right">
             <Searchbar onSearched={this.onSearched} />
             <Nav pullRight>
-              <NavItem eventKey={1}>
+              <NavItem eventKey={1} href={"/create_new"}>
                 <Button className="start-new-topic" type="submit">
                   Start New Topic
                 </Button>
@@ -42,9 +49,8 @@ class Header extends Component {
           </div>
         </Navbar.Collapse>
       </Navbar>
-    )
+    );
   }
 }
-
 
 export default Header;

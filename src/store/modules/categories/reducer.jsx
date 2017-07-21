@@ -1,12 +1,19 @@
 import * as actionTypes from './actionTypes'; 
 
 const INITIAL_STATE = {
+<<<<<<< HEAD
   ids: [],
   categories: {}, 
   selected_category: {},
   isFetchingCategories: false,
   isFetchingSingleCategories: false,
   formloaded: false
+=======
+  categoryids:[],
+  categories: {},
+  selected_category: null,
+  isFetchingCategories: false
+>>>>>>> origin/development
 };
 
 export default function (state = INITIAL_STATE, action) { //action coming from actioncontainers
@@ -18,7 +25,11 @@ export default function (state = INITIAL_STATE, action) { //action coming from a
     case actionTypes.FETCH_CATEGORIES_SUCCESS:
       return {
         ...state,
+<<<<<<< HEAD
         ids: Object.keys(action.payload),
+=======
+        categoryids:Object.keys(action.payload),
+>>>>>>> origin/development
         categories: action.payload,
         isFetchingCategories: false
       }
