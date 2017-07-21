@@ -18,7 +18,7 @@ class Login extends Component {
       if (user) {
         this.setState({ user });
         this.props.authentication(user);
-        database.ref("users").push({
+        database.ref(`currentUser/${user.uid}`).set({
           displayName: user.displayName,
           email: user.email,
           emailVerified: user.emailVerified,
