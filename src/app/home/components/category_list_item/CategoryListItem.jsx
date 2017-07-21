@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import './CategoryListItem.css';
 
 const CategoryListItem = (props) => {

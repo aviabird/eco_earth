@@ -12,7 +12,21 @@ import App from "./app/App";
 import ENV from "./AppConstants.jsx";
 import * as firebase from 'firebase';
 
+import * as firebase from 'firebase';
+
 // adding rx operators
+
+var config = {
+    apiKey: "AIzaSyCeSSfTO7a3moD2_qfStsiYZk36TQBe1zw",
+    authDomain: "eco-earth-b0911.firebaseapp.com",
+    databaseURL: "https://eco-earth-b0911.firebaseio.com",
+    projectId: "eco-earth-b0911",
+    storageBucket: "eco-earth-b0911.appspot.com",
+    messagingSenderId: "1043499852389"
+  };
+
+firebase.initializeApp(config);
+export const database = firebase.database; 
 
 const store = configureStore();
 
@@ -39,3 +53,5 @@ ReactDOM.render(
 );
 
 registerServiceWorker();
+
+
