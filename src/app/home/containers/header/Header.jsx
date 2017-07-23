@@ -62,7 +62,10 @@ class Header extends Component {
                     title={this.props.currentUser.displayName}
                     id="basic-nav-dropdown"
                   >
-                    <MenuItem eventKey={3.1}>My Profile</MenuItem>
+                    <MenuItem eventKey={3.1} href={`/myprofile`}>
+                      My Profile
+                    </MenuItem>
+
                     <MenuItem eventKey={3.2}>Setting</MenuItem>
                     <MenuItem divider />
                     <MenuItem

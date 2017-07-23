@@ -46,7 +46,8 @@ class PostCreate extends Component {
       id: id,
       title: title,
       category_id: category_id,
-      content: content
+      content: content,
+      userid: this.props.user.uid
     });
     this.title.value = "";
     this.category.value = "";
@@ -149,7 +150,8 @@ function mapStateToProps(state) {
     categoryids: state.categoriesState.categoryids,
     categories: state.categoriesState.categories,
     post: state.postsState.selected_post,
-    formloaded: state.postsState.formloaded
+    formloaded: state.postsState.formloaded,
+    user: state.auth.currentUser
   };
 }
 

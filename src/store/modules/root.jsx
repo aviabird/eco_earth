@@ -6,6 +6,7 @@ import categoriesReducer from "./categories/reducer";
 import authReducer from "./auth/reducer";
 import * as postEpics from "./posts/epics";
 import * as categoryEpics from "./categories/epics";
+import * as userEpics from "./auth/epics";
 //import { ajax } from 'rxjs/observable/dom/ajax';
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/filter";
@@ -23,7 +24,9 @@ export const rootEpic = (...args) =>
     postEpics.getSelectedPost,
     postEpics.newpostCreate,
     postEpics.postUpdation,
-    categoryEpics.FetchCategories
+    categoryEpics.FetchCategories,
+    userEpics.UserProfileUpdate,
+    userEpics.authentication
   )(...args);
 
 // const epicMiddleware = createEpicMiddleware(rootEpic, {

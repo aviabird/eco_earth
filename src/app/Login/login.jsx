@@ -13,21 +13,10 @@ class Login extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
+  componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setState({ user });
-        this.props.authentication(user);
-        database.ref(`currentUser/${user.uid}`).set({
-          displayName: user.displayName,
-          email: user.email,
-          emailVerified: user.emailVerified,
-          photoURL: user.photoURL,
-          isAnonymous: user.isAnonymous,
-          uid: user.uid,
-          providerData: user.providerData
-        });
-      }
+      console.log("hey");
+      this.props.authentication(user);
     });
   }
 
@@ -37,7 +26,7 @@ class Login extends Component {
     provider.addScope("email");
 
     firebase.auth().signInWithPopup(provider).then(result => {
-      console.log(result);
+      this.props.authentication(result.user);
     });
   }
 
