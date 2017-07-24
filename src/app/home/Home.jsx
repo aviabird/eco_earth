@@ -9,6 +9,8 @@ import PostDetail from "./../post/containers/post_detail/PostDetail";
 import PostCreate from "./../post/containers/post_create/PostCreate";
 import MyProfile from "./../Users/UserProfile";
 import { Col } from "react-bootstrap";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 class Home extends Component {
   render() {
@@ -48,4 +50,11 @@ class Home extends Component {
   }
 }
 
-export default Home;
+//export default Home;
+function mapStateToProps({ auth }, ownProps) {
+  return {
+    isLoggedIn: auth.isAuthenticated
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(Home));
