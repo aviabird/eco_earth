@@ -16,7 +16,7 @@ import * as firebase from "firebase";
 
 const store = configureStore();
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 var config = {
   apiKey: ENV.FIREBASE.APP_KEY,
   authDomain: ENV.FIREBASE.AUTH_DOMAIN,

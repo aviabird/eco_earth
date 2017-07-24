@@ -15,8 +15,9 @@ class Login extends Component {
 
   componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
-      console.log("hey");
-      this.props.authentication(user);
+      if (user) {
+        this.props.authentication(user);
+      }
     });
   }
 
@@ -26,7 +27,7 @@ class Login extends Component {
     provider.addScope("email");
 
     firebase.auth().signInWithPopup(provider).then(result => {
-      this.props.authentication(result.user);
+      // this.props.authentication(result.user);
     });
   }
 
