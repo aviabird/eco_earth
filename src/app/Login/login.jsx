@@ -26,7 +26,7 @@ class Login extends Component {
     provider.addScope("profile");
     provider.addScope("email");
 
-    firebase.auth().signInWithPopup(provider).then(result => {
+    firebase.auth().signInWithRedirect(provider).then(result => {
       // this.props.authentication(result.user);
     });
   }

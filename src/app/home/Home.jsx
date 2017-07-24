@@ -13,6 +13,12 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
   render() {
     return (
       <div className="home">
@@ -34,7 +40,15 @@ class Home extends Component {
                   component={PostDetail}
                   className="post_detail"
                 />
-                <Route path="/create_new" component={PostCreate} />
+                <Route
+                  path="/create_new"
+                  // component={PostCreate}
+                  render={() => {
+                    return this.props.isLoggedIn
+                      ? <PostCreate {...this.props} />
+                      : <h1>Please sign in!!!</h1>;
+                  }}
+                />
                 <Route path="/categories/:category" component={PostList} />
                 <Route path="/myprofile" component={MyProfile} />
                 <Route path="/editprofile/:name" component={MyProfile} />
