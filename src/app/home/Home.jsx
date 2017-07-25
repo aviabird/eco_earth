@@ -51,6 +51,7 @@ class Home extends Component {
                 />
                 <Route path="/categories/:category" component={PostList} />
                 <Route path="/myprofile" component={MyProfile} />
+                <Route path="/myprofile" component={PostList} />
                 <Route path="/editprofile/:name" component={MyProfile} />
               </Col>
               <Col lg={4} md={4}>
