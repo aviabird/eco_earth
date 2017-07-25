@@ -101,7 +101,7 @@ class PostList extends Component {
     return (
       <div className="post-list">
         {!postsArr.length ? <h4> No Posts Available </h4> : null}
-        {currentUser && this.state.name?<h1>My Posts</h1>:""}
+        {currentUser && this.state.name ? <h1>My Posts</h1> : ""}
         {postsArr.map(this.renderPost)}
       </div>
     );
