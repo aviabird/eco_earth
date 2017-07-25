@@ -26,7 +26,8 @@ export const rootEpic = (...args) =>
     postEpics.postUpdation,
     categoryEpics.FetchCategories,
     userEpics.UserProfileUpdate,
-    userEpics.authentication
+    userEpics.storeUser,
+    userEpics.fetchUser
   )(...args);
 
 // const epicMiddleware = createEpicMiddleware(rootEpic, {

@@ -53,8 +53,8 @@ export default class FBHomeService {
     });
   }
 
-  static authentication(user) {
-    var firebaseRef = database.ref(`currentUser/${user.uid}`);
+  static storeUser(user) {
+    var firebaseRef = database.ref(`users/${user.uid}`);
     firebaseRef.set({
       displayName: user.displayName,
       email: user.email,
@@ -70,8 +70,16 @@ export default class FBHomeService {
       });
     });
   }
+  static fetchUser(userid) {
+    var firebaseRef = database.ref(`users/${userid}`);
+    return Observable.create(observer => {
+      firebaseRef.once("value", function(snapshot) {
+        return observer.next(snapshot.val());
+      });
+    });
+  }
   static updateProfile(user) {
-    var firebaseRef = database.ref(`/currentUser/${user.uid}`);
+    var firebaseRef = database.ref(`/users/${user.uid}`);
     firebaseRef.update(user);
     return Observable.create(observer => {
       firebaseRef.once("value", function(snapshot) {

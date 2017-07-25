@@ -1,11 +1,19 @@
 import * as actionTypes from "./actionTypes";
 
-export function authentication(user) {
-  return { type: actionTypes.AUTHENTICATION, payload: user };
+export function storeUser(user) {
+  return { type: actionTypes.STORE_USER, payload: user };
 }
 
-export function authenticationSuccess(user) {
-  return { type: actionTypes.AUTHENTICATION_SUCCESS, payload: user };
+export function storeUserSuccess(user) {
+  return { type: actionTypes.STORE_USER_SUCCESS, payload: user };
+}
+
+export function fetchUser(id) {
+  return { type: actionTypes.FETCH_USER, payload: id };
+}
+
+export function fetchUserSuccess(user) {
+  return { type: actionTypes.FETCH_USER_SUCCESS, payload: user };
 }
 
 export function logout() {

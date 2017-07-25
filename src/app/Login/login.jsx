@@ -4,7 +4,7 @@ import firebase from "firebase";
 import database from "../../index.js";
 import { connect } from "react-redux";
 import "./login.css";
-import { authentication } from "../../store/modules/auth/actions";
+import { storeUser, fetchUser } from "../../store/modules/auth/actions";
 
 class Login extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class Login extends Component {
   componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.props.authentication(user);
+        this.props.fetchUser(user.uid);
       }
     });
   }
@@ -27,7 +27,7 @@ class Login extends Component {
     provider.addScope("email");
 
     firebase.auth().signInWithRedirect(provider).then(result => {
-      // this.props.authentication(result.user);
+      this.props.storeUser(result.user);
     });
   }
 
@@ -60,4 +60,4 @@ function mapStateToProps({ auth }) {
   };
 }
 
-export default connect(mapStateToProps, { authentication })(Login);
+export default connect(mapStateToProps, { storeUser, fetchUser })(Login);

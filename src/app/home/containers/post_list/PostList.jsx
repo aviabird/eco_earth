@@ -71,7 +71,7 @@ class PostList extends Component {
   }
 
   render() {
-    const { postids, posts, isFetchingPosts } = this.props;
+    const { postids, posts, isFetchingPosts, currentUser } = this.props;
     if (isFetchingPosts) {
       return (
         <div>
@@ -81,6 +81,23 @@ class PostList extends Component {
     }
 
     var postsArr = postids.map(id => Object.assign({}, posts[id], { id: id }));
+
+    // if (currentUser) {
+    //   console.log("heyyy" + currentUser.displayName);
+    //   var postsArr = postsArr.filter(
+    //     post => post.userid === this.props.currentUser.uid
+    //   );
+    //   console.log(postsArr);
+    // }
+
+    // if (!this.props.currentUser.uid) {
+    //   var postsArr = postids.map(id =>
+    //     Object.assign({}, posts[id], { id: id })
+    //   );
+    // }
+    // var postsArr = currentUser
+    //   ? postsArray.filter(post => post.userid === this.props.currentUser.uid)
+    //   : postsArray;
 
     if (!postsArr) {
       return <h4> No Posts Available </h4>;
@@ -99,9 +116,18 @@ PostList.propTypes = {
   posts: PropTypes.object
 };
 
-function mapStateToProps({ postsState }, ownProps) {
-  const { postids, posts, isFetchingPosts } = postsState;
-  return { postids, posts, isFetchingPosts };
+// function mapStateToProps({ postsState }, ownProps) {
+//   const { postids, posts, isFetchingPosts } = postsState;
+//   return { postids, posts, isFetchingPosts };
+// }
+
+function mapStateToProps({ postsState, auth }) {
+  return {
+    postids: postsState.postids,
+    posts: postsState.posts,
+    isFetchingPosts: postsState.isFetchingPosts,
+    currentUser: auth.currentUser
+  };
 }
 
 export default connect(mapStateToProps, { fetchPosts })(PostList);
