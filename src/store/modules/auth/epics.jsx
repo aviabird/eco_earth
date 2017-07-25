@@ -7,7 +7,8 @@ export const storeUser = (action$, { getJSON }) => {
     .ofType(actionTypes.STORE_USER)
     .map(action => action.payload)
     .switchMap(user => appServices().HOME.storeUser(user))
-    .map(data => userActions.storeUserSuccess(data));
+    .map(data => userActions.storeUserSuccess(data))
+    .catch(err => console.log(err));
 };
 
 export const fetchUser = (action$, { getJSON }) => {
@@ -15,14 +16,18 @@ export const fetchUser = (action$, { getJSON }) => {
     .ofType(actionTypes.FETCH_USER)
     .map(action => action.payload)
     .switchMap(uid => appServices().HOME.fetchUser(uid))
-    .map(data => userActions.fetchUserSuccess(data));
+    .filter(data => data != null)
+    .map(data => {
+      return userActions.fetchUserSuccess(data);
+    })
+    .catch(err => console.log(err));
 };
-
 
 export const UserProfileUpdate = (action$, { getJSON }) => {
   return action$
     .ofType(actionTypes.UPDATE_PROFILE)
     .map(action => action.payload)
     .switchMap(userdata => appServices().HOME.updateProfile(userdata))
-    .map(data => userActions.profileUpdateSuccess(data));
+    .map(data => userActions.profileUpdateSuccess(data))
+    .catch(err => console.log(err));
 };

@@ -31,6 +31,7 @@ class PostDetail extends Component {
   }
 
   render() {
+    const { post, user } = this.props;
     if (this.props.isFetchingSinglePost) {
       return <Loader />;
     }
@@ -42,7 +43,7 @@ class PostDetail extends Component {
         <p>
           {this.props.post.content}
         </p>
-        {this.props.isLoggedIn
+        {post.userid === user.uid
           ? <div>
               <Link to="/">
                 <Button
@@ -69,6 +70,7 @@ PostDetail.propTypes = {
 function mapStateToProps({ postsState, auth }) {
   return {
     isLoggedIn: auth.isAuthenticated,
+    user: auth.currentUser,
     post: postsState.selected_post,
     isFetchingSinglePost: postsState.isFetchingSinglePost
   };

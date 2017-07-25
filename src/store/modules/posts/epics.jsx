@@ -18,7 +18,8 @@ export const getPostlistFor = (action$, { getJSON }) => {
     .switchMap(category_id => appServices().HOME.getPostlistFor(category_id))
     .map(data => {
       return postsActions.fetchPostsByCategorySuccess(data || {});
-    });
+    })
+    .catch(err => console.log(err));
 };
 
 export const getSelectedPost = (action$, { getJSON }) => {
@@ -37,7 +38,8 @@ export const newpostCreate = (action$, { getJSON }) => {
     .ofType(actionTypes.CREATE_POST)
     .map(action => action.payload)
     .switchMap(post => appServices().HOME.postSubmit(post))
-    .map(post => postsActions.newpostCreateSuccess(post));
+    .map(post => postsActions.newpostCreateSuccess(post))
+    .catch(err => console.log(err));
 };
 
 export const postUpdation = (action$, { getJSON }) => {
@@ -45,5 +47,6 @@ export const postUpdation = (action$, { getJSON }) => {
     .ofType(actionTypes.POST_UPDATE)
     .map(action => action.payload)
     .switchMap(post => appServices().HOME.postUpdate(post))
-    .map(post => postsActions.postUpdateSuccess(post));
+    .map(post => postsActions.postUpdateSuccess(post))
+    .catch(err => console.log(err));
 };

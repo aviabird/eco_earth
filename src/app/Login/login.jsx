@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Avatar from "react-avatar";
 import firebase from "firebase";
-import database from "../../index.js";
 import { connect } from "react-redux";
 import "./login.css";
 import { storeUser, fetchUser } from "../../store/modules/auth/actions";
@@ -25,7 +24,7 @@ class Login extends Component {
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope("profile");
     provider.addScope("email");
-
+    //firebase.auth().getRedirectResult()
     firebase.auth().signInWithRedirect(provider).then(result => {
       this.props.storeUser(result.user);
     });

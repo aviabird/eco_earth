@@ -33,6 +33,7 @@ class Header extends Component {
   }
 
   render() {
+    const { isAuthenticated, currentUser } = this.props;
     return (
       <Navbar>
         <Navbar.Header>
@@ -56,15 +57,15 @@ class Header extends Component {
               <NavItem eventKey={1} href="#">
                 <Login />
               </NavItem>
-              {this.props.isAuthenticated
+              {isAuthenticated
                 ? <NavDropdown
                     eventKey={3}
-                    title={this.props.currentUser.displayName}
+                    title={currentUser.displayName}
                     id="basic-nav-dropdown"
                   >
                     <MenuItem
                       eventKey={3.1}
-                      href={`/myprofile/${this.props.currentUser.displayName}`}
+                      href={`/myprofile/${currentUser.displayName}`}
                     >
                       My Profile
                     </MenuItem>

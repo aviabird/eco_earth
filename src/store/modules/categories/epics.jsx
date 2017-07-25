@@ -16,5 +16,6 @@ export const FetchCategories = (action$, { getJSON }) => {
     .switchMap(() => appServices().HOME.getCategories())
     .map(data => {
       return categoryActions.fetchCategoriesSuccess(data);
-    });
+    })
+    .catch(err => console.log(err));
 };
