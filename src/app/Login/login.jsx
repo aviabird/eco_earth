@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Avatar from "react-avatar";
 import firebase from "firebase";
+import database from "../../index.js";
 import { connect } from "react-redux";
 import "./login.css";
 import { storeUser, fetchUser } from "../../store/modules/auth/actions";
@@ -15,6 +16,7 @@ class Login extends Component {
   componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        // console.log("inside mount", user);
         this.props.fetchUser(user.uid);
       }
     });
@@ -24,9 +26,18 @@ class Login extends Component {
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope("profile");
     provider.addScope("email");
-    //firebase.auth().getRedirectResult()
-    firebase.auth().signInWithRedirect(provider).then(result => {
-      this.props.storeUser(result.user);
+    let that = this;
+    firebase.auth().signInWithPopup(provider).then(result => {
+      var usersRef = database.ref(`users/${result.user.uid}`);
+      // console.log("second", result.user);
+      usersRef.once("value", function(snapshot) {
+        var exists = snapshot.val() !== null;
+        // console.log(exists);
+
+        if (!exists) {
+          that.props.storeUser(result.user);
+        }
+      });
     });
   }
 
