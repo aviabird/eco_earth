@@ -1,7 +1,5 @@
-import ENV from "../../AppConstants";
 import { Observable } from "rxjs/Observable";
 import database from "../../index.js";
-export const API_URL = ENV.API_URL;
 
 export default class FBHomeService {
   static getPostById(id) {
@@ -49,14 +47,16 @@ export default class FBHomeService {
     });
   }
 
-
   static getPostlistFor(category_id) {
     var postRef = database.ref(`posts`);
     return Observable.create(observer => {
-      postRef.orderByChild("category_id").equalTo(category_id).once("value", function(snapshot) {
-        return  observer.next(snapshot.val());
-      })
-    })
+      postRef
+        .orderByChild("category_id")
+        .equalTo(category_id)
+        .once("value", function(snapshot) {
+          return observer.next(snapshot.val());
+        });
+    });
   }
 
   static handleError(resp) {

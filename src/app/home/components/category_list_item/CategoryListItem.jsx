@@ -1,13 +1,15 @@
-import React from 'react';
-import './CategoryListItem.css';
+import React from "react";
+import "./CategoryListItem.css";
 
-const CategoryListItem = (props) => {
+const CategoryListItem = props => {
   return (
     <span className="category-list-item">
       <span className="badge pull-right">20</span>
       {props.title}
-      <br/>
-      <small>{props.description}</small>
+      <br />
+      <small>
+        {props.description}
+      </small>
     </span>
   );
 };
