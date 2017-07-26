@@ -24,19 +24,13 @@ export default class FBHomeService {
     var firebaseRef = database.ref("posts");
     firebaseRef.push(post);
     return Observable.of(post);
-    //this.getFirebasePosts();
   }
 
   static postUpdate(post) {
     var firebaseRef = database.ref(`/posts/${post.id}`);
     firebaseRef.update(post);
     return Observable.of(post);
-    //this.getFirebasePosts();
   }
-
-  // static getCategories() {
-  //   return ajax.getJSON(`${API_URL}/categories`).map(resp => resp.data);
-  // }
 
   static getCategories() {
     var categoriesRef = database.ref("categories");
@@ -56,6 +50,41 @@ export default class FBHomeService {
         .once("value", function(snapshot) {
           return observer.next(snapshot.val());
         });
+    });
+  }
+
+  static storeUser(user) {
+    var firebaseRef = database.ref(`users/${user.uid}`);
+    firebaseRef.set({
+      displayName: user.displayName,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      photoURL: user.photoURL,
+      isAnonymous: user.isAnonymous,
+      uid: user.uid,
+      providerData: user.providerData
+    });
+    return Observable.create(observer => {
+      firebaseRef.once("value", function(snapshot) {
+        return observer.next(snapshot.val());
+      });
+    });
+  }
+  static fetchUser(userid) {
+    var firebaseRef = database.ref(`users/${userid}`);
+    return Observable.create(observer => {
+      firebaseRef.once("value", function(snapshot) {
+        return observer.next(snapshot.val());
+      });
+    });
+  }
+  static updateProfile(user) {
+    var firebaseRef = database.ref(`/users/${user.uid}`);
+    firebaseRef.update(user);
+    return Observable.create(observer => {
+      firebaseRef.once("value", function(snapshot) {
+        return observer.next(snapshot.val());
+      });
     });
   }
 

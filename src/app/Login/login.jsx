@@ -4,7 +4,7 @@ import firebase from "firebase";
 import database from "../../index.js";
 import { connect } from "react-redux";
 import "./login.css";
-import { authentication } from "../../store/modules/auth/actions";
+import { storeUser, fetchUser } from "../../store/modules/auth/actions";
 
 class Login extends Component {
   constructor(props) {
@@ -13,20 +13,11 @@ class Login extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
+  componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState({ user });
-        this.props.authentication(user);
-        database.ref(`currentUser/${user.uid}`).set({
-          displayName: user.displayName,
-          email: user.email,
-          emailVerified: user.emailVerified,
-          photoURL: user.photoURL,
-          isAnonymous: user.isAnonymous,
-          uid: user.uid,
-          providerData: user.providerData
-        });
+        // console.log("inside mount", user);
+        this.props.fetchUser(user.uid);
       }
     });
   }
@@ -35,9 +26,18 @@ class Login extends Component {
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope("profile");
     provider.addScope("email");
-
+    let that = this;
     firebase.auth().signInWithPopup(provider).then(result => {
-      console.log(result);
+      var usersRef = database.ref(`users/${result.user.uid}`);
+      // console.log("second", result.user);
+      usersRef.once("value", function(snapshot) {
+        var exists = snapshot.val() !== null;
+        // console.log(exists);
+
+        if (!exists) {
+          that.props.storeUser(result.user);
+        }
+      });
     });
   }
 
@@ -70,4 +70,4 @@ function mapStateToProps({ auth }) {
   };
 }
 
-export default connect(mapStateToProps, { authentication })(Login);
+export default connect(mapStateToProps, { storeUser, fetchUser })(Login);

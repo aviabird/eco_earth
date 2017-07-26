@@ -28,10 +28,10 @@ class PostDetail extends Component {
 
   onDeleteClick() {
     this.props.deletePost(this.props.match.params.postId);
-
   }
 
   render() {
+    const { post, user } = this.props;
     if (this.props.isFetchingSinglePost) {
       return <Loader />;
     }
@@ -43,17 +43,21 @@ class PostDetail extends Component {
         <p>
           {this.props.post.content}
         </p>
-        <Link to="/">
-          <Button
-            onClick={this.onDeleteClick.bind(this)}
-            className="btn-danger pull-right"
-          >
-            Delete Post
-          </Button>
-        </Link>
-        <Link to={"/post/edit/" + this.state.postId}>
-          <Button className="btn-primary  edit_post">Edit Post</Button>
-        </Link>
+        {post.userid === user.uid
+          ? <div>
+              <Link to="/">
+                <Button
+                  onClick={this.onDeleteClick.bind(this)}
+                  className="btn-danger pull-right"
+                >
+                  Delete Post
+                </Button>
+              </Link>
+              <Link to={"/post/edit/" + this.state.postId}>
+                <Button className="btn-primary  edit_post">Edit Post</Button>
+              </Link>
+            </div>
+          : ""}
       </Panel>
     );
   }
@@ -63,8 +67,10 @@ PostDetail.propTypes = {
   post: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ postsState }) {
+function mapStateToProps({ postsState, auth }) {
   return {
+    isLoggedIn: auth.isAuthenticated,
+    user: auth.currentUser,
     post: postsState.selected_post,
     isFetchingSinglePost: postsState.isFetchingSinglePost
   };
