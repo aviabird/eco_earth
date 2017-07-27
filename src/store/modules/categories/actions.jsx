@@ -1,17 +1,17 @@
-import * as actionTypes from './actionTypes';
-import * as firebase from 'firebase';
+import * as actionTypes from "./actionTypes";
+import * as firebase from "firebase";
 
 export function fetchCategories() {
-  return {type: actionTypes.FETCH_CATEGORIES};
+  return { type: actionTypes.FETCH_CATEGORIES };
 }
 
 export function fetchCategoriesSuccess(categories) {
-  return {type: actionTypes.FETCH_CATEGORIES_SUCCESS, payload: categories};
+  return { type: actionTypes.FETCH_CATEGORIES_SUCCESS, payload: categories };
 }
 
 export function newCategoryCreate(props) {
   return {
-    type: actionTypes.CREATE_CATEGORIES,
+    type: actionTypes.CREATE_CATEGORY,
     payload: props
   };
 }
@@ -37,10 +37,10 @@ export function fetchSelectedCategorySuccess(category) {
   };
 }
 
-export function categoryUpdate(props,category_id) {
+export function categoryUpdate(props, category_id) {
   return {
     type: actionTypes.UPDATE_CATEGORY,
-    payload: Object.assign({},props,{category_id:category_id})
+    payload: Object.assign({}, { data: props }, { id: category_id })
   };
 }
 
@@ -52,10 +52,12 @@ export function categoryUpdateSuccess(props) {
 }
 
 export function deleteCategory(category_id) {
-  const request = firebase.database().ref(`/categories/${category_id}`).remove();
+  const request = firebase
+    .database()
+    .ref(`/categories/${category_id}`)
+    .remove();
   return {
     type: actionTypes.DELETE_SELECTED_CATEGORY,
     payload: request
   };
 }
-

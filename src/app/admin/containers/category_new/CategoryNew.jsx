@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { 
-  newCategoryCreate, 
-  selectedCategory, 
-  categoryUpdate 
-  } from '../../../../store/modules/categories/actions';
-import { Link } from 'react-router-dom';	
-import _ from 'lodash';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import {
+  newCategoryCreate,
+  selectedCategory,
+  categoryUpdate
+} from "../../../../store/modules/categories/actions";
+import { Link } from "react-router-dom";
+//import { withRouter } from "react-router-dom";
 
 import {
   FormControl,
@@ -16,79 +16,84 @@ import {
   Panel
 } from "react-bootstrap";
 
-
-class CategoriesNew extends Component {
-
+class CategoryNew extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   componentWillMount() {
-    var category_id = this.props.match.params.category_id;
-    
-    if (category_id) {
-      this.props.selectedCategory(category_id);
-      this.setState({ category_id });
-      this.setState({category:this.props.category})
+    var id = this.props.match.params.category_id;
+    this.props.selectedCategory(id);
+    console.log("will mount");
+    if (id) {
+      this.setState({ category_id: id });
+    }
+  }
+  componentDidUpdate(newProps) {
+    if (this.props.location !== newProps.location) {
+      var id = this.props.match.params.category_id;
+      this.props.selectedCategory(id);
+      if (id) {
+        this.setState({ category_id: id });
+      }
     }
   }
 
-  componentWillReceiveProps() {
-    var category_id =this.props.match.params.category_id;
-    
-     if (category_id) {
-      this.props.selectedCategory(category_id);
-      // this.setState({ category_id });
-      // this.setState({category:this.props.category})
-    }
-  }
-
-  handleSubmit(event) { 
+  handleSubmit(event) {
     event.preventDefault();
-    var category_id= _.uniqueId();
     var title = this.title.value.trim();
-    var desc = this.desc.value.trim();
+    var description = this.description.value.trim();
     this.props.newCategoryCreate({
-      category_id: category_id,
       title: title,
-      desc: desc
+      description: description
     });
-    this.category_id = "";
     this.title.value = "";
-    this.desc.value = "";
+    this.description.value = "";
 
-    setTimeout(function () { window.location.replace("/"); }, 10)
+    setTimeout(function() {
+      window.location.replace("/");
+    }, 10);
   }
 
   handleUpdate(event) {
     event.preventDefault();
     var title = this.title.value.trim();
-    var desc = this.desc.value.trim();
+    var description = this.description.value.trim();
 
-    this.props.categoryUpdate({
-      title: title,
-      desc: desc
-    }, this.props.match.params.category_id);
+    this.props.categoryUpdate(
+      {
+        title: title,
+        description: description
+      },
+      this.state.category_id
+    );
     this.title.value = "";
-    this.desc.value = "";
+    this.description.value = "";
 
-    setTimeout(function () { window.location.replace("/"); }, 10)
+    setTimeout(function() {
+      window.location.replace("/");
+    }, 10);
   }
 
+  render() {
+    const { category } = this.props;
+    if (category) {
+      var category_id = this.state.category_id;
+      //var id = category.id;
+      var title = category.title;
+      var description = category.description;
+    }
 
-	render() {
-    const { categoriesId, categories } = this.props;
-    var categoriesArr = categoriesId.map(id => (Object.assign({}, categories[id], {category_id: id})))
-    
-    var category_id = this.props.category.category_id;
-    var title = this.props.category.title;
-    var desc = this.props.category.desc;
-
-		return (
-      <Panel key={category_id}>
-        <form 
-          onSubmit={ category_id ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)}>
+    return (
+      <Panel key={title}>
+        <form
+          onSubmit={
+            category_id
+              ? this.handleUpdate.bind(this)
+              : this.handleSubmit.bind(this)
+          }
+        >
           <h3>
             {category_id ? "Edit category" : "Create a New Category"}
           </h3>
@@ -107,9 +112,9 @@ class CategoriesNew extends Component {
             <ControlLabel>Description</ControlLabel>
             <FormControl
               type="textarea"
-              defaultValue={desc}
+              defaultValue={description}
               inputRef={ref => {
-                this.desc = ref;
+                this.description = ref;
               }}
               placeholder="Enter description"
             />
@@ -117,25 +122,25 @@ class CategoriesNew extends Component {
           <Button className="btn-primary" type="submit">
             {category_id ? "Update" : "Submit"}
           </Button>
-          <span>  </span>
-          <Link to="/" className="btn btn-danger">Cancel </Link>
+          <span> </span>
+          <Link to="/" className="btn btn-danger">
+            Cancel
+          </Link>
         </form>
       </Panel>
-		);
-	}
+    );
+  }
 }
 
 function mapStateToProps(state) {
   return {
-    categoriesId: state.categoriesState.ids,
-    categories: state.categoriesState.categories,
     category: state.categoriesState.selected_category,
     formloaded: state.postsState.formloaded
   };
-}  
+}
 
-export default connect(mapStateToProps, { 
-  newCategoryCreate, 
+export default connect(mapStateToProps, {
+  newCategoryCreate,
   selectedCategory,
   categoryUpdate
-})(CategoriesNew);
+})(CategoryNew);

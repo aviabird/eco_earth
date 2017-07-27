@@ -3,66 +3,70 @@ import "./CategoryList.css";
 import React, { Component } from "react";
 import CategoryListItem from "../../components/category_list_item/CategoryListItem";
 //import PropTypes from "prop-types";
-import { 
-  fetchCategories, 
-  deleteCategory 
+import {
+  fetchCategories,
+  deleteCategory,
+  selectedCategory
 } from "../../../../store/modules/categories/actions";
 import { fetchPostsByCategory } from "../../../../store/modules/posts/actions";
-import { Panel, Glyphicon, Col } from 'react-bootstrap';
-import Loader from '../../../../shared/components/loader/Loader';
-import { Link } from 'react-router-dom';
+import { Panel, Glyphicon, Col } from "react-bootstrap";
+import Loader from "../../../../shared/components/loader/Loader";
+import { Link } from "react-router-dom";
 
 class CategoryList extends Component {
-
-
   constructor(props) {
     super(props);
 
     this.state = {};
     //this.onClicked = this.onClicked.bind(this);
     this.renderCategories = this.renderCategories.bind(this);
+    this.selectedcategory = this.selectedcategory.bind(this);
   }
 
-  getInitialState(){
-      return {data: {comments:[]}};
-    }
+  getInitialState() {
+    return { data: { comments: [] } };
+  }
 
   componentDidMount() {
     this.props.fetchCategories();
-  } 
+  }
 
   onDeleteClick(category_id) {
     this.props.deleteCategory(category_id);
-    setTimeout(function () { window.location.replace("/"); }, 10)
+    setTimeout(function() {
+      window.location.replace("/");
+    }, 10);
+  }
+
+  selectedcategory(category_id) {
+    this.props.selectedCategory(category_id);
   }
 
   renderCategories(data) {
-    const category_id = data.category_id;
+    const id = data.id;
     const title = data.title;
-    const desc = data.desc;
+    const desc = data.description;
 
     return (
-      <li
-        key={data.category_id}        
-        className="list-group-item"
-      > 
-        
-        <CategoryListItem 
-          title={title} 
-          desc={desc} /> 
-        
+      <li key={data.id} className="list-group-item">
+        <CategoryListItem title={title} desc={desc} />
+
         <Col className="row pull-right">
           <Col lg={6} md={6}>
-            <Link to={"/categories/edit/" + category_id}>
-              <Glyphicon className="pull-left" glyph="pencil" />
-            </Link> 
+            <Link to={"/category/edit/" + id}>
+              <Glyphicon
+                //onClick={() => this.selectedcategory(id)}
+                className="pull-left"
+                glyph="pencil"
+              />
+            </Link>
           </Col>
           <Col lg={6} md={6}>
-              <Glyphicon 
-                onClick={()=>this.onDeleteClick(category_id)}
-                className="pull-right" 
-                glyph="remove" 
-              />
+            <Glyphicon
+              onClick={() => this.onDeleteClick(id)}
+              className="pull-right"
+              glyph="remove"
+            />
           </Col>
         </Col>
       </li>
@@ -71,22 +75,23 @@ class CategoryList extends Component {
 
   render() {
     const { categoriesId, categories } = this.props;
-    var categoriesArr = categoriesId.map(id => (Object.assign({}, categories[id], {category_id: id})))
-    
+    var categoriesArr = categoriesId.map(id =>
+      Object.assign({}, categories[id], { id: id })
+    );
+    console.log(categoriesArr);
     return (
       <Panel className="cat-list">
         <div>
           <h5>Categories: </h5>
         </div>
-        <div className="text-xs-right">
-          <Link to="/categories/new" className="btn btn-primary">
-            New
-          </Link> 
+        <div onClick={() => this.selectedcategory()} className="text-xs-right">
+          <Link to="/new_category" className="btn btn-primary">
+            Add New
+          </Link>
         </div>
-        <hr/>
+        <hr />
         <ul>
-
-          {this.props.isFetchingCategories ? <Loader /> : null }
+          {this.props.isFetchingCategories ? <Loader /> : null}
           {categoriesArr.map(this.renderCategories)}
         </ul>
       </Panel>
@@ -98,19 +103,17 @@ class CategoryList extends Component {
 //   categories: PropTypes.object
 // };
 
-function mapStateToProps({categoriesState}) {
+function mapStateToProps({ categoriesState }) {
   return {
-    categoriesId: categoriesState.ids,
+    categoriesId: categoriesState.categoryids,
     categories: categoriesState.categories,
     isFetchingCategories: categoriesState.isFetchingCategories
   };
 }
 
-export default connect(
-  mapStateToProps,
-  {
-    fetchCategories,
-    deleteCategory,
-    fetchPostsByCategory
-  }
-)(CategoryList);
+export default connect(mapStateToProps, {
+  fetchCategories,
+  deleteCategory,
+  selectedCategory,
+  fetchPostsByCategory
+})(CategoryList);

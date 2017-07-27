@@ -1,42 +1,43 @@
-import ENV from '../../../AppConstants';
-import { ajax } from 'rxjs/observable/dom/ajax';
-import { Observable } from 'rxjs/Observable';
-import {database} from '../../.././index';
-import * as firebase from 'firebase';
+import ENV from "../../../AppConstants";
+import { Observable } from "rxjs/Observable";
+import database from "../../../index.js";
+import * as firebase from "firebase";
 
 export const API_URL = ENV.API_URL;
 
-
 export default class AdminService {
-
   static getPosts() {
-    return ajax.getJSON(`${API_URL}/posts`)
-      .map(resp => resp.data)
-      .catch(this.handleError);
-  }
-
- 
-//Firebase service for fetching categories
-
-  static getCategories() {
-    var categoriesRef = database().ref("categories");
+    var postsRef = database.ref("posts");
     return Observable.create(observer => {
-      categoriesRef.once("value", function(snapshot) {
-        return observer.next(snapshot.val());    
+      postsRef.once("value", function(snapshot) {
+        return observer.next(snapshot.val());
       });
     });
-  } 
-
-  static categorySubmit(category){
-    var firebaseRef = firebase.database().ref('categories');
-    firebaseRef.push(category);
-    this.getCategories();
-    return Observable.of(category);
   }
 
-  
+  //Firebase service for fetching categories
+
+  static getCategories() {
+    var categoriesRef = database.ref("categories");
+    return Observable.create(observer => {
+      categoriesRef.once("value", function(snapshot) {
+        return observer.next(snapshot.val());
+      });
+    });
+  }
+
+  static categorySubmit(category) {
+    var firebaseRef = database.ref("categories");
+    firebaseRef.push(category);
+    return Observable.create(observer => {
+      firebaseRef.once("value", function(snapshot) {
+        return observer.next(snapshot.val());
+      });
+    });
+  }
+
   static getCategoryById(category_id) {
-    var ref = firebase.database().ref(`/categories/${category_id}`);
+    var ref = database.ref(`/categories/${category_id}`);
     return Observable.create(observer => {
       ref.once("value", function(snapshot) {
         return observer.next(snapshot.val());
@@ -45,13 +46,16 @@ export default class AdminService {
   }
 
   static categoryUpdate(category) {
-    var firebaseRef = firebase.database().ref(`/categories/${category.category_id}`);
-    firebaseRef.update(category);
-    return Observable.of(category);
+    var firebaseRef = database.ref(`/categories/${category.id}`);
+    firebaseRef.update(category.data);
+    return Observable.create(observer => {
+      firebaseRef.once("value", function(snapshot) {
+        return observer.next(snapshot.val());
+      });
+    });
   }
 
   static handleError(resp) {
-    return Observable.of(null)
+    return Observable.of(null);
   }
 }
-  
