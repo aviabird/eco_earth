@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import _ from "lodash";
 import {
   selectedPost,
   newpostCreate,
@@ -83,17 +82,17 @@ class PostCreate extends Component {
     var categoriesArr = categoryids.map(id =>
       Object.assign({}, categories[id], { id: id })
     );
-    var { title, content, id } = this.props.post;
+    var { title, content } = this.props.post;
     //var loaded = this.props.formloaded;
     return (
-      <Panel key={id}>
+      <Panel key={title}>
         <form
           onSubmit={
-            id ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)
+            title ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)
           }
         >
           <h3>
-            {id ? "Edit post" : "Create a New Post"}
+            {title ? "Edit post" : "Create a New Post"}
           </h3>
           <FormGroup controlId="formControlsText">
             <ControlLabel>Title</ControlLabel>
@@ -132,7 +131,7 @@ class PostCreate extends Component {
           </FormGroup>
 
           <Button className="btn-primary" type="submit">
-            {id ? "Update" : "Submit"}
+            {title ? "Update" : "Submit"}
           </Button>
           <span> </span>
           <Link to="/" className="btn btn-danger">

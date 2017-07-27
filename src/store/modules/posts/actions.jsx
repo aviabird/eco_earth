@@ -59,7 +59,7 @@ export function newpostCreateSuccess(props) {
 export function postUpdate(props, id) {
   return {
     type: actionTypes.POST_UPDATE,
-    payload: Object.assign({}, props, { id: id })
+    payload: Object.assign({}, { data: props }, { id: id })
   };
 }
 export function postUpdateSuccess(props) {

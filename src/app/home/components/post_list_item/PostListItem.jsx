@@ -6,6 +6,7 @@ import FontAwesome from "react-fontawesome";
 import { Panel, Col, Image, Badge } from "react-bootstrap";
 
 const PostListItem = props => {
+
   return (
     <Panel className="post">
       <Col xs={2} sm={1} md={1} className="user-info text-center">
