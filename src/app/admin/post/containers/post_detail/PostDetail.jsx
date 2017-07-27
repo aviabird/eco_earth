@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import {
   selectedPost,
   deletePost
-} from "./../../../../store/modules/posts/actions";
+} from "./../../../../../store/modules/posts/actions.jsx";
 import "./PostDetail.css";
 import { Link } from "react-router-dom";
 import { Panel, Button } from "react-bootstrap";
-import Loader from "../../../../shared/components/loader/Loader";
+import Loader from "../../../../../shared/components/loader/Loader";
 
 class PostDetail extends Component {
   constructor(props) {
@@ -44,17 +44,6 @@ class PostDetail extends Component {
         <p>
           {this.props.post.content}
         </p>
-        <Link to="/">
-          <Button
-            onClick={this.onDeleteClick.bind(this)}
-            className="btn-danger pull-right"
-          >
-            Delete Post
-          </Button>
-        </Link>
-        <Link to={"/post/edit/" + this.state.postId}>
-          <Button className="btn-primary  edit_post">Edit Post</Button>
-        </Link>
       </Panel>
     );
   }

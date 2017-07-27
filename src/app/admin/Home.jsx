@@ -5,7 +5,7 @@ import "./Home.css";
 import Header from "./containers/header/Header";
 import CategoryList from "./containers/category_list/CategoryList.jsx";
 import PostList from "./containers/post_list/PostList";
-import PostDetail from "./../post/containers/post_detail/PostDetail";
+import PostDetail from "./post/containers/post_detail/PostDetail";
 import { Col } from "react-bootstrap";
 import CategoryNew from "./containers/category_new/CategoryNew.jsx";
 
