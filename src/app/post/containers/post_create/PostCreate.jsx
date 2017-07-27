@@ -45,7 +45,8 @@ class PostCreate extends Component {
       status: "pending",
       category_id: category_id,
       content: content,
-      userid: this.props.user.uid
+      userid: this.props.user.uid,
+      userpic: this.props.user.photoURL
     });
     this.title.value = "";
     this.category.value = "";

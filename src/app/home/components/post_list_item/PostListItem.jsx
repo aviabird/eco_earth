@@ -1,17 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Avatar from "../../../../assets/images/avatar.jpg";
+import Avatar from "react-avatar";
+import image from "../../../../assets/images/avatar.jpg";
 import "./PostListItem.css";
 import FontAwesome from "react-fontawesome";
 import { Panel, Col, Image, Badge } from "react-bootstrap";
 
 const PostListItem = props => {
-
   return (
     <Panel className="post">
       <Col xs={2} sm={1} md={1} className="user-info text-center">
         <Badge className="active" />
-        <Image src={Avatar} alt="Avatar" rounded />
+        {props.data.userpic
+          ? <Avatar src={props.data.userpic} size={40} />
+          : <Image src={image} size={40} alt="Avatar" rounded />}
         <hr />
       </Col>
       <Col xs={8} sm={8} md={9} className="post-text">
