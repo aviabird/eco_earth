@@ -92,7 +92,7 @@ class PostList extends Component {
     var postsArr =
       currentUser && this.state.name
         ? postsArray.filter(post => post.userid === this.props.currentUser.uid)
-        : postsArray;
+        : postsArray.filter(post => post.status === "approved");
 
     if (!postsArr) {
       return <h4> No Posts Available </h4>;

@@ -50,6 +50,11 @@ const PostListItem = props => {
           2days
         </div>
       </Col>
+      <div className="pull-right">
+        <strong>Status</strong> :<i className="text-primary">
+          {props.data.status}
+        </i>
+      </div>
     </Panel>
   );
 };
