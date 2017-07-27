@@ -49,14 +49,16 @@ export default class FBHomeService {
     });
   }
 
-
   static getPostlistFor(category_id) {
     var postRef = database.ref(`posts`);
     return Observable.create(observer => {
-      postRef.orderByChild("category_id").equalTo(category_id).once("value", function(snapshot) {
-        return  observer.next(snapshot.val());
-      })
-    })
+      postRef
+        .orderByChild("category_id")
+        .equalTo(category_id)
+        .once("value", function(snapshot) {
+          return observer.next(snapshot.val());
+        });
+    });
   }
 
   static handleError(resp) {

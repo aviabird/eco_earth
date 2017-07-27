@@ -1,17 +1,31 @@
-import * as actionTypes from './actionTypes';
+import * as actionTypes from "./actionTypes";
 
 import database from "../../../index.js";
 
 export function fetchPosts() {
   return {
     type: actionTypes.FETCH_POSTS
-  }
+  };
 }
 
 export function fetchPostsSuccess(posts) {
   return {
     type: actionTypes.FETCH_POSTS_SUCCESS,
     payload: posts
+  };
+}
+
+export function approvePost(id) {
+  return {
+    type: actionTypes.APPROVE_POST,
+    payload: id
+  };
+}
+
+export function rejectPost(id) {
+  return {
+    type: actionTypes.REJECT_POST,
+    payload: id
   };
 }
 
@@ -56,10 +70,10 @@ export function newpostCreateSuccess(props) {
     payload: props
   };
 }
-export function postUpdate(props,id) {
+export function postUpdate(props, id) {
   return {
     type: actionTypes.POST_UPDATE,
-    payload: Object.assign({},props,{id:id})
+    payload: Object.assign({}, props, { id: id })
   };
 }
 export function postUpdateSuccess(props) {
@@ -76,4 +90,3 @@ export function deletePost(post_id) {
     payload: request
   };
 }
-
