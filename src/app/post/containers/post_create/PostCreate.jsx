@@ -52,22 +52,31 @@ class PostCreate extends Component {
     var title = this.title.value.trim();
     var category_id = this.category.value.trim();
     var content = this.content.value.trim();
-    this.props.postUpdate({
-      title: title,
-      category_id: category_id,
-      content: content
-    }, this.props.match.params.postId);
+    this.props.postUpdate(
+      {
+        title: title,
+        category_id: category_id,
+        content: content
+      },
+      this.props.match.params.postId
+    );
     this.title.value = "";
     this.category.value = "";
     this.content.value = "";
   }
 
   renderCategories(data) {
-    return <option value={data.id} key={data.id}>{data.title}</option>;
+    return (
+      <option value={data.id} key={data.id}>
+        {data.title}
+      </option>
+    );
   }
   render() {
     const { categoryids, categories } = this.props;
-    var categoriesArr = categoryids.map(id => Object.assign({}, categories[id], { id: id }));
+    var categoriesArr = categoryids.map(id =>
+      Object.assign({}, categories[id], { id: id })
+    );
     var postId = this.state.postId;
     var title = this.props.post.title;
     var content = this.props.post.content;
@@ -79,7 +88,9 @@ class PostCreate extends Component {
             postId ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)
           }
         >
-          <h3>{postId ? "Edit post" : "Create a New Post"}</h3>
+          <h3>
+            {postId ? "Edit post" : "Create a New Post"}
+          </h3>
           <FormGroup controlId="formControlsText">
             <ControlLabel>Title</ControlLabel>
             <FormControl
@@ -106,7 +117,7 @@ class PostCreate extends Component {
           <FormGroup controlId="formControlsTextarea">
             <ControlLabel>Content</ControlLabel>
             <FormControl
-               componentClass="textarea"
+              componentClass="textarea"
               defaultValue={content}
               inputRef={ref => {
                 this.content = ref;
@@ -117,8 +128,10 @@ class PostCreate extends Component {
           <Button className="btn-primary" type="submit">
             {postId ? "Update" : "Submit"}
           </Button>
-          <span>  </span>
-          <Link to="/" className="btn btn-danger">Cancel </Link>
+          <span> </span>
+          <Link to="/" className="btn btn-danger">
+            Cancel{" "}
+          </Link>
         </form>
       </Panel>
     );

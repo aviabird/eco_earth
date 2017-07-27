@@ -21,11 +21,23 @@ export function approvePost(id) {
     payload: id
   };
 }
+export function approvePostSuccess(post) {
+  return {
+    type: actionTypes.APPROVE_POST_SUCCESS,
+    payload: post
+  };
+}
 
 export function rejectPost(id) {
   return {
     type: actionTypes.REJECT_POST,
     payload: id
+  };
+}
+export function rejectPostSuccess(post) {
+  return {
+    type: actionTypes.REJECT_POST_SUCCESS,
+    payload: post
   };
 }
 

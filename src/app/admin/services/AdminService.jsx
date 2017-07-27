@@ -35,6 +35,27 @@ export default class AdminService {
       });
     });
   }
+  static postApproval(postid) {
+    var postsref = database.ref(`/posts`);
+    var ref = database.ref(`/posts/${postid}`);
+    ref.update({ status: "approved" });
+    return Observable.create(observer => {
+      postsref.once("value", function(snapshot) {
+        return observer.next(snapshot.val());
+      });
+    });
+  }
+
+  static postRejection(postid) {
+    var postsref = database.ref(`/posts`);
+    var ref = database.ref(`/posts/${postid}`);
+    ref.update({ status: "rejected" });
+    return Observable.create(observer => {
+      postsref.once("value", function(snapshot) {
+        return observer.next(snapshot.val());
+      });
+    });
+  }
 
   static getCategoryById(category_id) {
     var ref = database.ref(`/categories/${category_id}`);

@@ -27,6 +27,8 @@ export const rootEpic = (...args) =>
     categoryEpics.categoryUpdation,
     postEpics.newpostCreate,
     postEpics.postUpdation,
+    postEpics.postApproval,
+    postEpics.postRejection,
     categoryEpics.FetchCategories
   )(...args);
 

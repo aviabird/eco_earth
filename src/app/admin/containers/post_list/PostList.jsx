@@ -6,7 +6,6 @@ import { fetchPosts } from "../../../../store/modules/posts/actions";
 import "./PostList.css";
 import { Panel } from "react-bootstrap";
 import { Motion, spring } from "react-motion";
-
 class PostList extends Component {
   constructor(props) {
     super(props);
@@ -79,12 +78,24 @@ class PostList extends Component {
         </div>
       );
     }
-    var postsArr = postids.map(id => Object.assign({}, posts[id], { id: id }));
+    var postsArray = postids.map(id =>
+      Object.assign({}, posts[id], { id: id })
+    );
+    var postsArr = postsArray.filter(post => post.status === "pending");
+    var approvedPostsArr = postsArray.filter(
+      post => post.status === "approved"
+    );
 
     return (
-      <div className="post-list">
-        {!postsArr.length ? <h4> No Posts Available </h4> : null}
-        {postsArr.map(this.renderPost)}
+      <div>
+        <div className="post-list">
+          <h1>Pending Posts</h1>
+          {!postsArr.length ? <h4> No Posts Available </h4> : null}
+          {postsArr.map(this.renderPost)}
+        </div>
+        <h1>Approved Posts</h1>
+        {!approvedPostsArr.length ? <h4> No Posts Available </h4> : null}
+        {approvedPostsArr.map(this.renderPost)}
       </div>
     );
   }

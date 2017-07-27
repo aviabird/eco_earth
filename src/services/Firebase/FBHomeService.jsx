@@ -40,6 +40,7 @@ export default class FBHomeService {
   //   return ajax.getJSON(`${API_URL}/categories`).map(resp => resp.data);
   // }
 
+
   static getCategories() {
     var categoriesRef = database.ref("categories");
     return Observable.create(observer => {

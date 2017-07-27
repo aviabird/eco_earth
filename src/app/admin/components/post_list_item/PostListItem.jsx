@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import Avatar from "react-avatar";
 import {
   approvePost,
   rejectPost
 } from "./../../../../store/modules/posts/actions";
-import Avatar from "../../../../assets/images/avatar.jpg";
+import image from "../../../../assets/images/avatar.jpg";
 import "./PostListItem.css";
 import FontAwesome from "react-fontawesome";
 import { Panel, Col, Image, Badge, Button } from "react-bootstrap";
@@ -29,7 +30,9 @@ class PostListItem extends Component {
       <Panel className="post">
         <Col xs={2} sm={1} md={1} className="user-info text-center">
           <Badge className="active" />
-          <Image src={Avatar} alt="Avatar" rounded />
+          {this.props.data.userpic
+            ? <Avatar src={this.props.data.userpic} size={40} />
+            : <Image src={image} alt="Avatar" rounded />}
           <hr />
         </Col>
         <Col xs={8} sm={8} md={9} className="post-text">
@@ -66,22 +69,25 @@ class PostListItem extends Component {
             2days
           </div>
         </Col>
-        <div className="pull-right">
-          <Button
-            onClick={this.postApproval(this.props.data.id)}
-            className="btn-xs btn-success"
-          >
-            Approve
-          </Button>
-          <Link to="/">
-            <Button
-              onClick={this.postRejection(this.props.data.id)}
-              className="btn-xs btn-danger"
-            >
-              Reject
-            </Button>
-          </Link>
-        </div>
+        {this.props.data.status === "pending"
+          ? <div className="pull-right">
+              <Button
+                onClick={() => this.postApproval(this.props.data.id)}
+                className="btn-xs btn-success"
+              >
+                Approve
+              </Button>
+              <span> </span>
+              <Link to="/">
+                <Button
+                  onClick={() => this.postRejection(this.props.data.id)}
+                  className="btn-xs btn-danger"
+                >
+                  Reject
+                </Button>
+              </Link>
+            </div>
+          : ""}
       </Panel>
     );
   }
