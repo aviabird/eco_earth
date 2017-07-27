@@ -38,13 +38,12 @@ class PostCreate extends Component {
   // }
   handleSubmit(event) {
     event.preventDefault();
-    var id = _.uniqueId();
     var title = this.title.value.trim();
     var category_id = this.category.value.trim();
     var content = this.content.value.trim();
     this.props.newpostCreate({
-      id: id,
       title: title,
+      status: "pending",
       category_id: category_id,
       content: content,
       userid: this.props.user.uid
