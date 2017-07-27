@@ -4,7 +4,7 @@ import PostListItem from "../../components/post_list_item/PostListItem";
 import PropTypes from "prop-types";
 import { fetchPosts } from "../../../../store/modules/posts/actions";
 import "./PostList.css";
-import { Panel } from "react-bootstrap";
+import { Panel, Well } from "react-bootstrap";
 import { Motion, spring } from "react-motion";
 class PostList extends Component {
   constructor(props) {
@@ -88,14 +88,18 @@ class PostList extends Component {
 
     return (
       <div>
-        <div className="post-list">
-          <h1>Pending Posts</h1>
-          {!postsArr.length ? <h4> No Posts Available </h4> : null}
-          {postsArr.map(this.renderPost)}
-        </div>
-        <h1>Approved Posts</h1>
-        {!approvedPostsArr.length ? <h4> No Posts Available </h4> : null}
-        {approvedPostsArr.map(this.renderPost)}
+        <Well>
+          <div className="post-list">
+            <h1>Pending Posts</h1>
+            {!postsArr.length ? <h4> No Posts Available </h4> : null}
+            {postsArr.map(this.renderPost)}
+          </div>
+        </Well>
+        <Well>
+          <h1>Approved Posts</h1>
+          {!approvedPostsArr.length ? <h4> No Posts Available </h4> : null}
+          {approvedPostsArr.map(this.renderPost)}
+        </Well>
       </div>
     );
   }
