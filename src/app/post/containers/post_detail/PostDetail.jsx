@@ -43,7 +43,7 @@ class PostDetail extends Component {
         <p>
           {this.props.post.content}
         </p>
-        {post.userid === user.uid
+        {user && post.userid === user.uid
           ? <div>
               <Link to="/">
                 <Button

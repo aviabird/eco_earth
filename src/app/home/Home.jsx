@@ -8,7 +8,6 @@ import PostList from "./containers/post_list/PostList";
 import PostDetail from "./../post/containers/post_detail/PostDetail";
 import PostCreate from "./../post/containers/post_create/PostCreate";
 import AdminPostList from "../admin/containers/post_list/PostList";
-import AdminPostDetail from "../admin/post/containers/post_detail/PostDetail";
 import { Col } from "react-bootstrap";
 import AdminCategoryNew from "../admin/containers/category_new/CategoryNew";
 import MyProfile from "./../Users/UserProfile";
@@ -58,11 +57,6 @@ class Home extends Component {
                   component={AdminPostList}
                   // components={(AdminPostList, AdminCategoryList)}
                   className="post_list"
-                />
-                <Route
-                  path="/admin/posts/:postId"
-                  component={AdminPostDetail}
-                  className="post_detail"
                 />
                 <Route
                   path="/admin/new_category"
