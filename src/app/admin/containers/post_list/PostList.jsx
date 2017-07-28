@@ -1,12 +1,13 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import PostListItem from "../../components/post_list_item/PostListItem";
+import AdminCategoryList from "./../category_list/CategoryList";
 import PropTypes from "prop-types";
 import { fetchPosts } from "../../../../store/modules/posts/actions";
 import "./PostList.css";
-import { Panel, Well } from "react-bootstrap";
+import { Panel, Well, Col } from "react-bootstrap";
 import { Motion, spring } from "react-motion";
-class PostList extends Component {
+class AdminPostList extends Component {
   constructor(props) {
     super(props);
 
@@ -105,7 +106,7 @@ class PostList extends Component {
   }
 }
 
-PostList.propTypes = {
+AdminPostList.propTypes = {
   posts: PropTypes.object
 };
 
@@ -114,4 +115,4 @@ function mapStateToProps({ postsState }, ownProps) {
   return { posts, postids, isFetchingPosts };
 }
 
-export default connect(mapStateToProps, { fetchPosts })(PostList);
+export default connect(mapStateToProps, { fetchPosts })(AdminPostList);

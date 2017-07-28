@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { Panel, Button } from "react-bootstrap";
 import Loader from "../../../../../shared/components/loader/Loader";
 
-class PostDetail extends Component {
+class AdminPostDetail extends Component {
   constructor(props) {
     super(props);
 
@@ -49,7 +49,7 @@ class PostDetail extends Component {
   }
 }
 
-PostDetail.propTypes = {
+AdminPostDetail.propTypes = {
   post: PropTypes.object.isRequired
 };
 
@@ -61,5 +61,5 @@ function mapStateToProps({ postsState }) {
 }
 
 export default connect(mapStateToProps, { selectedPost, deletePost })(
-  PostDetail
+  AdminPostDetail
 );

@@ -16,7 +16,7 @@ import {
   Panel
 } from "react-bootstrap";
 
-class CategoryNew extends Component {
+class AdminCategoryNew extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -143,4 +143,4 @@ export default connect(mapStateToProps, {
   newCategoryCreate,
   selectedCategory,
   categoryUpdate
-})(CategoryNew);
+})(AdminCategoryNew);

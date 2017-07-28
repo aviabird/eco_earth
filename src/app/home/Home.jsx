@@ -7,8 +7,12 @@ import CategoryList from "./containers/category_list/CategoryList.jsx";
 import PostList from "./containers/post_list/PostList";
 import PostDetail from "./../post/containers/post_detail/PostDetail";
 import PostCreate from "./../post/containers/post_create/PostCreate";
-import MyProfile from "./../Users/UserProfile";
+import AdminCategoryList from "../admin/containers/category_list/CategoryList";
+import AdminPostList from "../admin/containers/post_list/PostList";
+import AdminPostDetail from "../admin/post/containers/post_detail/PostDetail";
 import { Col } from "react-bootstrap";
+import AdminCategoryNew from "../admin/containers/category_new/CategoryNew";
+import MyProfile from "./../Users/UserProfile";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -49,13 +53,35 @@ class Home extends Component {
                       : <h1>Please sign in!!!</h1>;
                   }}
                 />
+                <Route
+                  exact
+                  path="/admin"
+                  component={AdminPostList}
+                  // components={(AdminPostList, AdminCategoryList)}
+                  className="post_list"
+                />
+                <Route
+                  path="/admin/posts/:postId"
+                  component={AdminPostDetail}
+                  className="post_detail"
+                />
+                <Route
+                  path="/admin/new_category"
+                  component={AdminCategoryNew}
+                />
+                <Route
+                  path="/admin/category/edit/:category_id"
+                  component={AdminCategoryNew}
+                />
                 <Route path="/categories/:category" component={PostList} />
                 <Route path="/myprofile/:name" component={MyProfile} />
                 <Route path="/myprofile/:name" component={PostList} />
                 <Route path="/editprofile/:name" component={MyProfile} />
               </Col>
               <Col lg={4} md={4}>
-                <CategoryList className="categories-list" />
+                {window.location.pathname === "/admin"
+                  ? <AdminCategoryList />
+                  : <CategoryList className="categories-list" />}
               </Col>
             </Col>
           </div>

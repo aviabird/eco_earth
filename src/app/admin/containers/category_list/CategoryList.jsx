@@ -13,7 +13,7 @@ import { Panel, Glyphicon, Col } from "react-bootstrap";
 import Loader from "../../../../shared/components/loader/Loader";
 import { Link } from "react-router-dom";
 
-class CategoryList extends Component {
+class AdminCategoryList extends Component {
   constructor(props) {
     super(props);
 
@@ -116,4 +116,4 @@ export default connect(mapStateToProps, {
   deleteCategory,
   selectedCategory,
   fetchPostsByCategory
-})(CategoryList);
+})(AdminCategoryList);
