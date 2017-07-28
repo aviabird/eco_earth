@@ -47,16 +47,8 @@ class CategoryList extends Component {
     const title = data.title;
     const description = data.description;
     let user = this.props.user;
-    return user && !user.isAdmin
-      ? <Link key={category_id} to={"/categories/" + category_id}>
-          <li
-            onClick={() => this.onClicked(category_id)}
-            className="list-group-item"
-          >
-            <CategoryListItem title={title} description={description} />
-          </li>
-        </Link>
-      : <li key={category_id} className="list-group-item">
+    return user && user.isAdmin
+      ? <li key={category_id} className="list-group-item">
           <CategoryListItem title={title} description={description} />
 
           <Col className="row pull-right">
@@ -77,7 +69,15 @@ class CategoryList extends Component {
               />
             </Col>
           </Col>
-        </li>;
+        </li>
+      : <Link key={category_id} to={"/categories/" + category_id}>
+          <li
+            onClick={() => this.onClicked(category_id)}
+            className="list-group-item"
+          >
+            <CategoryListItem title={title} description={description} />
+          </li>
+        </Link>;
   }
 
   render() {

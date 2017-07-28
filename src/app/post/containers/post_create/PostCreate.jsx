@@ -18,8 +18,9 @@ import {
 class PostCreate extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
+    this.state = {
+      isValidData: false
+    };
     window.count = 0;
   }
 
@@ -30,11 +31,17 @@ class PostCreate extends Component {
       this.props.selectedPost(postId);
     }
   }
+  componentDidMount() {
+    this.setState({ isValidData: false });
+  }
 
-  // componentWillReceiveProps(nextprops) {
-  //   console.log("new props", nextprops.post.title);
-  //   this.setState({ title: nextprops.post.title });
-  // }
+  validateHandler() {
+    this.setState({
+      ...this.state,
+      isValidData: !!(this.title.value && this.content.value)
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     var title = this.title.value.trim();
@@ -84,7 +91,12 @@ class PostCreate extends Component {
       Object.assign({}, categories[id], { id: id })
     );
     var { title, content } = this.props.post;
-    //var loaded = this.props.formloaded;
+    var loaded = this.props.formloaded;
+    if (loaded) {
+      setTimeout(function() {
+        window.location.replace("/");
+      }, 10);
+    }
     return (
       <Panel key={title}>
         <form
@@ -105,6 +117,7 @@ class PostCreate extends Component {
               placeholder="Enter title"
               defaultValue={title}
               //value={this.state.title}
+              onChange={this.validateHandler.bind(this)}
               //onChange={this.onClick.bind(this)}
             />
           </FormGroup>
@@ -125,13 +138,18 @@ class PostCreate extends Component {
             <FormControl
               componentClass="textarea"
               defaultValue={content}
+              onChange={this.validateHandler.bind(this)}
               inputRef={ref => {
                 this.content = ref;
               }}
             />
           </FormGroup>
 
-          <Button className="btn-primary" type="submit">
+          <Button
+            disabled={!this.state.isValidData}
+            className="btn-primary"
+            type="submit"
+          >
             {title ? "Update" : "Submit"}
           </Button>
           <span> </span>

@@ -19,7 +19,9 @@ import {
 class AdminCategoryNew extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isValidData: false
+    };
   }
 
   componentWillMount() {
@@ -38,6 +40,15 @@ class AdminCategoryNew extends Component {
         this.setState({ category_id: id });
       }
     }
+  }
+  componentDidMount() {
+    this.setState({ isValidData: false });
+  }
+  validateHandler() {
+    this.setState({
+      ...this.state,
+      isValidData: !!(this.title.value && this.description.value)
+    });
   }
 
   handleSubmit(event) {
@@ -106,6 +117,7 @@ class AdminCategoryNew extends Component {
               }}
               placeholder="Enter title"
               defaultValue={title}
+              onChange={this.validateHandler.bind(this)}
             />
           </FormGroup>
           <FormGroup controlId="formControlsTextarea">
@@ -116,10 +128,15 @@ class AdminCategoryNew extends Component {
               inputRef={ref => {
                 this.description = ref;
               }}
+              onChange={this.validateHandler.bind(this)}
               placeholder="Enter description"
             />
           </FormGroup>
-          <Button className="btn-primary" type="submit">
+          <Button
+            disabled={!this.state.isValidData}
+            className="btn-primary"
+            type="submit"
+          >
             {category_id ? "Update" : "Submit"}
           </Button>
           <span> </span>

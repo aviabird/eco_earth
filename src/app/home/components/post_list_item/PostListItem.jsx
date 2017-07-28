@@ -17,7 +17,7 @@ const PostListItem = props => {
         <hr />
       </Col>
       <Col xs={8} sm={8} md={9} className="post-text">
-        <Link to={"posts/" + props.data.id}>
+        <Link to={"/posts/" + props.data.id}>
           <h2>
             {props.data.title}
           </h2>
