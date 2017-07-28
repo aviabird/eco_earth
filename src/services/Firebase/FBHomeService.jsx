@@ -60,6 +60,7 @@ export default class FBHomeService {
       email: user.email,
       emailVerified: user.emailVerified,
       photoURL: user.photoURL,
+      isAdmin: false,
       isAnonymous: user.isAnonymous,
       uid: user.uid,
       providerData: user.providerData
