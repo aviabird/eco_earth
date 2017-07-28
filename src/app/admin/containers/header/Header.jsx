@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import Searchbar from '../../components/search_bar/SearchBar';
-import './Header.css';
-import { Navbar, NavDropdown, Nav, NavItem, MenuItem } from 'react-bootstrap';
-import Logo from './../../../../assets/images/logo.png';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import Searchbar from "../../components/search_bar/SearchBar";
+import "./Header.css";
+import { Navbar, NavDropdown, Nav, NavItem, MenuItem } from "react-bootstrap";
+import Logo from "./../../../../assets/images/logo.png";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   onSearched(keyword) {
@@ -15,7 +15,7 @@ class Header extends Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to={"/"}>
+            <Link to={"/admin"}>
               <img className="logo" src={Logo} alt="EcoEarth" />
               EcoEarth
             </Link>
@@ -26,7 +26,9 @@ class Header extends Component {
           <div className="navbar-right">
             <Searchbar onSearched={this.onSearched} />
             <Nav pullRight>
-              <NavItem eventKey={1} href="#">Login</NavItem>
+              <NavItem eventKey={1} href="#">
+                Login
+              </NavItem>
               <NavDropdown eventKey={3} title="Profile" id="basic-nav-dropdown">
                 <MenuItem eventKey={3.1}>My Profile</MenuItem>
                 <MenuItem eventKey={3.2}>Setting</MenuItem>
@@ -37,9 +39,8 @@ class Header extends Component {
           </div>
         </Navbar.Collapse>
       </Navbar>
-    )
+    );
   }
 }
-
 
 export default Header;

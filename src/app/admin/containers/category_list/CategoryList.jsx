@@ -53,7 +53,7 @@ class CategoryList extends Component {
 
         <Col className="row pull-right">
           <Col lg={6} md={6}>
-            <Link to={"/category/edit/" + id}>
+            <Link to={"/admin/category/edit/" + id}>
               <Glyphicon
                 //onClick={() => this.selectedcategory(id)}
                 className="pull-left"
@@ -85,7 +85,7 @@ class CategoryList extends Component {
           <h5>Categories: </h5>
         </div>
         <div onClick={() => this.selectedcategory()} className="text-xs-right">
-          <Link to="/new_category" className="btn btn-primary">
+          <Link to="/admin/new_category" className="btn btn-primary">
             Add New
           </Link>
         </div>

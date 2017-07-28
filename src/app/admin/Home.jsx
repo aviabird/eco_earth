@@ -20,18 +20,18 @@ class AdminHome extends Component {
               <Col lg={8} md={8}>
                 <Route
                   exact
-                  path="/"
+                  path="/admin"
                   component={PostList}
                   className="post_list"
                 />
                 <Route
-                  path="/posts/:postId"
+                  path="/admin/posts/:postId"
                   component={PostDetail}
                   className="post_detail"
                 />
-                <Route path="/new_category" component={CategoryNew} />
+                <Route path="/admin/new_category" component={CategoryNew} />
                 <Route
-                  path="/category/edit/:category_id"
+                  path="/admin/category/edit/:category_id"
                   component={CategoryNew}
                 />
               </Col>

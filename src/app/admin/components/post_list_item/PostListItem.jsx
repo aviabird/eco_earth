@@ -36,7 +36,7 @@ class PostListItem extends Component {
           <hr />
         </Col>
         <Col xs={8} sm={8} md={9} className="post-text">
-          <Link to={"posts/" + this.props.data.id}>
+          <Link to={"/admin/posts/" + this.props.data.id}>
             <h2>
               {this.props.data.title}
             </h2>
@@ -78,7 +78,7 @@ class PostListItem extends Component {
                 Approve
               </Button>
               <span> </span>
-              <Link to="/">
+              <Link to="/admin">
                 <Button
                   onClick={() => this.postRejection(this.props.data.id)}
                   className="btn-xs btn-danger"
