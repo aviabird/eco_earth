@@ -15,6 +15,32 @@ export function fetchPostsSuccess(posts) {
   };
 }
 
+export function approvePost(id) {
+  return {
+    type: actionTypes.APPROVE_POST,
+    payload: id
+  };
+}
+export function approvePostSuccess(post) {
+  return {
+    type: actionTypes.APPROVE_POST_SUCCESS,
+    payload: post
+  };
+}
+
+export function rejectPost(id) {
+  return {
+    type: actionTypes.REJECT_POST,
+    payload: id
+  };
+}
+export function rejectPostSuccess(post) {
+  return {
+    type: actionTypes.REJECT_POST_SUCCESS,
+    payload: post
+  };
+}
+
 export function fetchPostsByCategory(category_id) {
   return {
     type: actionTypes.FETCH_POSTS_BY_CATEGORY,

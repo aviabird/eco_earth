@@ -7,6 +7,7 @@ import "./PostList.css";
 import { Panel } from "react-bootstrap";
 import { Motion, spring } from "react-motion";
 
+
 class PostList extends Component {
   constructor(props) {
     super(props);
