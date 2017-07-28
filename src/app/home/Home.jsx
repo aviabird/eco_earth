@@ -7,7 +7,6 @@ import CategoryList from "./containers/category_list/CategoryList.jsx";
 import PostList from "./containers/post_list/PostList";
 import PostDetail from "./../post/containers/post_detail/PostDetail";
 import PostCreate from "./../post/containers/post_create/PostCreate";
-import AdminCategoryList from "../admin/containers/category_list/CategoryList";
 import AdminPostList from "../admin/containers/post_list/PostList";
 import AdminPostDetail from "../admin/post/containers/post_detail/PostDetail";
 import { Col } from "react-bootstrap";
@@ -79,9 +78,7 @@ class Home extends Component {
                 <Route path="/editprofile/:name" component={MyProfile} />
               </Col>
               <Col lg={4} md={4}>
-                {window.location.pathname === "/admin"
-                  ? <AdminCategoryList />
-                  : <CategoryList className="categories-list" />}
+                <CategoryList className="categories-list" />
               </Col>
             </Col>
           </div>
