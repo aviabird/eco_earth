@@ -21,7 +21,6 @@ class PostCreate extends Component {
     this.state = {
       isValidData: false
     };
-    window.count = 0;
   }
 
   componentWillMount() {
@@ -37,11 +36,11 @@ class PostCreate extends Component {
 
   validateHandler() {
     this.setState({
-      ...this.state,
-      isValidData: !!(this.title.value && this.content.value)
+      isValidData: !!(this.title.value && this.content.value),
+      title: this.title.value,
+      content: this.content.value
     });
   }
-
   handleSubmit(event) {
     event.preventDefault();
     var title = this.title.value.trim();
@@ -116,9 +115,7 @@ class PostCreate extends Component {
               }}
               placeholder="Enter title"
               defaultValue={title}
-              //value={this.state.title}
               onChange={this.validateHandler.bind(this)}
-              //onChange={this.onClick.bind(this)}
             />
           </FormGroup>
           <FormGroup controlId="formControlsSelect">
