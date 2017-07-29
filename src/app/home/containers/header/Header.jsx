@@ -77,6 +77,7 @@ class Header extends Component {
                     <MenuItem divider />
                     <MenuItem
                       eventKey={3.3}
+                      href={"/"}
                       onClick={this.googleSignout.bind(this)}
                     >
                       Logout

@@ -29,10 +29,8 @@ class Login extends Component {
     let that = this;
     firebase.auth().signInWithPopup(provider).then(result => {
       var usersRef = database.ref(`users/${result.user.uid}`);
-      // console.log("second", result.user);
       usersRef.once("value", function(snapshot) {
         var exists = snapshot.val() !== null;
-        // console.log(exists);
 
         if (!exists) {
           that.props.storeUser(result.user);
