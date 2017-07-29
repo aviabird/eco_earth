@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   selectedPost,
-  newpostCreate
+  newpostCreate,
+  postUpdate
 } from "./../../../../store/modules/posts/actions";
 import { Link } from "react-router-dom";
 import "./PostCreate.css";
@@ -17,44 +18,94 @@ import {
 class PostCreate extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
+    this.state = {
+      isValidData: false
+    };
   }
+
   componentWillMount() {
     var postId = this.props.match.params.postId;
 
     if (postId) {
       this.props.selectedPost(postId);
-      this.setState({ postId });
     }
+  }
+  componentDidMount() {
+    this.setState({ isValidData: false });
+  }
+
+  validateHandler() {
+    this.setState({
+      isValidData: !!(this.title.value && this.content.value),
+      title: this.title.value,
+      content: this.content.value
+    });
   }
   handleSubmit(event) {
     event.preventDefault();
     var title = this.title.value.trim();
-    var category = this.category.value.trim();
+    var category_id = this.category.value.trim();
     var content = this.content.value.trim();
     this.props.newpostCreate({
       title: title,
-      category: category,
-      content: content
+      status: "pending",
+      category_id: category_id,
+      content: content,
+      userid: this.props.user.uid,
+      userpic: this.props.user.photoURL
     });
     this.title.value = "";
     this.category.value = "";
     this.content.value = "";
   }
 
+  handleUpdate(event) {
+    event.preventDefault();
+    var title = this.title.value.trim();
+    var category_id = this.category.value.trim();
+    var content = this.content.value.trim();
+    this.props.postUpdate(
+      {
+        title: title,
+        category_id: category_id,
+        content: content
+      },
+      this.props.match.params.postId
+    );
+    this.title.value = "";
+    this.category.value = "";
+    this.content.value = "";
+  }
+
   renderCategories(data) {
-    return <option value={data.title} key={data.id}>{data.title}</option>;
+    return (
+      <option value={data.id} key={data.id}>
+        {data.title}
+      </option>
+    );
   }
   render() {
-    var postId = this.state.postId;
-    var title = this.props.post.title;
-    var content = this.props.post.content;
-    //var loaded = this.props.formloaded;
+    const { categoryids, categories } = this.props;
+    var categoriesArr = categoryids.map(id =>
+      Object.assign({}, categories[id], { id: id })
+    );
+    var { title, content } = this.props.post;
+    var loaded = this.props.formloaded;
+    if (loaded) {
+      setTimeout(function() {
+        window.location.replace("/");
+      }, 10);
+    }
     return (
-      <Panel>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <h3>{postId ? "Edit post" : "Create a New Post"}</h3>
+      <Panel key={title}>
+        <form
+          onSubmit={
+            title ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)
+          }
+        >
+          <h3>
+            {title ? "Edit post" : "Create a New Post"}
+          </h3>
           <FormGroup controlId="formControlsText">
             <ControlLabel>Title</ControlLabel>
             <FormControl
@@ -64,6 +115,7 @@ class PostCreate extends Component {
               }}
               placeholder="Enter title"
               defaultValue={title}
+              onChange={this.validateHandler.bind(this)}
             />
           </FormGroup>
           <FormGroup controlId="formControlsSelect">
@@ -75,24 +127,32 @@ class PostCreate extends Component {
                 this.category = ref;
               }}
             >
-              {this.props.categories.map(this.renderCategories)}
+              {categoriesArr.map(this.renderCategories)}
             </FormControl>
           </FormGroup>
           <FormGroup controlId="formControlsTextarea">
             <ControlLabel>Content</ControlLabel>
             <FormControl
-              type="textarea"
+              componentClass="textarea"
               defaultValue={content}
+              onChange={this.validateHandler.bind(this)}
               inputRef={ref => {
                 this.content = ref;
               }}
             />
           </FormGroup>
-          <Button className="btn-primary" type="submit">
-            {postId ? "Update" : "Submit"}
+
+          <Button
+            disabled={!this.state.isValidData}
+            className="btn-primary"
+            type="submit"
+          >
+            {title ? "Update" : "Submit"}
           </Button>
-          <span>  </span>
-          <Link to="/" className="btn btn-danger">Cancel </Link>
+          <span> </span>
+          <Link to="/" className="btn btn-danger">
+            Cancel{" "}
+          </Link>
         </form>
       </Panel>
     );
@@ -101,12 +161,16 @@ class PostCreate extends Component {
 
 function mapStateToProps(state) {
   return {
+    categoryids: state.categoriesState.categoryids,
     categories: state.categoriesState.categories,
     post: state.postsState.selected_post,
-    formloaded: state.postsState.formloaded
+    formloaded: state.postsState.formloaded,
+    user: state.auth.currentUser
   };
 }
 
-export default connect(mapStateToProps, { selectedPost, newpostCreate })(
-  PostCreate
-);
+export default connect(mapStateToProps, {
+  selectedPost,
+  newpostCreate,
+  postUpdate
+})(PostCreate);

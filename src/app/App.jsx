@@ -1,12 +1,11 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-import Home from './home/Home';
+import Home from "./home/Home";
 
-const App = () => (
+const App = () =>
   <div className="container-fluid">
     <Home />
-  </div>
-)
+  </div>;
 
 export default App;
