@@ -1,22 +1,25 @@
-import { fetchCategoriesSuccess } from './actions.jsx';
+import { fetchCategoriesSuccess } from "./actions.jsx";
 
-
-describe('fetchcategories action', () => {
-  it('loads categories', () => {
+describe("fetchcategories action", () => {
+  it("loads categories", () => {
     var categories = [
       {
         id: 1,
-        category: 'energy conservation'
-      }, {
+        category: "energy conservation"
+      },
+      {
         id: 2,
-        category: 'no plastics'
+        category: "no plastics"
       }
     ];
-    const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS';
-    expect(fetchCategoriesSuccess(categories)).toEqual({type: FETCH_CATEGORIES_SUCCESS, payload: categories});
+    const FETCH_CATEGORIES_SUCCESS = "FETCH_CATEGORIES_SUCCESS";
+    expect(fetchCategoriesSuccess(categories)).toEqual({
+      type: FETCH_CATEGORIES_SUCCESS,
+      payload: categories
+    });
   });
-  it('has the correct type', () => {
-      const action = fetchCategoriesSuccess();
-      expect(action.type).toEqual( "FETCH_CATEGORIES_SUCCESS" );
+  it("has the correct type", () => {
+    const action = fetchCategoriesSuccess();
+    expect(action.type).toEqual("FETCH_CATEGORIES_SUCCESS");
   });
 });

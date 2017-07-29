@@ -4,20 +4,13 @@ import PostListItem from "../../components/post_list_item/PostListItem";
 import PropTypes from "prop-types";
 import { fetchPosts } from "../../../../store/modules/posts/actions";
 import "./PostList.css";
-import { Panel } from "react-bootstrap";
+import { Panel, Well, Col } from "react-bootstrap";
 import { Motion, spring } from "react-motion";
-
-
-class PostList extends Component {
+class AdminPostList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
-  }
-
-  componentWillMount() {
-    var name = this.props.match.params.name;
-    this.setState({ name });
   }
 
   componentDidMount() {
@@ -77,7 +70,7 @@ class PostList extends Component {
   }
 
   render() {
-    const { postids, posts, isFetchingPosts, currentUser } = this.props;
+    const { posts, postids, isFetchingPosts } = this.props;
     if (isFetchingPosts) {
       return (
         <div>
@@ -85,46 +78,40 @@ class PostList extends Component {
         </div>
       );
     }
-
     var postsArray = postids.map(id =>
       Object.assign({}, posts[id], { id: id })
     );
-
-    var postsArr =
-      currentUser && this.state.name
-        ? postsArray.filter(post => post.userid === this.props.currentUser.uid)
-        : postsArray.filter(post => post.status === "approved");
-
-    if (!postsArr) {
-      return <h4> No Posts Available </h4>;
-    }
+    var postsArr = postsArray.filter(post => post.status === "pending");
+    var approvedPostsArr = postsArray.filter(
+      post => post.status === "approved"
+    );
 
     return (
-      <div className="post-list">
-        {!postsArr.length ? <h4> No Posts Available </h4> : null}
-        {currentUser && this.state.name ? <h1>My Posts</h1> : ""}
-        {postsArr.map(this.renderPost)}
+      <div>
+        <Well>
+          <div className="post-list">
+            <h1>Pending Posts</h1>
+            {!postsArr.length ? <h4> No Posts Available </h4> : null}
+            {postsArr.map(this.renderPost)}
+          </div>
+        </Well>
+        <Well>
+          <h1>Approved Posts</h1>
+          {!approvedPostsArr.length ? <h4> No Posts Available </h4> : null}
+          {approvedPostsArr.map(this.renderPost)}
+        </Well>
       </div>
     );
   }
 }
 
-PostList.propTypes = {
+AdminPostList.propTypes = {
   posts: PropTypes.object
 };
 
-// function mapStateToProps({ postsState }, ownProps) {
-//   const { postids, posts, isFetchingPosts } = postsState;
-//   return { postids, posts, isFetchingPosts };
-// }
-
-function mapStateToProps({ postsState, auth }) {
-  return {
-    postids: postsState.postids,
-    posts: postsState.posts,
-    isFetchingPosts: postsState.isFetchingPosts,
-    currentUser: auth.currentUser
-  };
+function mapStateToProps({ postsState }, ownProps) {
+  const { posts, postids, isFetchingPosts } = postsState;
+  return { posts, postids, isFetchingPosts };
 }
 
-export default connect(mapStateToProps, { fetchPosts })(PostList);
+export default connect(mapStateToProps, { fetchPosts })(AdminPostList);

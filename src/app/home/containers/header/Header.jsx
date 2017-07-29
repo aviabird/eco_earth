@@ -69,8 +69,11 @@ class Header extends Component {
                     >
                       My Profile
                     </MenuItem>
-
-                    <MenuItem eventKey={3.2}>Setting</MenuItem>
+                    {currentUser.isAdmin
+                      ? <MenuItem eventKey={3.2} href={"/admin"}>
+                          Admin
+                        </MenuItem>
+                      : ""}
                     <MenuItem divider />
                     <MenuItem
                       eventKey={3.3}

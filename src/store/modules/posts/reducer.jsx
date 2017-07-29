@@ -25,6 +25,14 @@ export default function(state = INITIAL_STATE, action) {
       };
     case actionTypes.FETCH_POSTS_BY_CATEGORY:
       return { ...state, isFetchingPosts: true };
+    case actionTypes.APPROVE_POST:
+      return { ...state };
+    case actionTypes.APPROVE_POST_SUCCESS:
+      return { ...state, posts: action.payload };
+    case actionTypes.REJECT_POST:
+      return { ...state };
+    case actionTypes.REJECT_POST_SUCCESS:
+      return { ...state, posts: action.payload };
     case actionTypes.FETCH_POSTS_BY_CATEGORY_SUCCESS:
       return {
         ...state,

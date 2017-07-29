@@ -1,5 +1,6 @@
 import * as postsActions from "./actions";
 import appServices from "../../../services/Services";
+import AdminService from "../../../app/admin/services/AdminService";
 import * as actionTypes from "./actionTypes";
 
 export const fetchPosts = (action$, { getJSON }) => {
@@ -49,4 +50,20 @@ export const postUpdation = (action$, { getJSON }) => {
     .switchMap(post => appServices().HOME.postUpdate(post))
     .map(post => postsActions.postUpdateSuccess(post))
     .catch(err => console.log(err));
+};
+
+export const postApproval = (action$, { getJSON }) => {
+  return action$
+    .ofType(actionTypes.APPROVE_POST)
+    .map(action => action.payload)
+    .switchMap(postid => AdminService.postApproval(postid))
+    .map(post => postsActions.approvePostSuccess(post));
+};
+
+export const postRejection = (action$, { getJSON }) => {
+  return action$
+    .ofType(actionTypes.REJECT_POST)
+    .map(action => action.payload)
+    .switchMap(post => AdminService.postRejection(post))
+    .map(post => postsActions.rejectPostSuccess(post));
 };

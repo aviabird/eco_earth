@@ -1,13 +1,11 @@
 import { combineEpics } from "redux-observable";
 import { combineReducers } from "redux";
-//import firebase from "firebase";
 import postsReducer from "./posts/reducer";
 import categoriesReducer from "./categories/reducer";
 import authReducer from "./auth/reducer";
 import * as postEpics from "./posts/epics";
 import * as categoryEpics from "./categories/epics";
 import * as userEpics from "./auth/epics";
-//import { ajax } from 'rxjs/observable/dom/ajax';
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/filter";
 import "rxjs/add/operator/switchMap";
@@ -24,15 +22,17 @@ export const rootEpic = (...args) =>
     postEpics.getSelectedPost,
     postEpics.newpostCreate,
     postEpics.postUpdation,
+    postEpics.postApproval,
+    postEpics.postRejection,
+    categoryEpics.FetchCategories,
+    categoryEpics.newCategoryCreate,
+    categoryEpics.getSelectedCategory,
+    categoryEpics.categoryUpdation,
     categoryEpics.FetchCategories,
     userEpics.UserProfileUpdate,
     userEpics.storeUser,
     userEpics.fetchUser
   )(...args);
-
-// const epicMiddleware = createEpicMiddleware(rootEpic, {
-//   dependencies: { getJSON: ajax.getJSON ,firebase}
-// })
 
 export const rootReducer = combineReducers({
   postsState: postsReducer,

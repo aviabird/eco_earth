@@ -7,8 +7,10 @@ import CategoryList from "./containers/category_list/CategoryList.jsx";
 import PostList from "./containers/post_list/PostList";
 import PostDetail from "./../post/containers/post_detail/PostDetail";
 import PostCreate from "./../post/containers/post_create/PostCreate";
-import MyProfile from "./../Users/UserProfile";
+import AdminPostList from "../admin/containers/post_list/PostList";
 import { Col } from "react-bootstrap";
+import AdminCategoryNew from "../admin/containers/category_new/CategoryNew";
+import MyProfile from "./../Users/UserProfile";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -48,6 +50,21 @@ class Home extends Component {
                       ? <PostCreate {...this.props} />
                       : <h1>Please sign in!!!</h1>;
                   }}
+                />
+                <Route
+                  exact
+                  path="/admin"
+                  component={AdminPostList}
+                  // components={(AdminPostList, AdminCategoryList)}
+                  className="post_list"
+                />
+                <Route
+                  path="/admin/new_category"
+                  component={AdminCategoryNew}
+                />
+                <Route
+                  path="/admin/category/edit/:category_id"
+                  component={AdminCategoryNew}
                 />
                 <Route path="/categories/:category" component={PostList} />
                 <Route path="/myprofile/:name" component={MyProfile} />

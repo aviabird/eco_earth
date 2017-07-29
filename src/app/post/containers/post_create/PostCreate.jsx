@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import _ from "lodash";
 import {
   selectedPost,
   newpostCreate,
@@ -19,9 +18,9 @@ import {
 class PostCreate extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
-    window.count = 0;
+    this.state = {
+      isValidData: false
+    };
   }
 
   componentWillMount() {
@@ -31,23 +30,29 @@ class PostCreate extends Component {
       this.props.selectedPost(postId);
     }
   }
+  componentDidMount() {
+    this.setState({ isValidData: false });
+  }
 
-  // componentWillReceiveProps(nextprops) {
-  //   console.log("new props", nextprops.post.title);
-  //   this.setState({ title: nextprops.post.title });
-  // }
+  validateHandler() {
+    this.setState({
+      isValidData: !!(this.title.value && this.content.value),
+      title: this.title.value,
+      content: this.content.value
+    });
+  }
   handleSubmit(event) {
     event.preventDefault();
-    var id = _.uniqueId();
     var title = this.title.value.trim();
     var category_id = this.category.value.trim();
     var content = this.content.value.trim();
     this.props.newpostCreate({
-      id: id,
       title: title,
+      status: "pending",
       category_id: category_id,
       content: content,
-      userid: this.props.user.uid
+      userid: this.props.user.uid,
+      userpic: this.props.user.photoURL
     });
     this.title.value = "";
     this.category.value = "";
@@ -84,17 +89,22 @@ class PostCreate extends Component {
     var categoriesArr = categoryids.map(id =>
       Object.assign({}, categories[id], { id: id })
     );
-    var { title, content, id } = this.props.post;
-    //var loaded = this.props.formloaded;
+    var { title, content } = this.props.post;
+    var loaded = this.props.formloaded;
+    if (loaded) {
+      setTimeout(function() {
+        window.location.replace("/");
+      }, 10);
+    }
     return (
-      <Panel key={id}>
+      <Panel key={title}>
         <form
           onSubmit={
-            id ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)
+            title ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)
           }
         >
           <h3>
-            {id ? "Edit post" : "Create a New Post"}
+            {title ? "Edit post" : "Create a New Post"}
           </h3>
           <FormGroup controlId="formControlsText">
             <ControlLabel>Title</ControlLabel>
@@ -105,8 +115,7 @@ class PostCreate extends Component {
               }}
               placeholder="Enter title"
               defaultValue={title}
-              //value={this.state.title}
-              //onChange={this.onClick.bind(this)}
+              onChange={this.validateHandler.bind(this)}
             />
           </FormGroup>
           <FormGroup controlId="formControlsSelect">
@@ -126,14 +135,19 @@ class PostCreate extends Component {
             <FormControl
               componentClass="textarea"
               defaultValue={content}
+              onChange={this.validateHandler.bind(this)}
               inputRef={ref => {
                 this.content = ref;
               }}
             />
           </FormGroup>
 
-          <Button className="btn-primary" type="submit">
-            {id ? "Update" : "Submit"}
+          <Button
+            disabled={!this.state.isValidData}
+            className="btn-primary"
+            type="submit"
+          >
+            {title ? "Update" : "Submit"}
           </Button>
           <span> </span>
           <Link to="/" className="btn btn-danger">

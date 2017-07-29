@@ -28,8 +28,8 @@ export default class FBHomeService {
 
   static postUpdate(post) {
     var firebaseRef = database.ref(`/posts/${post.id}`);
-    firebaseRef.update(post);
-    return Observable.of(post);
+    firebaseRef.update(post.data);
+    return Observable.of(post.data);
   }
 
   static getCategories() {
@@ -60,6 +60,7 @@ export default class FBHomeService {
       email: user.email,
       emailVerified: user.emailVerified,
       photoURL: user.photoURL,
+      isAdmin: false,
       isAnonymous: user.isAnonymous,
       uid: user.uid,
       providerData: user.providerData
