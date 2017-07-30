@@ -41,6 +41,7 @@ class PostCreate extends Component {
       content: this.content.value
     });
   }
+
   handleSubmit(event) {
     event.preventDefault();
     var title = this.title.value.trim();
